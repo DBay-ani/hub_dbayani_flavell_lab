@@ -1,0 +1,14 @@
+Material in this directory reflects email exported at htw14d24M04y2025tzEDT from MIT Outlook account (dbayani@mit.edu) via IMAP through Thunderbird then unzipped. Hashes generated as follows:
+[absolute path to script]/getMetadataForAllFiles.sh ./iydfx585.default 1> linksFollowed_s14m25htw14d24M04y2025tzEDT.csv 2> stderr_linksFollowed_s14m25htw14d24M04y2025tzEDT.txt
+[absolute path to script]/noFollowingLinks_getMetadataForAllFiles.sh ./iydfx585.default 1> noLinkFollowing_s14m25htw14d24M04y2025tzEDT.csv 2> stderr_noLinkFollowing_s14m25htw14d24M04y2025tzEDT.txt
+
+
+Additionally, the results from running find on the exported content - both with and without link following - were run, and the hash results were as follows:
+[command line] $find iydfx585.default 1> resultsFromFind_noLinkFollowing.txt 2> stderr_resultsFromFind_noLinkFollowing.txt
+[command line]$ find -L iydfx585.default 1> resultsFromFind_withLinkFollowing.txt 2> stderr_resultsFromFind_withLinkFollowing.txt
+[command line]$ sha512sum *resultsFromFind*
+1c3be6d484541473c50fce394433ab10b788a4d53a0df4e30f3b982a258731b0b55f21fc2fec8fa9b57a57c55a69fe2224051c014a5b1203fba513eb606873b5  resultsFromFind_noLinkFollowing.txt
+1c3be6d484541473c50fce394433ab10b788a4d53a0df4e30f3b982a258731b0b55f21fc2fec8fa9b57a57c55a69fe2224051c014a5b1203fba513eb606873b5  resultsFromFind_withLinkFollowing.txt
+cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e  stderr_resultsFromFind_noLinkFollowing.txt
+cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e  stderr_resultsFromFind_withLinkFollowing.txt
+

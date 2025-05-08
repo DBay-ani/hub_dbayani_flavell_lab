@@ -1,0 +1,111 @@
+iydfx585.default
+iydfx585.default/storage.sqlite
+iydfx585.default/pkcs11.txt
+iydfx585.default/encrypted-openpgp-passphrase.txt
+iydfx585.default/abook.sqlite
+iydfx585.default/settings
+iydfx585.default/settings/data.safe.bin
+iydfx585.default/webappsstore.sqlite-wal
+iydfx585.default/global-messages-db.sqlite
+iydfx585.default/xulstore.json
+iydfx585.default/calendar-data
+iydfx585.default/calendar-data/local.sqlite-wal
+iydfx585.default/calendar-data/local.sqlite
+iydfx585.default/extension-preferences.json
+iydfx585.default/abook.sqlite-wal
+iydfx585.default/scheduled-notifications
+iydfx585.default/scheduled-notifications/notifications.json
+iydfx585.default/compatibility.ini
+iydfx585.default/AlternateServices.bin
+iydfx585.default/extensions.json
+iydfx585.default/cert9.db
+iydfx585.default/addonStartup.json.lz4
+iydfx585.default/formhistory.sqlite
+iydfx585.default/favicons.sqlite-wal
+iydfx585.default/webappsstore.sqlite
+iydfx585.default/openpgp.sqlite
+iydfx585.default/prefs.js
+iydfx585.default/.parentlock
+iydfx585.default/folderTree.json
+iydfx585.default/search.json.mozlz4
+iydfx585.default/blist.sqlite
+iydfx585.default/content-prefs.sqlite
+iydfx585.default/mailViews.dat
+iydfx585.default/SiteSecurityServiceState.bin
+iydfx585.default/times.json
+iydfx585.default/cookies.sqlite
+iydfx585.default/sessionCheckpoints.json
+iydfx585.default/ImapMail
+iydfx585.default/ImapMail/outlook.office365.com.msf
+iydfx585.default/ImapMail/outlook.office365.com
+iydfx585.default/ImapMail/outlook.office365.com/Calendar-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Trash.msf
+iydfx585.default/ImapMail/outlook.office365.com/Sent.msf
+iydfx585.default/ImapMail/outlook.office365.com/Notes.msf
+iydfx585.default/ImapMail/outlook.office365.com/Drafts-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Sent Items-1
+iydfx585.default/ImapMail/outlook.office365.com/Archive-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/INBOX.msf
+iydfx585.default/ImapMail/outlook.office365.com/Deleted Items.msf
+iydfx585.default/ImapMail/outlook.office365.com/Notes-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Journal.msf
+iydfx585.default/ImapMail/outlook.office365.com/INBOX
+iydfx585.default/ImapMail/outlook.office365.com/Templates.msf
+iydfx585.default/ImapMail/outlook.office365.com/Archive.msf
+iydfx585.default/ImapMail/outlook.office365.com/Outbox-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Deleted Items-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Calendar-1.sbd
+iydfx585.default/ImapMail/outlook.office365.com/Calendar-1.sbd/Birthdays.msf
+iydfx585.default/ImapMail/outlook.office365.com/Calendar-1.sbd/United States holidays
+iydfx585.default/ImapMail/outlook.office365.com/Calendar-1.sbd/United States holidays.msf
+iydfx585.default/ImapMail/outlook.office365.com/Outbox.msf
+iydfx585.default/ImapMail/outlook.office365.com/Junk Email-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Junk Email.msf
+iydfx585.default/ImapMail/outlook.office365.com/Calendar.msf
+iydfx585.default/ImapMail/outlook.office365.com/Drafts.msf
+iydfx585.default/ImapMail/outlook.office365.com/Tasks.msf
+iydfx585.default/ImapMail/outlook.office365.com/Archives.msf
+iydfx585.default/ImapMail/outlook.office365.com/Contacts.msf
+iydfx585.default/ImapMail/outlook.office365.com/Conversation History.msf
+iydfx585.default/ImapMail/outlook.office365.com/Conversation History-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Contacts-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Sent Items-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/msgFilterRules.dat
+iydfx585.default/ImapMail/outlook.office365.com/Journal-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Tasks-1.msf
+iydfx585.default/ImapMail/outlook.office365.com/Junk.msf
+iydfx585.default/ImapMail/outlook.office365.com/Sent Items.msf
+iydfx585.default/ImapMail/outlook.office365.com/Drafts-1
+iydfx585.default/ImapMail/outlook.office365.com/Calendar-1
+iydfx585.default/handlers.json
+iydfx585.default/logins.json
+iydfx585.default/session.json.backup
+iydfx585.default/cookies.sqlite-wal
+iydfx585.default/favicons.sqlite
+iydfx585.default/key4.db
+iydfx585.default/places.sqlite
+iydfx585.default/bounce-tracking-protection.sqlite
+iydfx585.default/logins-backup.json
+iydfx585.default/virtualFolders.dat
+iydfx585.default/permissions.sqlite
+iydfx585.default/addons.json
+iydfx585.default/places.sqlite-wal
+iydfx585.default/Mail
+iydfx585.default/Mail/Local Folders
+iydfx585.default/Mail/Local Folders/Trash.msf
+iydfx585.default/Mail/Local Folders/Trash
+iydfx585.default/Mail/Local Folders/Unsent Messages.msf
+iydfx585.default/Mail/Local Folders/msgFilterRules.dat
+iydfx585.default/Mail/Local Folders/Unsent Messages
+iydfx585.default/Mail/outlook.office365.com
+iydfx585.default/Mail/outlook.office365.com/Junk
+iydfx585.default/Mail/outlook.office365.com/Trash.msf
+iydfx585.default/Mail/outlook.office365.com/Trash
+iydfx585.default/Mail/outlook.office365.com/Inbox
+iydfx585.default/Mail/outlook.office365.com/msgFilterRules.dat
+iydfx585.default/Mail/outlook.office365.com/Junk.msf
+iydfx585.default/Mail/outlook.office365.com/Inbox.msf
+iydfx585.default/history.sqlite
+iydfx585.default/session.json
+iydfx585.default/history.sqlite-wal
+iydfx585.default/folderCache.json

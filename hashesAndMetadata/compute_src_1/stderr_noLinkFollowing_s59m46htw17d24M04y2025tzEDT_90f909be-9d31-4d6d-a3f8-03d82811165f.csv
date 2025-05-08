@@ -1,0 +1,4 @@
+[absolute path redacted]/.helper_getFileMetadata.sh: line 17: 423430 Killed                  timeout --signal=9 600 sha512sum "$1" 2> /dev/null
+[absolute path redacted]/.helper_getFileMetadata.sh: line 17: 664223 Killed                  timeout --signal=9 600 sha512sum "$1" 2> /dev/null
+10228.67user 24593.48system 9:27:19elapsed 102%CPU (0avgtext+0avgdata 16488maxresident)k
+1244392213inputs+1521600outputs (101274major+3160439559minor)pagefaults 0swaps
