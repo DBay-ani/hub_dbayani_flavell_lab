@@ -35,7 +35,7 @@ See https://web.archive.org/web/*/https://github.com/DBay-ani/hub_dbayani_flavel
 is reported, one cannot ensure every last thing has been included in the list - *the proper way to interpret this, 
 however, is not "if it is not there then it never was", but that "if it is there, then it certainly was and was at that time".*
 For more information in relation to these points, see:
-- https://web.archive.org/web/20240420222403/https://github.com/DBay-ani/FanoosFurtherMaterials/blob/master/manifest.xml#L8
+- https://web.archive.org/web/20240420222403/https://github.com/DBay-ani/FanoosFurtherMaterials/blob/master/manifest.xml#L89-L107
 - "./scripts/README.txt" 
 - https://web.archive.org/web/20250507061910/https://en.wikipedia.org/wiki/SHA-2
 
