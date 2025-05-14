@@ -3,6 +3,9 @@ Hub for Content Relating to David ( داود ) Bayani and the Flavell Lab at MIT
 
 Private material can be found at https://github.com/DBay-ani/private_from_dbayani_for_flavell_lab/tree/main .
 
+Note that if you find this work useful, and especially if you find information here useful either as guideance or for direct use,
+at a minimum you should consider citing appropriately.
+
 # Note Regarding Processing Files to Conform to Github File Size Limits
 
 GitHub has a limit on the maximum size file it allows of 100MB. To deal with that, unless otherwise stated, files provided 
@@ -38,6 +41,20 @@ For more information in relation to these points, see:
 - https://web.archive.org/web/20240420222403/https://github.com/DBay-ani/FanoosFurtherMaterials/blob/master/manifest.xml#L89-L107
 - "./scripts/README.txt" 
 - https://web.archive.org/web/20250507061910/https://en.wikipedia.org/wiki/SHA-2
+
+
+## Hashes and metadata for the `README.md` file in the `https://github.com/DBay-ani/private_from_dbayani_for_flavell_lab/tree/main` repo:
+
+Content reported under this subheader and after this sentence were collected by running `ls -1s --block-size=1  <base path to cloned repo>/README.md ;  ./scripts/getMetadataForAllFiles.sh <base path to cloned repo>/README.md` where `<base to clone repo>` is the location where https://github.com/DBay-ani/private_from_dbayani_for_flavell_lab/tree/main was Git-cloned into; note that that `README.md` contains hashes and metadata for files in that directory (with the exception of the README itself), so providing the hash and metadata regarding that file here should carry-over to trusting the information reported in that README file.
+53248 /home/dove/Code/hub_dbayani_flavell_lab/README.md
+e48208ac7012b6b4dd9681cfdef5dcdf1bf3db1fca4e8bb23b2e9e6b224d17ce0c23b0a6f1a1483e68b8c6acc41cfde8c2c8fef23ac37a7acc21a64db5bc2ead,regular file,160,512,81797,2025-05-14 23:17:33.708920630 +0000,1747264653,2025-05-14 23:18:03.854938752 +0000,1747264683,2025-05-14 23:17:33.710920565 +0000,1747264653,2025-05-14 23:17:33.710920565 +0000,1747264653,d57c873ba775995a6261fe225851d420a4eda6d00f4e0e8321a9c692599cf46761a30db0f9e632875bacbdab036d12758c5cc7219b644ce6e7dc1e7dcb946626,4ba1b8191e70c7c78e5d1b5a7058ee052c015bfda06dc489c258ad2ef535f6991e5d1413134cf1aeb1ca268f639feced42d5d4b9175d5d432ed6aab7fb1b47fd
+
+
+## Hashes and metadata for content in the `./slidesFromTimeInLab` diretory
+
+Content reported under this subheader and after this sentence were collected by running `./scripts/getMetadataForAllFiles.sh ./slidesFromTimeInLab/README.txt`; note that `./slidesFromTimeInLab/README.txt` contains hashes and metadata for files in that directory (with the exception of the README itself), so providing the hash and metadata regarding that file here should carry-over to trusting the information reported in that README file.
+
+
 
 ## Hashes and metadata for content in the `./hashesAndMetadata` and `./scripts` subdirectories.
 
