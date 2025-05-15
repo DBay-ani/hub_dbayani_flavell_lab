@@ -19,9 +19,10 @@ mkdir pdftotext_outputOn_pdfs ;
 for thisFile in $(ls -1 pdfs ); do pdftotext pdfs/$thisFile  pdftotext_outputOn_pdfs/$thisFile".txt" 2> pdftotext_outputOn_pdfs/stderr_$thisFile".txt" ; done
 ```
 
-Below is summary metadata for the content this README discusses and which is shared via the Dropbox link. Information relating to this READMIE is excluding since we
-modified this README after the time of collecting the below data in order to include the outcome of collection, thus potentially
-being misleading to include. Also be aware that the dates/times reported by ../.scripts/getMetadataForAllFiles.sh are impacted by
+Below is summary metadata for the content this README discusses and which is shared via the Dropbox link. Information relating to this READMIE is excluded from the
+results reported below since we modified this README after the time of collecting the below data, in order to include the outcome of collection in this README-
+thus it is potentially misleading to include information about the file since what is reported would necessarily not match what is here. 
+Also be aware that the dates/times reported by ../.scripts/getMetadataForAllFiles.sh are impacted by
 copying content around, etc., so are upper-bounds on the respective time-fields, but for the most part are far later than, say,
 the last time the content in question was actually editted. For cross-referencing, one can get even lower upper-bounds by checking
 with the content in ../hashesAndMetadata  .
