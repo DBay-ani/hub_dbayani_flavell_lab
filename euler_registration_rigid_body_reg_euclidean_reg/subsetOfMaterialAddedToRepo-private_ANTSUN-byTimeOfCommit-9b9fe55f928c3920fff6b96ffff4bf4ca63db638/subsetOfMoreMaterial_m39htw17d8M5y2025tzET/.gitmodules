@@ -1,0 +1,12 @@
+[submodule "euler_gpu"]
+	path = euler_gpu
+	url = git@github.com:flavell-lab/euler_gpu.git
+[submodule "imreg"]
+	path = older_version_imreg
+	url = https://github.com/cgohlke/imreg.git
+[submodule "imreg_dft"]
+	path = imreg_dft
+	url = https://github.com/matejak/imreg_dft.git
+[submodule "2020-Computer-Version"]
+	path = 2020-Computer-Version
+	url = https://github.com/lingwsh/2020-Computer-Version.git
