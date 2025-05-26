@@ -15,6 +15,17 @@ are processed with the following Bash-snippet to prepare them for uploading.
 for thisFile in $(find ./hashesAndMetadata -type f -size +99M  ); do split -d -l 165000 $thisFile $thisFile"__part_"; rm $thisFile ;  done
 ```
 
+# Additional Repos Relating to Flavell Lab Work to See:
+
+Also see the following GitHub repos relating to D Bayani's work with the Flavell Lab:
+- [DBay-ani/private_from_dbayani_for_flavell_lab](https://github.com/DBay-ani/private_from_dbayani_for_flavell_lab) ; note that this is a private repository that requires an invitation to view from GitHub. If you would like access and do not already have it, please contact D Bayani at dcbayani@alumni.cmu.edu so we may discuss it.
+- [DBay-ani/flavellLab_lookingIntoPreTrainedMaterial_d6M1y2024tzET](https://github.com/DBay-ani/flavellLab_lookingIntoPreTrainedMaterial_d6M1y2024tzET)
+- [DBay-ani/labDataOverseer](https://github.com/DBay-ani/labDataOverseer)
+
+As a general reminder, for Git repositories that include submodules, you will likely need to use the flag `--recurse-submodules`  along with the
+`git clone` command in order to achieve the aims you had in mind. This particularly applies to the `DBay-ani/flavellLab_lookingIntoPreTrainedMaterial_d6M1y2024tzET`
+GitHub repository listed in the bullets of this subsection.
+
 
 
 # Hashes/Checksums and Metadata for Content Gathered 
