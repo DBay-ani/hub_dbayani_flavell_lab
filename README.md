@@ -64,6 +64,15 @@ Content reported under this subheader and after this sentence were collected by 
 e48208ac7012b6b4dd9681cfdef5dcdf1bf3db1fca4e8bb23b2e9e6b224d17ce0c23b0a6f1a1483e68b8c6acc41cfde8c2c8fef23ac37a7acc21a64db5bc2ead,regular file,160,512,81797,2025-05-14 23:17:33.708920630 +0000,1747264653,2025-05-14 23:18:03.854938752 +0000,1747264683,2025-05-14 23:17:33.710920565 +0000,1747264653,2025-05-14 23:17:33.710920565 +0000,1747264653,d57c873ba775995a6261fe225851d420a4eda6d00f4e0e8321a9c692599cf46761a30db0f9e632875bacbdab036d12758c5cc7219b644ce6e7dc1e7dcb946626,4ba1b8191e70c7c78e5d1b5a7058ee052c015bfda06dc489c258ad2ef535f6991e5d1413134cf1aeb1ca268f639feced42d5d4b9175d5d432ed6aab7fb1b47fd
 
 
+## Hashes and Metadata for Content in the [`./furtherInformationAndSuggestionsProvidedByDBayani`](./furtherInformationAndSuggestionsProvidedByDBayani) Subdirectory
+
+<details>
+<summary>Expand to show list</summary>
+Content reported under this subheader and after this sentence were collected by running `./scripts/getMetadataForAllFiles.sh ./furtherInformationAndSuggestionsProvidedByDBayani ;`
+Not_Applicable_Or_Timeout,directory,8,512,4096,2025-06-18 21:17:07.954774615 +0000,1750281427,2025-06-18 21:49:25.299978871 +0000,1750283365,2025-06-18 21:52:58.523197901 +0000,1750283578,2025-06-18 21:52:58.523197901 +0000,1750283578,5576831c29468497379ee0e6aeba4909c86b400ff380624c8ca638da293da020b12add81e081bd00cb6d5a8a3da252a1b799aba48ed1cf136e7c826bba020047,9aeabd281d53a75a58e5b2d30e0449ab6c06bbd200f54d9b70c5cb2e2a751f7824e21daf512bff13e12a47210df58b67c5cc26fb826a3851f9f63f9a11664924
+1875f96431cfa53826272e0841b031e0880eeecdf15dc94a65635e31d32fe88d5746a55c1dfa074dbeef897f3fe84305736d93c85efea4e331d70d2ade169d9d,regular file,16,512,4475,2025-06-18 21:52:58.517198056 +0000,1750283578,2025-06-18 21:52:58.596196014 +0000,1750283578,2025-06-18 21:52:58.517198056 +0000,1750283578,2025-06-18 21:52:58.522197927 +0000,1750283578,bad7333228e1c326cc148252692135421e2c23927140057efed1dde7474830bdebe2ef265eccdf87665d9fe85e5d0f29e76e0a48531da421ac66304d8970e7b0,4ba1b8191e70c7c78e5d1b5a7058ee052c015bfda06dc489c258ad2ef535f6991e5d1413134cf1aeb1ca268f639feced42d5d4b9175d5d432ed6aab7fb1b47fd
+</details>
+
 ## Hashes and metadata for content in the `./slidesFromTimeInLab` diretory
 
 Content reported under this subheader and after this sentence were collected by running `./scripts/getMetadataForAllFiles.sh ./slidesFromTimeInLab/README.txt`; note that `./slidesFromTimeInLab/README.txt` contains hashes and metadata for files in that directory (with the exception of the README itself), so providing the hash and metadata regarding that file here should carry-over to trusting the information reported in that README file.
