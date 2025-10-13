@@ -1,0 +1,362 @@
+24.4s	 So we're back. So we, for reference, we paused a moment ago to change the permissions on what in the Docker are the home, what is the home directory for the Docker user, but on the host is some directory on store one, stored under [person A], right?
+--- --- --- --- --- --- --- --- ---
+52.5s	 So we got, we use administrative powers offline to make a change in ownership so that the Docker user could use their home directory. And for details of what the actual issue was, you can refer to the previous recording, the tail end of it. But let's, let's see what that looks like now that it was supposedly completed.
+--- --- --- --- --- --- --- --- ---
+17.5s,1min	 So now we see we have the Docker user. User directory, which again should be home directory when we go and use the Docker. And it's listed as having this number as the host and the the owner, that number corresponds to the Docker user. It's just that on the host, it doesn't have the doesn't have the text corresponding to that name. And let's see if we have actually a record. Well, before.
+--- --- --- --- --- --- --- --- ---
+54.4s,1min	 Okay, well, that's it, the whole screen, whatever. But let's take a look at the Docker user. So let's take a look inside of that to see if the change of ownership took effect to those and it looks like it did, which is great. So again, the command that was run was just ch mod, this thing, but it needed to be run as an administrator, as opposed to [person A], which is a little unfortunate because [they were] the owner on all these files prior to us making the change. So it would have been nice if the owner was able to just hand it to someone else.
+--- --- --- --- --- --- --- --- ---
+17.6s,2min	 But at the same time, I can kind of see it as I can see ways that [...]  allowing users to arbitrarily hand things to other users could backfire, especially if the other user doesn't want it or something, yada, yada, yada, yada. Anyway, that's all set. So let's, let's go back into the Docker and see or start the Docker container again and see if this time the permission issue is resolved.
+--- --- --- --- --- --- --- --- ---
+41.0s,2min	 So Docker container status. Stacks? No, it's LSA. I'm thinking, I was thinking it was system control. Okay, so here we see it has one that was created about an hour ago, but it exited.
+--- --- --- --- --- --- --- --- ---
+8.7s,3min	 And I think we mentioned yesterday this dash A flag and circle back on that. Without it, it doesn't list anything because by default Docker container LS only lists the containers that are actively running. So it's not going to list anything. So it's not going to list anything. So it's not going to list anything. So let's start the container. Or as yet another example of what not to do if I do Docker container attach.
+--- --- --- --- --- --- --- --- ---
+38.6s,3min	 And then the container name, this should fail. And it does, and it says you need to start it. Indeed, if we do start. Well. It's giving us a similar error to what we had before about these ports, which is annoying. And I had a better fix for this before. I know we resolved, we got it to cooperate a bit ago.
+--- --- --- --- --- --- --- --- ---
+1.9s,4min	 But let me just try restoring the system. Indeed. Okay. So we've got a better fix for this before. Now, if we go out here and do another on1000, we can see that it's started logging out the clippings.
+--- --- --- --- --- --- --- --- ---
+22.5s,4min	 That is genuine、 And all of the faut we know, All of the all we know about that business terminal for what is running in that terminal. All we have to do is, open our terminal. How do we heat this up? By doing this code.
+--- --- --- --- --- --- --- --- ---
+42.6s,4min	 Alright, now if I do that, alright, above, I guess, I guess I'll already use it.
+--- --- --- --- --- --- --- --- ---
+4.1s,5min	 It's just a kind of annoying thing, let's see. Okay, we just talked with start. Before we hit throw in container and now we don't. Whatever, just bear in mind sometimes you put in the word, sometimes you don't, and it doesn't seem like there's a way for this to...
+--- --- --- --- --- --- --- --- ---
+24.5s,5min	 Thankfully this is, I haven't run into a situation where if you do one and it works, it's the wrong thing to do. Okay, so we have, we're attached to the thing. And as before, it's spitting out this message to let you know, type in a random character.
+--- --- --- --- --- --- --- --- ---
+48.9s,5min	 Do I want to record? Well, I'm going to hit yes this time because I want to see if it can write into its home directory. And so far it seems to be. It hasn't given us any permission errors, which before it did. Now we are still starting at the root of the file system. There's probably an easy way to change that, but it's not a big deal. I'm just going to go ahead to what's assigned as the home directory inside the Docker.
+--- --- --- --- --- --- --- --- ---
+12.1s,6min	 And if I do ls, great, I can see all this stuff. And if I make a new file, well let's see if I can make a new file. Say hi. Well that's new. There we are, I was able to write into the directory. Now am I able to modify stuff that's in that directory? Well what am I allowed to modify? Well, how about we do bashrc, modify bash, right?
+--- --- --- --- --- --- --- --- ---
+35.6s,6min	 Go down, and I don't need to do anything fancy. I can just do this. Okay. I'll just say, testing, I can modify this file. That hasn't given me any permission errors, and as far as I'm aware, it actually had the
+--- --- --- --- --- --- --- --- ---
+58.3s,6min	 change recorded. So it looks like a red timeline, it's that many bytes, and before it was less, so, and just to be even more specific. Great. And I want to see if this is reflected on the server, because again, the home directory
+--- --- --- --- --- --- --- --- ---
+22.4s,7min	 in the Docker is actually on the host, stored as a directory on store one, at least the way we configured it. How am I going to do that? I'm going to detach from the container without stopping it, control P, control Q. Great, and as you can see, it always says that, or if it does as it's supposed to, it says it read the escape sequence. Well, that's fine. It's just when we type in the escape sequence correctly, as opposed to saying it exited,
+--- --- --- --- --- --- --- --- ---
+45.5s,7min	 and as before, we can just double check that all, docker container ls dash a. Hey, look, it's running now, because it says the status is up, and in fact, because it's running, I shouldn't need to give the dash a if I just do ls. Hey, look, it gives me the thing, because again, ls just lists the things that are running by default. Now, I want to check that thing on store one. So let's go to store one, [person A], and Docker something.
+--- --- --- --- --- --- --- --- ---
+6.3s,8min	 There we are. Ta-da. Okay. So that, well, I see hi is right there, and let me see if the batch file has, our c file has changed.
+--- --- --- --- --- --- --- --- ---
+31.8s,8min	 Hey, look, the size here is the same as the size was up here, which is different than the size we initially had it as. Let's see if we can still read this file outside of the docker, because we did change permission so who knows, maybe [person A] lost some access. Well, we can still read it. There we go. And how can we check it and still read it without actually just reading it? Well, we can look at the permissions right here on the line where we did ls dash a, and
+--- --- --- --- --- --- --- --- ---
+55.6s,8min	 again, the first three letters, well, the first three letters shown here, this blank can be filled with a letter sometimes. Well, in this case, we have rwx, read, write, and execute for the owner, which is this number. That's the Docker user. Then for the group, we have read and execute, no write permissions. And for everyone else under the sun, it's read and execute.
+--- --- --- --- --- --- --- --- ---
+16.6s,9min	 So what this says is that I should be able to read this file, which I just did, but I probably should not be able to write to it or modify it because I'm running as [person A] right now. [person A] is part of the [person A] group, and the group does not have write access. So let's test that. Let me go to batch RC. There we are. And we're good.
+--- --- --- --- --- --- --- --- ---
+39.5s,9min	 So I'm going to go to the end of it. OK. And let me, now it's already giving me warning saying change and read only file, but let's see. Let's see if I can even force it to write this thing. So type that in. Let me say write. Well, it says read only. Let me try with the exclamation mark and try and force it. And it says it can't open it for writing, so even if I force it, it can't.
+--- --- --- --- --- --- --- --- ---
+2.8s,10min	 So I quit. And we can just double check that nothing I did stuck. OK. There you are. Now what happens if I actually do want to modify this file? How am I going to do that? Well, now that I have the Docker user as the owner of this thing, I can actually have it expand the permissions to the group that it allowed.
+--- --- --- --- --- --- --- --- ---
+23.4s,10min	 So let me reattach to the container. Great. I'm in the container again. I'm in the home directory. And I have all the accesses I care about for, let's say, dash RC. Ta-da. OK. So I'm going to do that. And I want to give the group, which is the second set of permissions here, the ability
+--- --- --- --- --- --- --- --- ---
+43.6s,10min	 to write into the bash rc file as just an example. So I'll just do chmod group plus write that, bash rc. Great. Did that stick? Well, it looks like it. We have that changed here now. So I just want to make sure that on the host system, I'm indeed able to do that.
+--- --- --- --- --- --- --- --- ---
+3.9s,11min	 OK. So I'm going to do that. I'm indeed able to modify the bash rc file. And again, bash rc file is just an example of what you can do here. So control-p, control-q to reattach. And let's see if on the host I'm able to modify this, where on the host I'm running as [person A]. Type that in.
+--- --- --- --- --- --- --- --- ---
+26.6s,11min	 And you'll notice that I'm not getting to worry about it being read-only here. I'd like to make sure this is something that terminal can still read. So I'll make it a line comment. Hit write. I didn't even have to put an exclamation mark on it, and it's still saying, hey, look, it's written. I do quit. And then if I do tail, hey, it looks like the thing I wrote was there on the file.
+--- --- --- --- --- --- --- --- ---
+48.6s,11min	 But this is still on the host. Let's confirm it on the docker. If I reattach the docker, I'm in the home directory on the docker. And if I do the tail of the dot bash rc file, bash rc, oh, look, there's the comment we put in. So in general, if you run into this sort of permission thing, it's going to be a little bit more complicated. But if you run into this sort of permission things after an admin makes the owner the
+--- --- --- --- --- --- --- --- ---
+10.7s,12min	 docker user, you can go ahead and assign things appropriately within the container. Now actually, maybe another way I could have done that instead of having to host admin change to permission was do it at the root of the docker. And I probably should have done that first.
+--- --- --- --- --- --- --- --- ---
+39.2s,12min	 I think I might have even done that before. But let me see. Let me see if there's another thing owned by root that I can reassign. I mean, we changed the ownership on this entire file. Well, if I go back to the host, control key, control q, and I'm here, I'm not going to be able to really change too much in this directory because I made the docker user the
+--- --- --- --- --- --- --- --- ---
+59.8s,12min	 owner of all this stuff. And we saw a moment ago how I had to go into the docker. And expand the permissions in order for [person A] on the host to modify the bash rsc file. So I'm going to try to do the same thing on the other stuff. I'd have to go into the bash rsc into the docker as docker user and then expand those permissions.
+--- --- --- --- --- --- --- --- ---
+20.8s,13min	 But I want to see about changing things from [person A] on the host to docker user on the host without having to get the admin involved. So let me see if this experiment works. And I'm going to try to see if this works. and I really don't recall what the outcome was. Now bear in mind, this point is mounted inside the Docker container.
+--- --- --- --- --- --- --- --- ---
+41.6s,13min	 We set it up, we had the whole discussion of, oh hey, I wanted this thing to be the home directory, but the home directory is stored under home, yada yada. You know, refer to those details again, but the point is [...]  it's not just this specific directory that's available inside the Docker container. This entire path is, anything under this umbrella should be available there.
+--- --- --- --- --- --- --- --- ---
+6.2s,14min	 So let me try making a file, which since I'm running as [person A] right now, if I make that file, on the host it should appear as [person A] owner group [person A], but because of the remapping of IDs on the Docker, that should appear as root root. And then I want to try and change that to be owned by the Docker user,
+--- --- --- --- --- --- --- --- ---
+27.9s,14min	 which before when we did that for the home directory, we needed to get the admin involved, to do the chmod [...]  dash all that stuff, and yada yada. I want to see if just the root user on the Docker container is able to do that, and individual users are able to run as the root user on their Docker, as opposed to having to be the root on the host. Anyway, so to see what that actually all looks like,
+--- --- --- --- --- --- --- --- ---
+51.3s,14min	 let me make a file and say, hello there people. I don't know. That, and I'm going to say test. My old UID gen. Because who doesn't like UIDs?
+--- --- --- --- --- --- --- --- ---
+15.1s,15min	 Great. And we see that it's owned by [person A], and the group is [person A], and that the owner and the group have read and write permission, but everyone else only has read. You know what, let's make that a little bit more restrictive, just to test the extreme case of this. Let's say chmod. Everyone, loses read, write, and execute permissions on test file.
+--- --- --- --- --- --- --- --- ---
+39.8s,15min	 And then we'll expand it back out to say chmod. Only the user has read and write access to test file. Now if I look at the permissions of that file, test file. Oh look [...]  the only person who has read and write access is the owner, [person A], and neither the group nor anyone else has the ability to do stuff to it, supposedly.
+--- --- --- --- --- --- --- --- ---
+0.4s,16min	 Great. Let me confirm this by going into the Docker, and if I just do docker attach 3, right? Now if I do cd dot dot, first off let's check that I can see the file I just made on the host. I can, because of the specifics of how we mounted it before. All right. Now let me see if I can see what's inside of it.
+--- --- --- --- --- --- --- --- ---
+25.9s,16min	 Can. Permission denied. And if I look at [...]  what the permissions of this file are, we should see owned by root, group root, and cd. And if I look at the file, I can see that it's not a cd. I can see that it's not a cd. I can see that it's not a cd. And indeed we do. And we see the corresponding permissions like this. Just, it shouldn't work, but just to [...]  demonstrate and beat that horse, let's say that [...]  chmod ugo,
+--- --- --- --- --- --- --- --- ---
+54.1s,16min	 or [...]  you might as well just do a plus rewrite x on test file. And it should say [...]  no permission. You don't, you can't do that. Operation not permitted. Okay, great. Let me try ch, own to try and transfer the ownership to the Docker user. And it should say fail, right? Great, okay. Well, this is all expected,
+--- --- --- --- --- --- --- --- ---
+18.9s,17min	 but I want to see if we have a solution to this. So let's try that Docker exec root thing we did before, where we were running as the root inside the Docker, which on the host is just the same as [person A]. So Docker exec view root, dash IT, three E, that's just the first two characters of the ID
+--- --- --- --- --- --- --- --- ---
+41.4s,17min	 for the container we're running, and then bash. Okay, great. We're attached to the terminal. It's giving me the indication with the typical printing of the line. Press any character, do a run record. I'm not terribly interested in this type. I'm recording my entire shell as a matter of fact. So whatever the case, I mean, outside of this. Anyway, so, hey look, I'm running, I'm running, I'm running. Anyway, so, hey look, I'm running, I'm running, I'm running.
+--- --- --- --- --- --- --- --- ---
+5.8s,18min	 Root, great, let me see if I can go to see that file. I still see it as root, great. If I do ls dash a, l, ti, latte? Is that L-A-T-I-L-A-T-I? Lanty, latte? Whatever, English sucks. So there's a test file, great.
+--- --- --- --- --- --- --- --- ---
+29.4s,18min	 And am I able to see the content of the test file? Yes, I am. Am I able to check the content of the test file? Yes, I am. Okay, so I'm going to change the permissions of it. Let's say I want to expand the, to the group, some readership. I mean, it shouldn't make a difference in this case because it's the group and the owner are root. They're formally two separate things, but I mean, the topic would typically set up to correspond pretty tightly.
+--- --- --- --- --- --- --- --- ---
+53.5s,18min	 So chmod group plus read, let's say. That didn't give any indication of error. Let's look, hey look, the group now has read access, whereas before it did not. Okay, now let's try and change ownership. Ch own, yeah. Docker user, like that.
+--- --- --- --- --- --- --- --- ---
+19.7s,19min	 Let's say Docker user as well. Test file. Invalid group. Well, there's no group Docker user, probably as we set it up. So let's just say ch own Docker user. There's definitely a user by that name, or should be. Operation not permitted. So let's say ch own. Let's say ch own. That, we're already actively running as root, so that shouldn't make a difference, but let's see.
+--- --- --- --- --- --- --- --- ---
+44.1s,19min	 Nope. So let's see. Now, I mean, this could just all well be expected, right? Because this file actually lives on the host machine as opposed to in the Docker container. But yeah, so in this case, it does look like it probably needs to get the admin on the host machine. So let's see. So let's see. So let's see. So let's see. I think it's a little bit more complicated
+--- --- --- --- --- --- --- --- ---
+5.2s,20min	 than the host machine to change information. It's not just something you can do in Docker. But let's see an example where probably you can get away with just doing it in a Docker. What's an example like that? Well, one of the tricky parts about this specific file is that it lives [...]  in part on the system outside the Docker. What about a file that's just completely contained inside the Docker? All right, so where's a place that's completely contained inside the Docker?
+--- --- --- --- --- --- --- --- ---
+27.1s,20min	 But if we go to root [...]  this whole directory structure, et cetera, is not something that [...]  we could just write it in. It's not something that is reflected directly anywhere on our basic file system. This is something that's internal to Docker as opposed to the mount points that we kind of set up that allow us to have a bridge between inside the Docker and outside. Let me see if I can make a quick low file, basically doing the similar processes above,
+--- --- --- --- --- --- --- --- ---
+47.7s,20min	 where I can try and change the ownership from root to the Docker user, right? And I'm gonna go for a very similar process to what we did above here, just to see all the ways that like it matches up. So we're gonna go with touch, I don't wanna do touch, we'll go, look at a dump and I, the EUID,
+--- --- --- --- --- --- --- --- ---
+13.9s,21min	 as a proxy for some other unique or interesting string to file, it's called testfile123.txt. I'm suffering for EUIDs, might as well. There we go. It would be nice if I spelled things correctly. Okay. Okay, and do we have a file named test file something something?
+--- --- --- --- --- --- --- --- ---
+42.2s,21min	 We do. In fact, we have two of them because I screwed up on the first one. So I'll delete the first one. There we are. Now how many do we have? We have one, and indeed it was made recently. All right. This was made recently, and it has root root and has kind of expansive permissions.
+--- --- --- --- --- --- --- --- ---
+2.2s,22min	 I'm going to go ahead and contract the permissions again because I want to make sure that we actually change ownership and yadda yadda yadda. So chmod group and other minus read access on test file. Didn't indicate any errors. And we see that indeed. All right.
+--- --- --- --- --- --- --- --- ---
+26.0s,22min	 So I'm going to go ahead and create that. Remove the read flags for the group and the other people while retaining the permissions for the owner. Cool. So let me exit from this. Again, I have another terminal session running in the same container. So if I exit from this, it should not kill the or cause the container to stop.
+--- --- --- --- --- --- --- --- ---
+48.7s,22min	 I should just close that particular shell session. And I can confirm that with docker container ls. Cool. Yep. If I do docker attach to three, and again, I know I said it, but I'll just highlight
+--- --- --- --- --- --- --- --- ---
+9.1s,23min	 for future people. The three there corresponds to the first character of this. If I had two containers that started with three, I'd probably have to specify however whatever substring uniquely identifies them. Cool. Great. So I'm going to go to root directory and go like that. Great. I can see the test file. Cool. Am I able to see what's inside of it?
+--- --- --- --- --- --- --- --- ---
+31.0s,23min	 No. Am I able to modify any of the permissions on it to say, uh, chr u plus three? No. Uh, and I'll spare every other combination. This establishes the main point. Great. So let me go back to root and see if I can change the ownership or, um, yeah.
+--- --- --- --- --- --- --- --- ---
+53.0s,23min	 Change the ownership to the docker user. Uh, so similar command we ran a moment, uh, to what we ran a moment ago. Uh, record terminal activity. This time I'll say yes for whatever reason. Great. It's telling me that I'm recording and that's where the file is. Great. Um, so we should already be at the, the root directory and we are.
+--- --- --- --- --- --- --- --- ---
+17.0s,24min	 There's that file. Scale test. Great. There's that. Um. So let me say chown, docker user, test file. Didn't indicate any error. If I look now, hey look, it changed the owner from root to docker user.
+--- --- --- --- --- --- --- --- ---
+40.0s,24min	 The rest of this is basically the same. Uh, am I able to dump out what's inside this file? It probably should still be able to on root right now, but we'll see. Yeah. Well [...]  root permission has management permission, but anyway. Um, let's see if the docker user is able to dump that out now and I'll go ahead and exit this time. This time we should have to type in exit twice because we're in technically a recording shell.
+--- --- --- --- --- --- --- --- ---
+4.0s,25min	 Uh, it's not a big deal. Uh, I mean, it's a little annoying you have to type exit twice, but I mean, in the scope of things, whatever. And look, it compressed stuff and added it to its archive and it went down from 0027 to, uh, 002. Look at that. Isn't that pretty? I think it's pretty. Anyway, so that's the docker. Now let's reattach to three, but as docker user, if we go to the root directory, which
+--- --- --- --- --- --- --- --- ---
+26.0s,25min	 we are currently at, let me take a look. Hey, there's the test file. Let me confirm that the permissions seem to be changed on that in terms of at least the listing or like the listed permissions still says that, uh, the docker user who I'm currently running as is the owner. Great. Am I able to type it out? Yes, I am. Okay. Notice how this is in contrast to what we did just a moment ago for the thing on the
+--- --- --- --- --- --- --- --- ---
+49.0s,25min	 home directory. The main difference as far as I'm aware between this file, this test file thing, and the one we were dealing with in home directory that was, uh, this one right here, um, is that this file that was in the home directory is stored on the host with a certain set of permissions.
+--- --- --- --- --- --- --- --- ---
+10.0s,26min	 In particular on host, what the permissions were listed as [person A], [person A], right? Okay. So, this file right here, this other one is just internal to docker, right? So that's something that it manages and it's in it. There's not some additional permission issue as far as I'm aware. Um, okay.
+--- --- --- --- --- --- --- --- ---
+30.6s,26min	 So that's a little bit of a gotcha. Could be a little bit weird if someone wasn't aware of it. Honestly, most of the time, I don't think a person's going to have to worry, even deal with this. I mean, if you're saving files routinely to the root directory of, uh, of an OS or, or whatever, you're, you're probably not using your system correctly unless you really know
+--- --- --- --- --- --- --- --- ---
+55.2s,26min	 what you're doing. Um, anyway, so that's great. Um, covering some of the, the pedantic aspects, but let's get back to the things that we really need to cover. Um, so we went over the stuff with the home directory, so that's done. Uh, we made a container. That's great. SSH, we'll talk about a little bit. Uh, and then one of the other things to really talk more about, and I, I suspect you might
+--- --- --- --- --- --- --- --- ---
+15.8s,27min	 have questions on is looking at the history files to just see some of the details that went into the various packages that exist. Um, we already talked about sort of the UIDs, the group IDs, the sub IDs. I mean, there's a lot of potential detail there because it has to do with like the slightly deeper new workings of Linux, but, um, I think we discussed it enough to provide pointers
+--- --- --- --- --- --- --- --- ---
+38.5s,27min	 for someone who's interested to read more on it. Um, and again, take away from that whole, um, adventure. Yeah. So, the adventure going into that is, uh, in the future it would be good to have a centralized identity management so we don't have to worry about sub IDs or other details of the operating
+--- --- --- --- --- --- --- --- ---
+1.9s,28min	 system or file system or what have you, uh, breaking on us. Anyway, uh, yeah, so I have this in bold and it's a quick note, though a little bit off topic. Uh. So, as a reminder and general disclaimer, setting up the Docker and stuff takes care
+--- --- --- --- --- --- --- --- ---
+23.1s,28min	 of most of the pain of what one needs to do to one ANT sun, but bear in mind what I will not be talking about here, with the exception of the SSH a little bit, is the open mind aspect. Alright, so there are things you need to do to set up ANT sun on open mind, uh, which the person I'm talking to right now knows very well.
+--- --- --- --- --- --- --- --- ---
+45.6s,28min	 But future people will know. So, I'm going to go ahead and do that. Uh, might not be as familiar. Nothing I'm talking about today is how you set up your software on open mind, but thankfully that's a fairly stable environment and that's [...]  generally been the place of least concern. Um, anyway. So SSH keys and, or SSH add.
+--- --- --- --- --- --- --- --- ---
+8.0s,29min	 Um, so if someone is not familiar with SSH, look on the internet and I'll write that down for you. If you don't know what SSH is. Okay. Okay. Okay. Okay. Okay. Okay. If you don't know about SSH stuff, the internet has a lot to help.
+--- --- --- --- --- --- --- --- ---
+46.4s,29min	 And among other things, um, if you have a GitHub account and it used to be the case that you had to use GitHub in order to use, um, ANT sun, um, it still might be the case depending on the open mind stuff. So I need to check that. It's been a while. But, um, GitHub. for example, has documentation on setting up keys for that site, those instructions
+--- --- --- --- --- --- --- --- ---
+8.1s,30min	 are very similar to what you'd have to do for OpenMind.
+--- --- --- --- --- --- --- --- ---
+30.4s,30min	 Also the [lab] Wiki. Okay. So, that's it. Thank you. So, that's it. That's it. That's it. That's it. That's it. That's it. Great. But, with that all noted, very briefly, two other things to note.
+--- --- --- --- --- --- --- --- ---
+57.4s,30min	 So, if you go into the home directory, there is a hidden .ssh folder, and I can reveal it with . . . There we are. Or, there's the directory and what is it contains. . . . There we are. That's stuff. Generally speaking, if you copy one of your .ssh keys into this directory, then .ssh will
+--- --- --- --- --- --- --- --- ---
+22.4s,31min	 know to try and use that key whenever it connects to a site, and most of the process from there is automated. I mean, it might ask you for permission for the password on your .ssh keys, but at the very least it will be very clear that it's asking you, as opposed to like, how do I do this thing? I'll just guide you. Now, another utility we know about is sshadd, like that.
+--- --- --- --- --- --- --- --- ---
+44.4s,31min	 And, basically, the distinction between this and .ssh are that you can set up your ssh keys with passwords. That's a good thing to do. Why? Because your ssh key is what you use to tell other systems that it is you who is using
+--- --- --- --- --- --- --- --- ---
+8.4s,32min	 it. It is you who is connecting to them. You can imagine, then, that if you don't have it protected in some way, and someone just grabs it, then they can just go into other arbitrary systems and say they're you. Great. That sounds great. But, typing in passwords can be a pain. Wouldn't it be great if I could have the protection of a password while at the same time not having
+--- --- --- --- --- --- --- --- ---
+42.4s,32min	 to type it in every time? That's what sshadd does. So, now go ahead and type in your password. . . . Now, Docker is probably going to complain that it's a minimized system and not give us a man page for it. Yeah, exactly. The system has been minimized, removed, yadda yadda. That's attached. Control-P, Control-Q, man, sshadd. Great. All that stuff, there's more detail in the man page. Okay, maybe that's not terribly informative, but the . . . I could give a demo of using
+--- --- --- --- --- --- --- --- ---
+6.1s,33min	 it. It's not that hard. In general, you just do sshadd and then path to the key, and then it guides you from there. Basically, you just need to type in the password. So, what's the distinction? Why use sshadd as opposed to just making a key that doesn't have a password?
+--- --- --- --- --- --- --- --- ---
+27.1s,33min	 Right? Because the idea is that sshadd will allow you to not have to specify your password all the time. You don't have to specify it. Why even have one in the first place? There's two differences. First, sshadd lives in memory as opposed to sitting around on disk. Your key sits around permanently on disk.
+--- --- --- --- --- --- --- --- ---
+50.1s,33min	 Right? That means anyone now or in the future can grab it. But, with sshadd, one, if the machinery starts, in theory, that means the unlocking of your key is gone. Your key will automatically re-lock. Second, while disk has certain protections on it in terms of permissions, etc., it's
+--- --- --- --- --- --- --- --- ---
+12.1s,34min	 also the case that things running in memory have restrictions and protections on them, which sshadd benefits from as well. One other detail that's good to know about. Suppose you want to unlock your key for a while because you're going to be doing work with it in the next day or two. But not forever.
+--- --- --- --- --- --- --- --- ---
+36.1s,34min	 There's a "-t flag", and then you just specify how long in seconds here you want it. So, I remember [...] that there are 3,600 seconds in one hour. If I wanted to have it unlocked for a day, then I could do 24 times how many seconds
+--- --- --- --- --- --- --- --- ---
+3.1s,35min	 there are in one hour. And that would have my key unlocked for 24 hours. After which it would automatically re-lock. This is optional. If you want to, you can just dump your keys here and then try to save your password permanently or not use a password. Those latter two options are ill-advised. But whatever the case is, these are some things that you can do to set up your ssh key.
+--- --- --- --- --- --- --- --- ---
+26.1s,35min	 And if you want to learn more about these, well, there's plenty online that you can go to, and that is reputable and can give you some guidance. Or fellow lab members can give you guidance as well, of course. Anyway, so that's ssh. Now the last bit that I think we have to talk about is a little bit of the history files in case someone needs to re-create more of the details.
+--- --- --- --- --- --- --- --- ---
+51.1s,35min	 But before I go into that last bit, I think now is a good time to again ask if there's any questions, if there's anything else that should be brought up. For example, there might be something that I'm just completely forgetting to mention, or anything like that. If there's just anything else that we should talk about before getting into the last little bit of records in this Docker setup. I'm good, just in terms of what we've gone through so far.
+--- --- --- --- --- --- --- --- ---
+13.1s,36min	 For the sake of [person A]'s account, would it be safe to demonstrate how to do keygen here and actually add it? Because this is being recorded. We could, but it's kind of up to [them]. Okay. You can also, I guess we can ask [them] to sit with you and generate this at some point.
+--- --- --- --- --- --- --- --- ---
+34.1s,36min	 Yeah. So it's not a bad suggestion, and we're not for the fact that I need to consult the exact syntax for keygen, because I used a system before that had different syntax than the one that's installed on our servers. I probably would. But the good and bad news there is that doing that largely is separate from Docker's specific
+--- --- --- --- --- --- --- --- ---
+56.1s,36min	 concerns. Yeah, that I understand. I mean, a good point though is like, hey, what if you generate the key on the host, like where we are right now, how do I get it into the Docker? And the short answer there is, hey, you have your, well, not only do we have store one, not only do we have the home directory available inside the Docker, and that's anything stored
+--- --- --- --- --- --- --- --- ---
+19.7s,37min	 under the tilde is actually backed on store one, but actually store one, data one, data three, and data four are all directly accessible in the Docker, and I might as well demonstrate that briefly. Because [...]  we didn't actually show it yet so far. So if I go to data one, and I go into [ person A ], there's nothing there yet, but let me say touch hello world.
+--- --- --- --- --- --- --- --- ---
+40.1s,37min	 Remember those programs? So there's now this file there. I want to see if this is reflected in my Docker. How am I going to do that? I'm going to say Docker attach three. Great. I'm going to go into my Docker. I'm going to go into data one. And I see all these different things there. I go into [ person A ]. There's hello world. Great.
+--- --- --- --- --- --- --- --- ---
+3.1s,38min	 And again, let's see if I can go into me. Permission denied. So [...]  yeah, Docker user is set up as part of the [ person A ] group on host. Though I didn't actually show that, I recall signing up.
+--- --- --- --- --- --- --- --- ---
+24.1s,38min	 So that's the case. Anyway. So that's all well and good. Anything else prior to just looking at the industry? The other thing I was wondering about is Docker dot service, because I think you restarted that at some point, and it showed up as a printout also. So what is Docker dot service?
+--- --- --- --- --- --- --- --- ---
+47.1s,38min	 So Docker dot service is, I believe it's just an alias, or like sometimes I just type in Docker, right? So control P, control Q. System controller. That's what CTL stands for. User. The user flag indicates that I want to do the ones that are running under [ person A ] as opposed to the ones that are running under root for the entire file system.
+--- --- --- --- --- --- --- --- ---
+8.1s,39min	 And then I say, let's say status. And let's say Docker. There's that. And if I just type in Docker service, it should show the same thing. Let's do a quick comparison. Main PID, 155.94. Main PID, 155.94. Now that doesn't mean that there aren't additional details here that are different between these
+--- --- --- --- --- --- --- --- ---
+29.1s,39min	 two, but clearly they're talking about very similar things. Just for a point of comparison, again, a little bit in the weeds, but it's relevant to your general question. If I look at Docker dot socket, well, that's not a system service, but that is something that is managed by system controller. Maybe that's run outside the user space.
+--- --- --- --- --- --- --- --- ---
+53.1s,39min	 No. It should be something, something socket somewhere. I'll just say, Docker.list. Let's say just status. There's a number of things there. Well, let's say user status.
+--- --- --- --- --- --- --- --- ---
+14.1s,40min	 I realize I'm not addressing your question just yet, but let's see, Docker status. Docker.list. I think it's soft. It doesn't sound good. I don't know. It's not. So it's not a soccer. What's that? It might be sock instead of soccer. Did I say soccer or did I type in socket? Oh, yes, sorry, socket.
+--- --- --- --- --- --- --- --- ---
+39.1s,40min	 It might be. It's possible they changed that in more recent versions. There used to be soccer, socket. That's okay. I think my more general question is basically, it seems like if you type in Docker dot something, it will contain a lot of Docker related information. So how many Docker dot something are there and what is a typical way of figuring out
+--- --- --- --- --- --- --- --- ---
+0.1s,41min	 what each of them contain? That's a lot of detail about how Docker itself functions and that's not something that I think we should... I mean, I don't want to dodge your point, but that's really advanced usage and if you're touching that stuff, you better have a pretty good idea of what you're doing or you're going to break something. Okay, cool. The main way that you'd interact with it is just starting and stopping it. Okay.
+--- --- --- --- --- --- --- --- ---
+26.1s,41min	 So that's a good question. So you're starting and stopping it, maybe checking the general status. The high level of what this actually is, and I think that's probably already understood, but I'll mention it again because it's relevant to the discussion, is that Docker is running as a service on the machine, in this case, under the permissions that [person A] has, and
+--- --- --- --- --- --- --- --- ---
+56.6s,41min	 it's providing functionality to the different components. So the valid
+--- --- --- --- --- --- --- --- ---
+18.0s,42min	 components are you... Right. Right. camel.ęd provides you a way to talk to it. If someone wants to learn more about it, probably the place to look is to learn about services on Linux, and if they want to more specifically, then they can probably look up the system controller command. And as a matter of fact,
+--- --- --- --- --- --- --- --- ---
+48.0s,42min	 we might as well just briefly look to see what the man page says. I want to see if the system controller, and I want to see if it has a more specific sub man page for status. It doesn't. Or at least it doesn't seem to. Alright, so that. And I know you can read this, but I mean, since I'm in the habit right now of reading out loud, I might as well.
+--- --- --- --- --- --- --- --- ---
+11.7s,43min	 System controller may be used to introspect and control the state of system D, system and service manager. Please refer to system D for an introduction into the basic concepts and functionality this tool manages. Well, that's not a bad idea. So let's take a look at system D briefly. System D and service manager. Because I'm an annoying person, I'm
+--- --- --- --- --- --- --- --- ---
+39.7s,43min	 going to read the description there, even though I'm sure you've probably already read it already, because you're a fast reader. System D is a system and service manager for Linux operating systems. When run as first process on boot, that's PID 1, so that already indicates that this is a pretty fundamental thing, it acts as an init system that brings up and maintains user space services. So it
+--- --- --- --- --- --- --- --- ---
+9.6s,44min	 maintains the entire user space for you. Separate instances are started for login users to start their services. System D is usually not invoked directly by the user, but is installed as the Sbin init symlink and started during boot. This is a pretty basic system, and it's a pretty basic system. It's a pretty basic system, and it's a pretty basic system. It's a pretty basic system environment and during boot uses, doesn't incarnation, or process learning all require Tootался that perfectly
+--- --- --- --- --- --- --- --- ---
+29.7s,44min	 even work. that's about it. Basically, it's all wireless. But focused on first operation and piloting, and that's what thisalley loading symbol Только nos focused on. That's exactly why it's so cool this session PRIN einem eigenen lives log in sessions, see telenet 8 for more information. When run as a system instance, systemd interprets
+--- --- --- --- --- --- --- --- ---
+54.4s,44min	 the configuration file system.config and the files in system.config.d directories. When run as user instance, systemd interprets the configuration file user.config. That might be something useful to keep in mind in case you want to play with these bells and whistles in a principled way. So user.config and the files in user.config.d directories, see systemd systemconfig5 for more
+--- --- --- --- --- --- --- --- ---
+15.4s,45min	 information. So that's a pretty basic part of the operating system and it already lists a couple different things you can touch if you want to start playing with it without risking too much of breaking the system. Though surely if you start touching these things, there's a risk of breaking the system. But one of the cases, this is where you get a little bit closer into the nitty-gritty
+--- --- --- --- --- --- --- --- ---
+43.3s,45min	 of what exactly your operating system is doing. Cool. I think we're ready to move to history. [...]
+--- --- --- --- --- --- --- --- ---
+11.3s,46min	 [...] Docker container attach to 3. So I want to go around some parts of the container
+--- --- --- --- --- --- --- --- ---
+36.3s,46min	 that reflect other commands. Okay. Okay. Okay. So, I'm just going to load up the Docker container. And [...]  we've got an app, which is called Docker, which is one of the very first commands that we use to set it up. And by other commands, I mean, no, Docker image, I want to slash A, we have all these images. And yesterday, I mentioned how there were
+--- --- --- --- --- --- --- --- ---
+3.2s,47min	 a couple main parts of, I did stuff and then committed it to make a new image. I'm highlighting ones arbitrarily, but the main point is that [...]  some of these are the result of me manually take an image of. And the question is, what is it that I did to produce that delta? It's great that we have the delta, but if we need to actually redo that process in some way that yadda yadda yadda, it would be nice to know the details. So, if I attach the container,
+--- --- --- --- --- --- --- --- ---
+31.3s,47min	 a reasonable place to start is to look at the bash history. I'm not saying that this is super thorough, I'm not saying it will give us every detail, but especially in terms of like, hey, how did you install Anson on this? Should be fairly early on this, right? So here's some examples of me setting up stuff on OpenMind, just to make sure that the docker
+--- --- --- --- --- --- --- --- ---
+58.2s,47min	 was able to talk to OpenMind. Various things like that. If we continue to scroll down, we should eventually get to the part where it's... Okay. Okay. Okay. Okay. Okay. Mm hmm. Okay. I think that's good. So, here's some examples of me setting up Julia and doing all the installs. That might be in some of the Python or the Julia history as well, but we'll get to that in a minute. Okay, so here we see, already I have conda install, stuff like JupyterLab, et cetera,
+--- --- --- --- --- --- --- --- ---
+40.3s,48min	 so that we could run the JupyterLab instance inside the docker. I'll go over the JupyterLab, et cetera, but I'll do that without you here, because that's not as deeply involved in the fundamental setting up the notebook. I mean, setting up the docker. Docker. Starting to clone things like the private ansum notebook. Okay, so here we're starting to do the sort of conda install and pip install stuff. Like here's setting up the CUDA
+--- --- --- --- --- --- --- --- ---
+9.9s,49min	 library version. And this is some of the stuff that was done in relation to Elastic, so it's checking that was set up correctly. Unfortunately, it doesn't look like the record of that got saved out in a nice format, at least here. But thankfully my recollection is that installing these was not terribly difficult, was fairly straightforward, it was just annoying that I had to do it in the doctor's so that [...] 
+--- --- --- --- --- --- --- --- ---
+32.9s,49min	 start docker, install the thing, stock docker, commit it so you have a new image, share the image on store one. Not hard, but I had a couple parts involved beyond what the typical install that someone has to do just for themselves on a fixed operating system. Anyway, so that's the Python history, or the bash history, which gives you some insight and is good to consult if there's questions.
+--- --- --- --- --- --- --- --- ---
+54.7s,49min	 Another place to look is the Python history, and that's fairly empty, but it just checked that we have access to the CUDA, so given the fact that we're inside a docker container, and there were non-fennialist steps we had to take in order to make sure that the container had access to the GPU etc. this was a worthwhile check. What's another thing we can check? JLNIR should have a history file.
+--- --- --- --- --- --- --- --- ---
+25.9s,50min	 Might be under the .jlnir file. I'm not sure it's actually just listed as that. Okay, so what is the history? No, it does have a history file. And I recall that you can also access it via REPL, but I'm not terribly interested in looking at that right now. So there we go, under logs. So we have REPL history, we have manifest usage, archive usage, scratch usage.
+--- --- --- --- --- --- --- --- ---
+50.6s,50min	 Let's see what's in the REPL. Okay, so these are some of the things I needed to do, and indeed you can see the date that I did some of these, listing out in early February for instance. And I of course had done things like this before, but this was like after polishing some of the process for getting the Docker set up, and having made wrong terms in the
+--- --- --- --- --- --- --- --- ---
+14.0s,51min	 past, after getting that straight I did the, like the install. So specifying the Python version for the environment, the conda version for the environment, and for, ended up being important. Installing some packages, I have, after specifying all that, in particular installing conda and
+--- --- --- --- --- --- --- --- ---
+34.5s,51min	 the specific version of it, then installing a specific, or adding a specific version of Python to the conda, then exiting, and restarting again, specifying the same environment variables, the same environment variable in terms of the conda version, and then having added the Python in the previous steps, specifying which Python.
+--- --- --- --- --- --- --- --- ---
+2.0s,52min	 Explicitly, namely the one that was under the conda, that is being run inside of Julia. Um, so we add conda. Yeah, so this is the conda inside of Julia, built the conda, uh, exited REPL, came back to the REPL, specified the conda version, um, specified the Python inside the conda,
+--- --- --- --- --- --- --- --- ---
+30.7s,52min	 and then from there, uh, actually. Okay, so that's it. Okay. Okay. So that's it. So that's it. Instantiate. Let's see. Specify the user. Did a lot of copying of manifest files, I recall. Um, should be in the batch history. Maybe some of it got, um, one of the bummers about the batch history is that the more you
+--- --- --- --- --- --- --- --- ---
+51.4s,52min	 do in it, the tail end of it tends to be erased, unless you set it up in a special way. So, uh, at this point, we've not done a ton inside the docker, but we've done more than zero. So then why is that listed like that? Is this the right batch history? Is it? Should be. If I exit. Is this the first terminal session we had after fixing that permission issue? Probably is. I'll check that in a second. Uh, the, what I'm rambling on about is that, uh, things don't get written to the batch history until after you exit the shell session. So, uh, I'm going to do that. I'm going to do that. I'm going to do that. I'm going to do that.
+--- --- --- --- --- --- --- --- ---
+12.4s,53min	 I'm going to do that. I'm going to do that. I'm going to do that. I'm going to do that. I'm going to do that. When I look at this batch history, the last thing it has is not stuff that we did while we were sitting down together. So, um, that leaves the natural question as to why. And one of the obvious things is that, oh, hey, maybe we haven't exited after we finished
+--- --- --- --- --- --- --- --- ---
+33.4s,53min	 the permission issue. We certainly have exited the docker container before, but either as root or as, uh, as a container. So, um, we've got a lot of stuff that we've got to do. So, um, I'm going to go ahead and do that. I'm going to go ahead and do that. I'm going to go ahead and do that. Okay. I think that's enough before that fits. Um, it's my turn to ask some questions. Yeah, sure. So, um, I definitely find the history very informative to look at, but if for someone else who isn't the most interested in history of how you did things, um, what is a good reason to look at, um, REPL history, BASH history, and Python history? Sure.
+--- --- --- --- --- --- --- --- ---
+7.4s,54min	 Like what are, what is this a knowledge bank for? Sure. Can you give me just one second to check on the man-made test? Okay. So, um, I'm going to go ahead and do that. I'm going to go ahead and do that. I'm going to go ahead and do that. Okay. So, um, I'm going to go ahead and do that. Okay. So, um, I'm going to go ahead and do that. Okay. So, um, I'm going to go ahead and do that. Okay. So, um, I'm going to go ahead and do that. Okay. So, um, I'm going to go ahead and do that. I'm going to go ahead and do that as well. Sure. Um, well here, does this mean that everything is the original version of the
+--- --- --- --- --- --- --- --- ---
+33.6s,54min	 [...] You just wanted to see what happened- Wait a second we should be doing this anyway. Okay, so, uh, so you've been here for.... So, right now, and hopefully for the foreseeable future, there's a Docker container that has the packages installed and set up and checked to work for ANSI.
+--- --- --- --- --- --- --- --- ---
+55.3s,54min	 The process of how those packages were installed in the Docker environment, set up to work and talk to each other correctly, is something that might be needed if at some point some
+--- --- --- --- --- --- --- --- ---
+19.1s,55min	 aspect of the Docker breaks, such that someone has to run these again. Or if... Um... If someone ends up trying to run these things in an environment where a Docker can't work for some reason. Now, I don't think for most modern machines you would be unable to run a Docker, but I don't know, there might be some weird operating system, or you might even be trying to run
+--- --- --- --- --- --- --- --- ---
+39.4s,55min	 this on... I mean, I doubt you would be running this on an embedded system, but whatever the case is [...]  it's conceivable that some aspect of the Docker breaks, but the rest of... But other things are solved. Some are unsolvable... Namely the other packages that are fundamentally used to run ANSI.
+--- --- --- --- --- --- --- --- ---
+1.0s,56min	 This history, these histories give an idea... Or give... The process used to do that setup inside the Docker environment so that someone... That then can look at that and have a much better sense of how to go about...
+--- --- --- --- --- --- --- --- ---
+22.8s,56min	 Um... Doing this install. somewhere else. Now, that's not to say it will be straightforward to do that install somewhere else, because there could be other specific circumstances or issues that they have to account for or modify to get this to work for them in that setting. That's happened more than a few times as we've
+--- --- --- --- --- --- --- --- ---
+46.0s,56min	 gone about things, and I won't list all of them, but I mean certainly environment variables, certain ways that things are configured to talk to each other, yada yada yada yada yada, but still, this is in comparison to, for example, where I started in terms of what we had set up in order to run Docker, and to [the credit of some other people], there wasn't nothing, there was a setup
+--- --- --- --- --- --- --- --- ---
+8.9s,57min	 script, but it ended up breaking over time, and I had to find a specific process to go through to get it to cooperate and build everything correctly, and that took time, and some things were a little bit more complicated, but I think that's what I'm going to do. Some things that on their surface, that might look simple, but of the many, many different knobs
+--- --- --- --- --- --- --- --- ---
+32.0s,57min	 one has to pull, they weren't the first options and the most obvious. So if I'm to summarize this, we don't think that the Docker will break, but in case that happens, or in case someone has to start from scratch and remake a similar Docker, the closest place to having the most relevant information is the Docker.
+--- --- --- --- --- --- --- --- ---
+54.9s,57min	 So the Docker is the best way to get the most relevant information, is actually the bash history. Not just the bash history, the history in general, which is distributed among the bash history, the Python history, the Julia logs that we were just looking at, it's also a system log file. So that's not a terribly organized thing, but at least it's there, in contrast to having no record
+--- --- --- --- --- --- --- --- ---
+21.6s,58min	 whatsoever. So if someone ends up in that position, and they should be someone that has some degree of technical background, because they're going to be able to do a lot of work, and they're going to be able to do a lot of work, and they're going to be able to do a lot of work, and they're going to be able to address that problem, and you don't have that technical background, one, you're probably the wrong person for the job, which I don't mean as an insult, it's just unfair if someone hands you that sort of thing, and two, you're going to have an even worse time. But even beyond like, hey, let's recreate this system, which, I mean, it's fair you bring that
+--- --- --- --- --- --- --- --- ---
+42.4s,58min	 up, I rambled on a fair bit about that, there's also like, what if I need to update something? How did you do it before? What are like, because sometimes the, even before like, little updates, you need to know how the two systems talk to each other, or what environment variable was set up before, in order to get the earlier update to work, and you might need to do
+--- --- --- --- --- --- --- --- ---
+11.9s,59min	 the same thing, or at least modify the same environment variable, maybe to a different variable, same environment variable, to do the other updates. So it's just, there's a myriad of ways where potentially this information could be helpful, that go beyond just, hey, we have to straight out redo the Docker, just basically the whole gamut of system updates and modifications that can always pull out surprises.
+--- --- --- --- --- --- --- --- ---
+39.7s,59min	 That sounds very informative, and my last question on this is that, let's say someone is to update quite a few of the packages that are involved in Ensign, and therefore it might be a good idea to actually build a new Docker on top of this one. Yep. What would be the shortest path to that? Well, I mean, so the Docker is set up so basically you interact after you attach to it, like you would any other
+--- --- --- --- --- --- --- --- ---
+1.9s,0min,1hr	 Ubuntu system, so you don't need to think of it as some other computer, other than just the fact that you have this nice ability to detach from it and isolate from your host. So you would install those packages, as you normally would, modulo, well, I would say as you normally would, and that includes having to debug the things you normally would, as if you were installing them on a computer, and then you would
+--- --- --- --- --- --- --- --- ---
+22.6s,0min,1hr	 have to do that on a system that had Ensign running already. And then when you do that, all those installations happen on your container. You would then use the docker commit function, which we talked about a bit yesterday. I know we talked about a lot of things yesterday, but we talked a little bit about docker commit and docker load.
+--- --- --- --- --- --- --- --- ---
+45.9s,0min,1hr	 You use that command, docker commit, to then make an image based on your container, and then save that. So just to revisit those, right? Yeah. So just to revisit those, but I think it's a good idea to do that. Yeah. Yeah. Yeah. Yeah. So there's the commit commands. I'm going to detach from this. docker help. So there's the commit command, which creates a new image from a container's changes.
+--- --- --- --- --- --- --- --- ---
+7.6s,1min,1hr	 So basically that will take the delta between whatever you do and what was there before. And then there was a docker save, which saves one or more images to a tar file, streamed to std out by default. Here's a flag you can specify a file. That's what I've done. And then you pass. So commit and save, and you should be okay.
+--- --- --- --- --- --- --- --- ---
+27.9s,1min,1hr	 So the end result of this would be that there will be new layers added to the image, and also there will exist a new tar archive. Yes. Cool. I think that's the end of my questions. Okay, great. So that, now, a last note I'll make about the history, well, actually to make sure we have that bit wrapped up, first off, I want to make sure that the [...]  if I can do that, I'll do it. Yeah. Yeah.
+--- --- --- --- --- --- --- --- ---
+0.9s,2min,1hr	 Yeah. Yeah. Yeah. Yeah. And everything we're doing shows up in the batch history on docker. And again, I think the reason it didn't show up before is because we had an exit at the terminal. Probably going to have to exit twice because it's actively recording. Okay, there we go. And look at that, it, not only did it record the entire session, the end result got compressed from 210 kilobytes to just 17 kilobytes.
+--- --- --- --- --- --- --- --- ---
+24.4s,2min,1hr	 Okay. I have to type exit again, great. Now the Docker container should be dead, or not running I should say. Docker container ls, and then lsa. Actually want to start again briefly just so it can check the bash history file. Start 3. Error response, well, do it without container in the name.
+--- --- --- --- --- --- --- --- ---
+50.0s,2min,1hr	 Still error response. Try exiting and then logging back in. Okay, it started that time, and again, I recall finding the solution to this before, but it's
+--- --- --- --- --- --- --- --- ---
+10.6s,3min,1hr	 just, that's what I'm going to do right now. I've got my tmux open, what am I doing? I'm just making sure I don't have more than one session going. That could be one. That could be one.
+--- --- --- --- --- --- --- --- ---
+31.0s,3min,1hr	 Anyway. So, I'm going to try to get the I'm going to try to get the I'm going to try to get the I'm going to try to get the
+--- --- --- --- --- --- --- --- ---
+53.3s,3min,1hr	 Sorted, let me attach to it. Great. No, mine have extra space or something. Sometimes, it's going to record at a minimum the number of times you want, hopefully. Okay, maybe not hopefully, but whatever the case.
+--- --- --- --- --- --- --- --- ---
+14.1s,4min,1hr	 I want to see that stuff landed in the bash history file, so we go to home directory and I see . slash that. Go to the top. There should be fewer things there, and it looks like it. And then we have all the various things that we typed in, including my warnings. So great.
+--- --- --- --- --- --- --- --- ---
+38.1s,4min,1hr	 But this is both to illustrate that, hey, the stuff you do lands in the batch history file, but also bear in mind that that means older things can end up going out of it because there's a configuration value for the number of lines, the maximum number of lines that are retained in the batch history. So things that are older, once that limit is reached, start to be dumped out.
+--- --- --- --- --- --- --- --- ---
+2.1s,5min,1hr	 And that means if you've been using your container for a while and then you're suddenly like, hey, I want to revisit the history of how this thing was set up, that might be gone from this file. What you need to do is grab the container or the image that is currently stored on store 1, that tar file, et cetera, pull that up. And then you can go back to the container in its pristine state and look at that file.
+--- --- --- --- --- --- --- --- ---
+26.1s,5min,1hr	 So a little annoying, but I don't anticipate having to deal with these records directly for a while. But just bear in mind that the place to get them is not in something that you've been using for a while. It's from the fresh thing grabbed from store 1. That sounds great. And actually the Docker container, sorry, the Docker image that you put on store 1 shared
+--- --- --- --- --- --- --- --- ---
+47.1s,5min,1hr	 is a good resource to basically rebuild the whole thing or basically a way to roll back to a pristine state. Each time our own Docker container fails for whatever reason, there's always a fallback, which is to go to that image, which is always going to be static and start over from there. I think it gives a better fallback.
+--- --- --- --- --- --- --- --- ---
+12.1s,6min,1hr	 And I appreciate the, well, of course, you're largely describing the right thing. I agree largely with what you're talking about. But of course, I want to give a word of caution, which is, if people don't have in mind to make things stable or record their steps along the way, indeed, I might have something that's stable for a very old prehistoric state
+--- --- --- --- --- --- --- --- ---
+38.1s,6min,1hr	 compared to whatever you might have developed. I don't, it's not fair to expect everyone to suddenly become an archivist in regard to what they're doing. But my main point is that there's only so much I could do to save someone from bad habits. And not making good records and just [...]  not committing things out is a bad habit.
+--- --- --- --- --- --- --- --- ---
+3.1s,7min,1hr	 So what I will say is that, on that note, if a person is concerned and wants to get copies of what they're doing along the way, they can use Docker commit and save to get the intermediates, right, in addition to the pristine state. And that's a very important thing, because if you don't have a proper directory, you can't do that. And so, I think,
+--- --- --- --- --- --- --- --- ---
+25.1s,7min,1hr	 if you're going to do that, you're going to have to have a very good, very good, very good, very good, very good, very good, very good, very good, very good, very good, very good.
+--- --- --- --- --- --- --- --- ---
+46.1s,7min,1hr	 Very good, very good, very good, very good. And that's why I use Docker. And Julia uses the .julia file in the home directory of the Docker user. That's not tracked by the Docker. So if I'd [...]  that's going to be in that directory on Store 1. Yeah. Right? So if I take a Docker image, that's not going to get those changes. Right?
+--- --- --- --- --- --- --- --- ---
+15.2s,8min,1hr	 If I delete the home directory thinking I have it stored somewhere else, then you probably don't That's very informative. So that basically tells us to not do something and think that it's being Docker tracked. So what is the correct way of doing it to make sure that it is Docker tracked? When we commit and save. Well, the thing to note there is that Docker, there's general things that track things generally.
+--- --- --- --- --- --- --- --- ---
+44.3s,8min,1hr	 And there's part that Docker tracks and then there are things outside of Docker, right? So I'm being a little pedantic about the wording there, but I suppose it's just that there's not all of this is the responsibility of Docker. A lot of this is the responsibility of the person. So in the case of the home directory, the way that I made it before is, well, basically, what was it?
+--- --- --- --- --- --- --- --- ---
+12.4s,9min,1hr	 Yeah, I made it for myself. Then I tarred up the directory where I made that stuff. And then I put it on store one. Now, I think I did some other things like change the owner and group to nobody. Nobody is like a, you can look it up online. It's a type of group and user on Linux that is basically unassigned to people.
+--- --- --- --- --- --- --- --- ---
+39.3s,9min,1hr	 And I might be misremembering, but I mean, I do recall looking at that stuff. And the fact that we untarred it just to make sure that it was a good thing. And it's now, or earlier, and it immediately showed up as [person A], as opposed to the person who made it, me, suggests that it was set to that default of [...]  nobody. But in any case, so if you, for example, want to change something in your Julia and have that carried over,
+--- --- --- --- --- --- --- --- ---
+6.0s,10min,1hr	 you would probably want to get a Docker image and also tar up your home directory. And it's worth noting, just so there's no misunderstanding here, that someone might listen to this and think, hey, well, if you're just tarring up the home directory and you need to do that for the Julia, then why do I need the Docker? Well, just because a package change is tracked in your home directory
+--- --- --- --- --- --- --- --- ---
+26.7s,10min,1hr	 and you tar up the home directory and it's changed, doesn't mean that that package change wasn't depending critically on something in the surrounding environment. And the thing that tracks the surrounding environment and operating system is the Docker. So they go together.
+--- --- --- --- --- --- --- --- ---
+55.9s,10min,1hr	 Now, in principle, I could have stored the home directories inside the Docker, but then that runs into the issues we talked about yesterday, like starts eating up disk space that is limited on the disk that the operating system is using, limits transactions. So it's a slightly more complicated setup for whoever this needs to set up the Docker container.
+--- --- --- --- --- --- --- --- ---
+22.0s,11min,1hr	 Hopefully not terribly more complex. I know I went into a lot of the details here for the record, but like the actual process end to end, hopefully shouldn't involve as many details as I provided. What's this? Give me a second. Oh, I'm sorry. I'm sorry. I'm sorry. I'm sorry. I'm sorry. I'm sorry. I'm sorry. I'm sorry.
+--- --- --- --- --- --- --- --- ---
+43.0s,11min,1hr	 I'm sorry. I'm sorry. I'm sorry. I'm sorry. Yeah, but in any case, I'm not going to claim that I struck the ultimate best balance, but I think it's probably better to have done it this way than risk the disk filling up and then people not being able to make containers. That makes sense. Also, I think you gave a good elaboration on why we still need the Docker, why we can just add like a home directory into our . So yeah, I think for the record, it's good. I appreciate it. Thank you. Yeah. Yeah. Thank you. Yeah. Thanks. I think that should be it. I think we are good. Yeah.
+--- --- --- --- --- --- --- --- ---
+5.4s,12min,1hr	 I think it's gonna be good. So yeah, for the record, it's good. I appreciate it. Yeah, cool. So I will exit this out, and then, as I said, I'll make some other records about using the JupyterLab and stuff and using Git, but that doesn't... And I'll do it inside of [person A]'s stuff for record's sake, but you already know how to do those,
+--- --- --- --- --- --- --- --- ---
+48.9s,12min,1hr	 so I don't need to bother you as much with them. Cool, and [person full name] gave David permission to transcribe this. Thank you. What about record the voice? You've already done that. Okay. Okay. I'm going to stop this now [and have the recording save].
+--- --- --- --- --- --- --- --- ---

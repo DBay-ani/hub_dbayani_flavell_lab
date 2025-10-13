@@ -1,0 +1,380 @@
+27.7s	 Now, I just want to confirm that you don't mind this being recorded? No, not at all. Neither in voice or picture? No, not at all. Okay, cool. Would you please help me talk to the screen, and I'll ask questions in the interim fashion. I'll actually take notes on my phone. Well, I mean, why shouldn't I talk to you? Because it's... It's much harder to follow a conversation than you being instructed directly.
+--- --- --- --- --- --- --- --- ---
+53.1s	 I don't know if I agree about that. I've been the third party to many active conversations between two people. [...]. Let me know when it's a good sort of break point, and I'll just ask questions, and we can stop there and start a new recording from there. Well, I mean, I haven't... Well, I have some sense of what to say. It's not like I've laid this out meticulously ahead of time.
+--- --- --- --- --- --- --- --- ---
+19.9s,1min	 I'm going to show you some stuff, but I mean, I don't... I would prefer that you ask questions along the way. So that they get addressed. This is being recorded now? It is. Do we just break it down into sections? Even just for my own sake, it's easier to follow things. Sure. You can type it if this is being recorded. You just type it in a txt file. I mean, we're going to get the transcript after this, though.
+--- --- --- --- --- --- --- --- ---
+53.4s,1min	 And you can pump that through ChatGPT if you want. I mean, with certain... Maybe certain qualifiers, if there's something personal that lands in that, but I don't think there's going to be anything. Okay. Okay. I'm likely not the next person who needs to see this, and I want to make that person's life easier. Sure. Anyway, so... Where to start? So we wanted to talk about sitting at the docker for the next person who comes along.
+--- --- --- --- --- --- --- --- ---
+17.9s,2min	 And at some point, we might also talk about the mechanics of how... the docker was made. Maybe that will just fall out as we discuss this. But... Just showing the process of setting up for a new person might be the thing to do. So I spoke with [person A]. Well, I contacted [them] in [their] Slack briefly,
+--- --- --- --- --- --- --- --- ---
+46.7s,2min	 and [they] gave the go-ahead to set things up for [them], for example. And we're going to be doing it on FOVC3. So... Okay. First thing to do is to SSH into FOVC3 as [person A]. All right.
+--- --- --- --- --- --- --- --- ---
+13.0s,3min	 And... Let's see. Next thing to do is to start setting up some of the docker material. Now... We'll be running docker rootless. And... I'm going to say a bunch of things that I know you already know, but I want to make sure we get a more recordable in place. So docker, by default, if you install it in the typical way,
+--- --- --- --- --- --- --- --- ---
+36.0s,3min	 runs as root. And... If you're a user and you try to run a docker, then even that docker itself is running with the maximum permissions. And... So... Even if you try and make a new user in that docker container that has quote-unquote lower permissions, the docker server itself is running as root.
+--- --- --- --- --- --- --- --- ---
+0.2s,4min	 Docker rootless tries to address that by allowing it to run per user with the same permission level as the user. So... On our servers, I... There's a two-step process, I should say, to set up docker rootless. One is a part that has to be done as admin,
+--- --- --- --- --- --- --- --- ---
+25.1s,4min	 and then there's another part that... The list of ways I've been doing it is per user. So we're on v3 right now, and the part that has to be done as admin I've already taken care of for the entire server. And now we need to do the part that's per user for [person A]. So... Just to start doing that, then... Now, if I ask system controller, I don't think it should report that docker's run...
+--- --- --- --- --- --- --- --- ---
+53.7s,4min	 I shouldn't even recognize what it is. Right. As a side, in part, I make this command just to make sure I mention this flag of double dash user because system controller without that tends to report things running for the entire system. And in fact... Right, so it doesn't know that. And anyway, so what we should see by the end of the process we're about to do is that when I run this,
+--- --- --- --- --- --- --- --- ---
+20.2s,5min	 it says docker server is running. But when I run... this lower one that doesn't have the user flag, it says that the... doesn't recognize what the command is. And that's because we'll be running in our user space as opposed to admin. Anyway, that all said, let's get to the part of actually signing it up for a user. So... Copied over a couple of the commands that were useful to do.
+--- --- --- --- --- --- --- --- ---
+51.0s,5min	 And... Yeah. These commands you can find online, by the way. On the typical documentation for docker rootless and also NVIDIA. We came a little ahead of ourselves, but... Inside the docker, we want to be able to have access to the GPU. Our GPUs are made by NVIDIA. NVIDIA has a special configuration that goes along with it.
+--- --- --- --- --- --- --- --- ---
+16.1s,6min	 Just worth knowing that the first thing is the docker, then inside slash on top of that, there's some additional things from NVIDIA we need to do. Now, here we just ran this one-line command that's basically grabbing instructions on how to set up the docker rootless and then running it. And this, again, I just can find it online. So even if you lost these notes, if you type in docker rootless, this is one of the things that it's going to show you. And then just looking through this to see if there's anything else interesting to note,
+--- --- --- --- --- --- --- --- ---
+40.8s,6min	 here's an output where it's showing, basically, the output of asking system controller what's the status of the docker application running as user. So, basically, very similar command I was showing momentarily. So, basically, here's the docker rootless command. And it's just showing, hey, now you have your docker rootless as your user running. If you continue to go down, there's just some generic logging, and then it has some info of telling us about the next steps. First off, install docker service successfully.
+--- --- --- --- --- --- --- --- ---
+12.2s,7min	 Just some general info on how to check the status of things. Yada, yada. And this will hold on to just in case. Sometimes there's a little bit of a hiccup in the process. That's a good thing. If I accidentally run something out of order. So, when that happens, knowing about these paths can be useful. And just to confirm that things are going now, I'll run this, and there we go.
+--- --- --- --- --- --- --- --- ---
+40.0s,7min	 Same command I typed earlier. It says that the docker is actively running. And to hammer home an earlier point, if I run it without the double user flag, it says it can't even find it. Because, again, it's running as us user, not as admin. Now, with that done, the next thing to do is to try and set up this NVIDIA package. And, again, it's mostly copy and paste. It does these.
+--- --- --- --- --- --- --- --- ---
+1.0s,8min	 Right, so just reading through this, basically it's looking for a config file, saying that it didn't exist initially, which is a good thing because we hadn't set it up before. Made the config file, and then it says it's recommended that you restart the docker daemon. Okay. So, to restart the docker daemon, it's a very similar command to what we looked at a moment ago with system controller and then user.
+--- --- --- --- --- --- --- --- ---
+26.0s,8min	 And then instead of status, we say restart. So, outside of just saying restart instead of status, it's basically the same command as we did a moment ago. Alright, so it did that. And now if we ask the status of the service, it says it's running, and it's been running as of,
+--- --- --- --- --- --- --- --- ---
+51.0s,8min	 maybe a few seconds ago, which is in line with what we'd expect. Let's see if there's anything else of interest to say here. Not really, it's just indicating again that it's running as rootless. Great. So, where do we go from here? Well, let's see if docker tells us that it's running.
+--- --- --- --- --- --- --- --- ---
+18.0s,9min	 [...]
+--- --- --- --- --- --- --- --- ---
+41.0s,9min	 [...] I just handed it to Gemini and said, make it faster. No, but I mean like, what did Gemini... It just multiplied it. Oh, okay. Wait, you didn't multiply it? Okay, well, okay. That can be a pain for something, so okay.
+--- --- --- --- --- --- --- --- ---
+10.0s,10min	 Nice. By the way, that's how I made [Euler] GPU faster. Well, not [Euler] GPU. It doesn't use a GPU anymore, but [Euler] was faster the same way. Anyway, that was fun. That was [person B] for the record. [They're a good person. I like them a lot.] Seconded. Yep. Anyway, so we started asking Docker about these things, and it says, Docker not found.
+--- --- --- --- --- --- --- --- ---
+34.0s,10min	 Well, I'm forgetting a little bit of something somewhere. Well, actually, let's log out and then log back in. That's sometimes the easiest solution. Did you know that? I just have things re-registered. All right. Now, if we try that again, there we go. So, we just need to log back in.
+--- --- --- --- --- --- --- --- ---
+56.0s,10min	 Oh, we log out and log back in to just have the registration of the processes, et cetera, take full effect. And just to hand it home to the thing, we check Docker status, and again, it's saying it's fine. Great. So, we have the Docker setup, and we should have NVIDIA setup to use with Docker.
+--- --- --- --- --- --- --- --- ---
+17.0s,11min	 The next thing we need to do is actually grab the Docker images. So, how do we do that? Well, where do we do? Oh, go. So, first thing is to find out where I stored the image files. And it happens to be the case I stored them on store one, shared, and then that brings
+--- --- --- --- --- --- --- --- ---
+39.0s,11min	 me to 4.9.net. There's Docker. Docker. Yeah. Docker. Great. So, it's an unfortunate naming that I have Docker image, and then I have like part two and three. And that's just in part reflective of how these were generated. But other than the unfortunate naming, the actual loading shouldn't be too complicated.
+--- --- --- --- --- --- --- --- ---
+1.0s,12min	 So, basically, I made these Docker images on my own account. Docker provides a way of exporting your image so that can be loaded elsewhere. These are the exported images. All right. So, I'm going to import images, store the star files. We're going to load them in locally. So, the command for that, I believe, is just thinking of whether I want to make that do
+--- --- --- --- --- --- --- --- ---
+22.0s,12min	 this in Tmux. But my recollection is that's fast enough that shouldn't matter. And to really quantify that, I might as well just put a timer here. Docker load one. Okay. Okay. Okay. Okay. So, it might cells. All right. I'm going to load these.
+--- --- --- --- --- --- --- --- ---
+42.8s,12min	 Now, I'll actually , use the ones I have. Here they are. All right. This is the 270 bits to attribute to the Tmux service. So, it's not something that I'm going to order them a lot because I've got a hard load almost like the first version, they take that load off and I got it back there. I want to get rid of the data, so I'm just going to put it up there. All right. Any questions? So, but, that's all that comes with the 한 and [...]  total version. Now hablar del labor Before part two there, we took about one of our images from from we in the third stage of the couleic process, which was basically one of four selected in the first collection of images.
+--- --- --- --- --- --- --- --- ---
+6.1s,13min	 And then the story behind the other two is that, as you know, as we went about using the Docker, additional things got added. There were things like, what was it, the elastics package that was installed by Ubuntu that needed to be added, et cetera, so on. And one of those things happened by making new images.
+--- --- --- --- --- --- --- --- ---
+32.0s,13min	 Behind the scenes, the way the Docker makes images is using these layers, you can actually see it animated here. So you and I had a conversation yesterday about the proof of the recap. That one of the ways that Docker saves space and helps make versioning of the images manageable is
+--- --- --- --- --- --- --- --- ---
+2.1s,14min	 that it doesn't just make something entirely fresh whenever you change something. It builds a new layer on top of the image that you're creating. So it's a new layer that's already existing in the record. And what we're seeing here is it compiling a series of layers that went into making the image that we, now we're trying to load. Once this is done loading before loading the other ones, we'll take a moment to actually see what came into our local stored images.
+--- --- --- --- --- --- --- --- ---
+26.2s,14min	 So it should be mentioned, by the way, that these are all stored on the disk. So we're going to go ahead and save this. And we're going to save this as a disk that the OS is using. All right. And that's important because if you're not careful, you can run out of space. Now it happens to be that by design, for more than one reason,
+--- --- --- --- --- --- --- --- ---
+48.1s,14min	 but in part to save space on disk, some of the bulkier system installation stuff I stored outside of the Docker. We'll get back, we'll get to that in a moment. But that's where the Docker is. That's where the business of like the home directory and having that stored on store one comes into play. So that's a little foreshadowing.
+--- --- --- --- --- --- --- --- ---
+12.8s,15min	 But setting the details of that setup and saving local disk space aside for a moment, let's ask Docker what images it has loaded. Docker image LSA. Okay. So now we see a bunch of images. And unfortunately, and this might just be as a result of how I set things up. It doesn't have very informative names.
+--- --- --- --- --- --- --- --- ---
+39.2s,15min	 The only identification we have right now are image IDs, which thankfully are in fact unique from what we're looking at. We can also see the various creation dates. Some are from eight weeks ago. Others are from 17 months ago. This one from 17 months ago is very likely in the NVIDIA container. I think that definitely is the case because we grabbed the NVIDIA container to use the GPU.
+--- --- --- --- --- --- --- --- ---
+4.5s,16min	 And you can find out about that by just searching online. And then with that foundation, we'll start adding things. Anyway, so those are the images. But let's see about the containers. They should be empty. We have more images to load in anyway, but just to confirm, we do have the containers empty. Remind me to talk about the distinction between an image and container just for record.
+--- --- --- --- --- --- --- --- ---
+31.7s,16min	 But we will get to that in a moment. I need to load some more things in in order to build up the container. I need to load some more things in in order to build up the container. I need to load some more things in in order to build up the container. I need to load some more things in in order to build up the container. And then I need to build up the image that we want to use. So I'm going to use a similar command to what I used a moment ago with dockerload-i. I'm also going to time it. And then I'm going to load in parts two and three. And again, there's no deep reason why part two and three are separate other than historical.
+--- --- --- --- --- --- --- --- ---
+1.9s,17min	 Yeah. While this is happening, let me take this chance to ask some questions. Yeah, please do. So when you do docker load dash i, what is the dash i doing? So without the dash i, I think by default it reads from std out or somewhere. Basically, dash i is just a command line argument to say,
+--- --- --- --- --- --- --- --- ---
+25.4s,17min	 hey, the next thing that I list out is the file you should read in. Gotcha. And the other thing that I wonder is the list of images. And when you load them in, they were indicated as layers. So was that what you were talking about, like things being docker emulation in sequential fashion
+--- --- --- --- --- --- --- --- ---
+52.4s,17min	 and you only adding on top of the last one? Was that basically just reflecting the process in which you dockerize the existing answer environment? Yeah. So if I'm understanding the, I'll try and answer it in what I think is addressing the question.
+--- --- --- --- --- --- --- --- ---
+16.6s,18min	 So I do have a couple different tar files here. I'm just going to call this one, even though it doesn't have one in the name, but then one and then part two, part three. And I loaded one of the tar files. That tar file happened to contain multiple layers to it,
+--- --- --- --- --- --- --- --- ---
+37.9s,18min	 but it's just the first part. Right. And then I mentioned that I think you're alluding to, hey, I need to load in the second part. And that seemed to load in some additional stuff, some additional layers. Yeah. Now, the reason that I could separate things out this way, the reason that I was able to have it,
+--- --- --- --- --- --- --- --- ---
+58.7s,18min	 I was able to have a part one and a part two, as opposed to doing some other janky thing that does weird modifications, is because docker builds up images or supports, among its many things, building up images by layers. So ignoring how many layers got stored in this tar file,
+--- --- --- --- --- --- --- --- ---
+22.0s,19min	 it is the case that I made these collection of images first. Those got stored out. I made some changes. And then I stored those out in this additional layer here. And behind the scenes, what's going on really is that when they load in the second group of changes,
+--- --- --- --- --- --- --- --- ---
+42.7s,19min	 it's just loading in a collection of layers, those layers functioning by just being, quote unquote, put on top of what existed before, as opposed to doing some other janky modification. I hope that addresses it. Yeah. I think that addresses what you're asking about. So these tar files themselves, these tar files
+--- --- --- --- --- --- --- --- ---
+3.5s,20min	 can contain multiple layers, right? But they themselves are not a layer. They contain layers and happen to be the export format that docker selected. Yeah. Another way to ask the same question is how do you segment the entire environment into layers? Like what determines? Docker does that.
+--- --- --- --- --- --- --- --- ---
+24.4s,20min	 So you're saying the layering is not created by you? No. So let's put it this way. Think of Git, right? If I want to introduce a change, I can either make multiple commits along the way, or I can do the somewhat stupid thing of doing a bunch of stuff
+--- --- --- --- --- --- --- --- ---
+45.9s,20min	 and then waiting to make one final commit that's giant. You can think of these layers in a similar way, where I do some stuff, and then I say, hey, Docker, pump out this as an image. You do some stuff. Hey, Docker, pump this out as an image, right? Or I could have done something like, hey, I'm going to make a ridiculous number of changes,
+--- --- --- --- --- --- --- --- ---
+6.5s,21min	 and now I'm going to just make one image of the thing at the end. The thing that actually takes care of generating the layer to be managed later is Docker. But when it does that, it's up to me. Is that leading to the three parts, or each layer of each part? Each layer.
+--- --- --- --- --- --- --- --- ---
+37.4s,21min	 Each layer. Each layer of each part. You can tell the Docker when to do that. Make the layers? Yeah. So in particular, might as well show this then. Docker. So there are commands like, I think it's docker commit. Yeah. So I'm not saying this is the only way to do it.
+--- --- --- --- --- --- --- --- ---
+58.6s,21min	 But what ended up happening to create, say, the layers that went into part two and part three, is that I had a container that I made out of, say, this collection of images up here. I made some changes in it, and then I wanted to share it for other people, or deploy it on more than one server, more than one
+--- --- --- --- --- --- --- --- ---
+21.7s,22min	 environment. So Docker has this command, docker commit, that lets you, as it says, create a new image from a container's changes. Now, this actually is probably a good point to mention the distinction between images and containers. And I'm sure I'm probably going to repeat myself about it again
+--- --- --- --- --- --- --- --- ---
+44.0s,22min	 later, but it's just an important point. You can think of an image like a class in programming, or just a prototype of something, the blueprint. But a blueprint of a house is not the same thing as the house. Right? Yeah. Yeah. Yeah. Yeah. Yeah. Even if I give you the blueprint and all the material to make the house, that's not the same as using the blueprint
+--- --- --- --- --- --- --- --- ---
+12.5s,23min	 and then making the house and having the house. So the image is just blueprint and the resources to do it, more or less. The container is actually assembling it together into one specific thing. And I can make multiple houses based on the same blueprint. Right? So I can have one image and make multiple containers based on it. But again, they're not formally, they're two separate things.
+--- --- --- --- --- --- --- --- ---
+33.1s,23min	 But with something like the Docker commit command, basically allows me to take a house and then say, hey, you see this thing? I want you to tell me how to make more like this. So it takes a container that exists and then produces an image that you can then make more containers of. And that's exactly the process that was used to make these.
+--- --- --- --- --- --- --- --- ---
+55.8s,23min	 So you can see here, I've got a container that's been used to make additional tar files that [...]  the part two and the part three that were used to make the, that are then used to make the Docker container we want to use to run Anson. And we might as well take a moment to just say, to look a little further at the Docker commit command, so Docker commit help.
+--- --- --- --- --- --- --- --- ---
+19.6s,24min	 And yeah, as you can see, it's a specified container. And then I can just say, hey, I want you to make a container. And then I can just say, hey, I want you to make a container. And then I can just say, hey, I want you to make a container. You can add some messages to describe what exactly happened. And I'm sure if you look online, you'll see that there's a number of additional flags, what have you. Docker has many different parts that you can play with if you like, global options and so forth that happen
+--- --- --- --- --- --- --- --- ---
+41.4s,24min	 for the main command you specify, yada, yada, yada. But that's getting a little further afield. Well, I have this in front of me. Let's see if there's anything else that's worth looking at. So there's a load, and then there's a counterpart to that, which is save. So OK, I mentioned how I was able to generate an image
+--- --- --- --- --- --- --- --- ---
+1.5s,25min	 from a container I made. But that doesn't necessarily tell you how to store your collection of images in a tar file. And after all, I'm loading images from a tar file. How did I do that? I used the Docker save command, which lets you dump out the collection of images you have to a tar file.
+--- --- --- --- --- --- --- --- ---
+23.8s,25min	 So we might as well take a quick look at doing that here. For demonstration's sake, if it takes too long, we can kill it. So what images do I have? I can say docker image ls and then dash a. For the record, the dash a means just all, because otherwise, if I just typed in ls, by default, it only shows the ones that are running or ones being used.
+--- --- --- --- --- --- --- --- ---
+48.6s,25min	 Well, containers are the things that run. Images don't run, but whatever. So these are the collections of all the images I have. And let's see. What it looks like without the dash a flag. OK, there are a couple. I think what it does is if you type in the dash a, it shows all the intermediaries. And then if you don't type in the dash a, it just shows the main layers.
+--- --- --- --- --- --- --- --- ---
+11.4s,26min	 So there were a number of layers and subsequent images that went into developing, say, my most recent image, 952. Most recent in terms of what I just loaded. But there were things that happened before that. So if we look at this one, 1c7d, based on the image ID,
+--- --- --- --- --- --- --- --- ---
+31.4s,26min	 and that's actually right before 952f. That is what we had when I loaded in the first collection of images from the first tar file. And we can see that because I ran docker image lsa not long before that, and it's here. Why am I talking about this? Why am I rambling on about this image?
+--- --- --- --- --- --- --- --- ---
+53.7s,26min	 Or that image? Well, again, if I looked at docker image ls without the dash a, just ls, it lists three. And the point is that the three lists are these sort of major, you can almost think of them as heads of branches if you want to make the analogy to get. These are the ones that you really care to work with. But behind the scenes, those are formed
+--- --- --- --- --- --- --- --- ---
+15.1s,27min	 by a number of intermediate steps that you don't necessarily want to use directly. You don't necessarily want to make a container out of this intermediate one called faa7. You might want to make a container, though, out of 1c7d or 952f. A last question on this topic.
+--- --- --- --- --- --- --- --- ---
+35.9s,27min	 For the intermediate images, basically, is the main image a superset of a lot of the intermediates? And would the container still work if we only spin off the container out of the main images and not the intermediates? So. The first thing to think about is probably deltas as opposed to superset or subset.
+--- --- --- --- --- --- --- --- ---
+0.4s,28min	 A delta could involve a number of things that aren't just additive. In regards to spinning off the main image without the subimages, let's be a little bit careful about the analogy. Bear in mind that the final image is basically a collection of deltas, right? So you apply delta 1, you apply delta 2,
+--- --- --- --- --- --- --- --- ---
+21.7s,28min	 you apply delta 3. If you just go with the final delta 3, it doesn't mean that you have the framework to do the basic work, right? Because I can tell you that the first image down here, one of the first images along the lines here, is really just, hey, this is how you use your GPU inside your docker.
+--- --- --- --- --- --- --- --- ---
+46.5s,28min	 The basic foundation of having a working and going through system with GPU access, but inside a docker. And then we did a bunch of stuff on top of it. Now, it might not be highlighting, exactly, but it's a little bit more complicated. I don't know exactly the right images in regard to what did what there, but in a topological sense, which one was first and then stuff happened. That's the story. Now, anyway, getting back to briefly demoing the docker save.
+--- --- --- --- --- --- --- --- ---
+6.7s,29min	 So we have this one. Well, I don't have any containers yet. Okay [...]  maybe, well, it doesn't hurt to... No, I've got a few containers. I've got a few containers. Oh, yeah, I better wait to make a container. So one of the things in the process to actually use Anson in this environment is that,
+--- --- --- --- --- --- --- --- ---
+29.5s,29min	 as I mentioned before, all these images are basically blueprints. At some point, we actually want to make the thing that we want to work in. But the image that I want to make, or the container I want to make, is based on an image with even more layers than what I have here. Why is that the case? Well, because at this point, I've loaded...
+--- --- --- --- --- --- --- --- ---
+51.8s,29min	 I've loaded two tar files. But as I mentioned earlier, there's a part one, two, and three. We need to load three yet. And that process is, well, similar to what we've done so far. So I'll time it just for the sense of how long these things take. Docker load-py that.
+--- --- --- --- --- --- --- --- ---
+16.7s,30min	 And it needs to be a full path. Or maybe it can be a relative path. But what are the cases? It's on a different drive. So I need to specify the whole thing. Tor1 shared material at... Tor2 shared material at...
+--- --- --- --- --- --- --- --- ---
+38.7s,30min	 Tor3 shared material at... Tor4 shared material at... Tor5 shared material at... Tor5 shared material at... Tor6 shared material at... Tor7 shared material at... Tor7 shared material at... Tor8 shared material at... Tor9 shared material at...
+--- --- --- --- --- --- --- --- ---
+59.1s,30min	 I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. I. So, while the unique identifiers machine generate a unique, it's of course not entirely user friendly. Anyway, so the last bit of the images has been loaded. It took about 30 seconds.
+--- --- --- --- --- --- --- --- ---
+19.3s,31min	 So, not bad. that, half a gigabyte loaded. And just to consult, we will run docker image LSA again. Up here, when I ran it before loading it, the last image, the most recent image we had was 952F. If we run it now, we should see one more layer on there.
+--- --- --- --- --- --- --- --- ---
+45.2s,31min	 One more layer, C1D3. And right before that, it's 952F. Now, in general, you can have images that are not layers of each other. That probably should be an obvious point. And when that happens, if you do docker image LSA,
+--- --- --- --- --- --- --- --- ---
+5.5s,32min	 it should list them all out linearly, even though they're not dependent on each other. So the point there is that, in general, you can't use the sort of logic I did a moment ago of saying, oh, hey, we have this image above this other image. Therefore, this higher image builds on the image immediately below it.
+--- --- --- --- --- --- --- --- ---
+29.9s,32min	 That's not the case. But I can do it here just because I know a priori that there is a single lineage of images going on. Anyway, so with that digression made, great. We should now have all our images. Now, in many docker setups, the next thing you would do
+--- --- --- --- --- --- --- --- ---
+50.5s,32min	 is make a container. And I think I might have accidentally said that. The next thing we do is make a container. But actually, the next thing we need to do is set up the home directory. So if we go to store one docker, store one docker, share. I'm sorry. Stay out.
+--- --- --- --- --- --- --- --- ---
+10.7s,33min	 Docker material, right? And we look at it. There are some profiles that say docker image. And we can see that there are some images. But there's also a tar file. In fact, it's a tar.lz4 file that says home for the docker user. Now, this gets a little bit back to the point
+--- --- --- --- --- --- --- --- ---
+32.0s,33min	 I foreshadowed earlier of docker stuff and then stuff outside of the docker, local disk space, and so forth. If we take a look at how large these files are, we see that they're not that big. They're not that big. We can see that the home directories for the docker are roughly the same size of the images,
+--- --- --- --- --- --- --- --- ---
+55.8s,33min	 even though the home for the docker is a compressed file, whereas the tars are, at least to our eyes, not compressed. I'm not going to make claims about what docker might do behind the scenes to save space on those. But that's another point. One of the reasons this is so large and also going to be so important to use is because by default, things
+--- --- --- --- --- --- --- --- ---
+25.0s,34min	 like Julia use a user's home directory as the place to store its configuration and also packages. Let's see. It will take a while for this to decompress once we set it up. So while it decompresses, I can illustrate the point of why the content of that is important. But first, to set up the decompression so that we can
+--- --- --- --- --- --- --- --- ---
+53.5s,34min	 then build a container. I'm going to start tmux because by far, this is the point that takes the longest in the setup. tmux new session. Yes. Well, I don't want it to attach yet. I actually want to do stuff in it. So I just made a session called setup home for docker, which I mentioned to correspond to the audio. The audio is going with the video right now. But in order to generate a transcript,
+--- --- --- --- --- --- --- --- ---
+14.3s,35min	 we might separate them. Anyway. That's details for post-processing. So now we have a new tmux session. And we're still in the same directory we were before. But I want to set up a place on store one to set up the home directory.
+--- --- --- --- --- --- --- --- ---
+34.6s,35min	 And at this point, it's probably good to start adopting terminology of host and docker. So on the host. The content that will end up being the home directory in the docker is going to be store one, store one. Let's dissect that wording a little bit.
+--- --- --- --- --- --- --- --- ---
+55.3s,35min	 The home directory in the docker is just going to be the home directory when we use the docker. But if we do stuff in the home directory on the docker, it's going to show up in some directory on store one that we're about to make. Basically set the same sentence twice, one forward, one backwards. But I like to think of it a little bit more detailed the second time around. So if we go to store one, and we're logged in as [person A] right
+--- --- --- --- --- --- --- --- ---
+23.0s,36min	 now, this is [their] location. Going to make a directory and say docker home years. The setup we have in the lab is that store one is accessible from all of our servers. And we might have docker set up on multiple different servers.
+--- --- --- --- --- --- --- --- ---
+54.1s,36min	 So I'm going to make another folder here to specify that I'm going to make a home directory for the docker that I'm using on C3. Now, further still, you can have multiple docker containers running on one server. So we should have a way of differentiating between which home directory belongs to which container here.
+--- --- --- --- --- --- --- --- ---
+16.0s,37min	 But we'll get to that. We'll get to that in a moment. Because basically, if we end up decompressing this LZ4 file that contains the docker homes, that should make a directory that would then just rename. So let's see. Just double check the, I think it was dash D, and then the output gets named.
+--- --- --- --- --- --- --- --- ---
+36.2s,37min	 Decompress, yeah. And blah, blah, blah. All right. So input file, output file. OK. So we're going to do that. And then we're going to do that. And then we're going to do that. And then we're going to do that. And then we're going to do that. And then we're going to do that. OK. I just need to check. Because sometimes things with zip and tar, you need to put a number of dash I. So let's do a time here. Because again, this is going to be
+--- --- --- --- --- --- --- --- ---
+0.3s,38min	 the longest part of the process in terms of wall clock time. Then we want to specify the file we want to decompress. These home dir for docker material. Yep. And what do I want to call it?
+--- --- --- --- --- --- --- --- ---
+20.9s,38min	 I'm going to call it container one as the output. Something like that. Cool. All right. So that's going to take some time. And when it's done, it should maybe be about 50 gigabytes. So again, this is 50 gigabytes that had we not set up the home directory, we would have a lot of time.
+--- --- --- --- --- --- --- --- ---
+42.6s,38min	 And and in general, if the directory that save on store one would have ended up on the disk on the server and in general, if the disk on the server gets full, since that disk is a thing that the operating system uses, et cetera, and it's where like packages outside the Docker and the being stored, et cetera that can meet some real pains.
+--- --- --- --- --- --- --- --- ---
+10.3s,39min	 Right. Typically programs, et cetera, get stored on the disk if a search, the photo or something. of the server directly. So, just be wary. Anyway, so while that runs, I will show you some of what the content of that looks like in my account.
+--- --- --- --- --- --- --- --- ---
+33.0s,39min	 And yes, I know that's recorded, but I didn't highlight the whole thing. There's more to the password than that. Let's go to this. So I'm doing C3 as well, so this is the same machine that we're setting things up for [person A] on. Great, so logged in.
+--- --- --- --- --- --- --- --- ---
+57.0s,39min	 And this little extra bit here is just something I set up to record the terminal activity. I should already be recording my terminal up here. Yeah, so I'm going to that terminal recording thing for record, for those who aren't familiar, is just the text that's showing up as input and output in my terminal is being dumped to a text file for me automatically
+--- --- --- --- --- --- --- --- ---
+23.0s,40min	 in case I want to refer to it later. But since my top level show is being recorded already, I don't need to do a lot of also recording a lower level show unless I felt like it. But at the moment, I don't particularly feel like it. Okay, so we are in my home directory on C3, but I want to show you what the content of the Docker home directory looks like,
+--- --- --- --- --- --- --- --- ---
+44.0s,40min	 both on a Docker and on the host machine. So let's take a quick look at what it looks like. Quick look at what it looks like. Let's take a quick look on store one to see the home directories as stored on the host. The Docker home directories as stored on the host. There we go.
+--- --- --- --- --- --- --- --- ---
+6.0s,41min	 So it's of course in my directory on store one, and then I can just, there we are, the Docker. And as you can see, I have at least three different folders here, one for each of our servers that we care to do and some computations on,
+--- --- --- --- --- --- --- --- ---
+31.0s,41min	 C2, C3, and C4. I'm on C3 right now, so I might as well go to C3. And I'm going to give a heads up that I'm not saying that I have what's below this organized in the best fashion. Live and learn. Right, okay, so. Right.
+--- --- --- --- --- --- --- --- ---
+54.0s,41min	 So we only have one home directory here that's probably in use. In general though, if I wanted to set up another home directory, then I would probably make a folder with the same name, but with an underscore one or something. It's worth noting, by the way, because the home directories are being stored outside of the Docker,
+--- --- --- --- --- --- --- --- ---
+17.0s,42min	 if you wanted to, and in fact I have done, you can have multiple Docker containers use the same home directory. We'll probably come back to that in a moment, because how exactly that works has to do with how the container is actually generated from the images that we've been loading.
+--- --- --- --- --- --- --- --- ---
+38.0s,42min	 But I just want to make that note now, and circle back to it later, that it is not the case that for each container you need a new home directory. That's the smart thing to do, so that if you modify something in one container, it doesn't magically modify something in another container, if you didn't mean to do that.
+--- --- --- --- --- --- --- --- ---
+0.0s,43min	 But if you don't mind, if you really think that, hey, I want to make a change in my stuff that's reflected in multiple containers, you can share a home directory. Well, even then, actually, it might be ill-advised if you're running multiple containers at the same time, because if you have multiple containers actually running, not that they exist at the same time,
+--- --- --- --- --- --- --- --- ---
+24.0s,43min	 but actually running at the same time, multi-threading potentially could be an issue. That depends on the implementation details of whatever code you're running in the Docker. That's not something I necessarily have control over, but you can imagine that if you have a piece of code written by someone that makes a lock file on a home directory
+--- --- --- --- --- --- --- --- ---
+48.0s,43min	 in order to organize its workflow, if you have two different containers that are running at exactly the same time, like physically running, not just existing, they might conflict in regard to saving to such a file or some other container. So, that's internal bookkeeping. Whatever the case, again, general prudence, one home directory per Docker container.
+--- --- --- --- --- --- --- --- ---
+9.0s,44min	 Short of that, probably just one home directory per actively running Docker container. What seems particularly ill-advised is having one home directory per actively running Docker container, but you can probably have multiple existing, just not running at the same time, Docker containers using the same home directory.
+--- --- --- --- --- --- --- --- ---
+31.0s,44min	 So, that's a little bit of a word soup there, but take that as a no. Anyway, so getting back to looking into what's inside this folder. Go in and we have a number of things, some of which, like temp files and log files, etc., are just a result of me using Docker
+--- --- --- --- --- --- --- --- ---
+54.0s,44min	 and generating things in the process. But other things, like the private anson folder and the itorch, unet, etc. Well, maybe not unet, but that should probably go in the source directory. But anyway, some of these other folders are things that a number of persons would also see if they make a Docker container based on the home directory setup. Particularly important to highlight are some of the hidden files.
+--- --- --- --- --- --- --- --- ---
+15.0s,45min	 And as one might be used to and seen in the Unreal home directory, there are things like .local, there are things like .ssh, there should be a .bash file in here, a .bash or a .c file. .bash history, etc. But the point is, a lot of the typical things you see in a home directory,
+--- --- --- --- --- --- --- --- ---
+42.0s,45min	 including a .julia. And that's one of the things we want to highlight. So let me take a moment to actually just see how much space is used by .julia, which, if I recall correctly, is fairly substantial. Probably should have put the timer on that. And my recollection, at least for the entire home directory,
+--- --- --- --- --- --- --- --- ---
+6.0s,46min	 is something like 50 gigabytes. Don't recall exactly how much it is contributed by just .julia alone. But while this is running, and this will illustrate when it finishes, for Anson, the way that we set things up was to have Conda installed within the Julia. So that means that the Conda that we use with Anson
+--- --- --- --- --- --- --- --- ---
+34.0s,46min	 is also stored in the .julia folder that I'm currently trying to take the size of. And naturally that means that not only are the quote-unquote Julia native things in there, but also the Python native things. So there's a lot of code and binaries that land in that location. I see that there are .jl folders,
+--- --- --- --- --- --- --- --- ---
+0.0s,47min	 which are basically Julia packages that are specific to Anson, also contained in this home docker user folder. I wonder if there are specific reasons why they are here, rather than in the .julia folder. That's probably just because of low hiccups setting things up. Probably not a deep reason. And if this takes more than another couple seconds,
+--- --- --- --- --- --- --- --- ---
+32.0s,47min	 which realistically it probably will, I'll kill it. I'm not sure. 5, 4, 3, 2, 1. Well, anyway, well, one of the cases it's not true size, and it would swirl us well to step inside of it.
+--- --- --- --- --- --- --- --- ---
+56.0s,47min	 Now the other day you asked me a little bit about checking packages, and checking installs, and checking source code, etc. Looking inside the .julia file, its folder is probably not the first thing you should do. Probably the first thing you should do is use the command line interfaces that these different programs provide, and then the REPL.
+--- --- --- --- --- --- --- --- ---
+18.0s,48min	 But if one is curious, you can also poke around inside here, and gain some insights. Mention conda will store it under .julia, or at least the conda that we use with ANTSUN, not to be confused, well, probably not to be confused with the .conda in the same level as the .julia. That seems to be elaborated a little bit.
+--- --- --- --- --- --- --- --- ---
+46.0s,48min	 We have the, what is on the doc or the home directory, inside that home directory is a .con, a .con, a .conda, and a .julia. And I'm saying that inside the .julia, but I'm not sure. I'm saying that inside the .julia, there's also a just conda file. But there are other things like compiled, artifacts, packages, etc.
+--- --- --- --- --- --- --- --- ---
+8.0s,49min	 And for most things that we use, the source code comes along with the material to run. For Python, to my understanding, that's particularly easy because Python is an interpreted language, so if I give you the source code, sure, it might produce some intermediates, but a lot of that is just generated,
+--- --- --- --- --- --- --- --- ---
+29.0s,49min	 a lot of the functionality is just figured out as the program reads the code. But with Julia, it's compiled, so you give it the source code, and then it needs to generate some other stuff, and that's one of the reasons why we have a compiled folder that has a bunch of subfolders corresponding to the names of various Julia packages we care to use.
+--- --- --- --- --- --- --- --- ---
+58.0s,49min	 And if I chose one that ran in like stats base, and looked at it, I'd see things like shared object libraries in a .ji file, and these should be binary, that don't have anything that I as a human can interpret directly. Might as well just take a gander to confirm that. Binary.
+--- --- --- --- --- --- --- --- ---
+21.0s,50min	 And shared object libraries. Binary. There we go. Great. But that's to be expected under something called compiled. There were some places where source code might be, well, if you look in packages, and we should have things that correspond to what we had in compiled file, subfolder, right? So at a high level,
+--- --- --- --- --- --- --- --- ---
+44.0s,50min	 and I'm not saying that this is strictly how the workflow goes, but it seems like a pretty good mental model, Julia has a source code under packages, compiles it, and then stores the result under, well, guess what, compiled. And to just take an example again, we were looking at stats base, so let's see about where stats base is here. Yep, it's listed.
+--- --- --- --- --- --- --- --- ---
+12.0s,51min	 And if we look inside of packages stats base, I'm betting we have some Julia code that we can look at. Okay, it has, one folder lower that has basically a collection of random numbers and letters. And here I mean random in two sense. One is the colloquial sense of random,
+--- --- --- --- --- --- --- --- ---
+35.0s,51min	 meaning H is kind of arbitrary. But the slightly more strict sense of random-like we use in programming might not hold here. This could just be based on a hash, or a random number of letters. And then we can look at the file content. Whatever the case is, I can tell you having dealt with the installs of these things before,
+--- --- --- --- --- --- --- --- ---
+57.0s,51min	 if you have two different versions of stats base, like V1 and then 1.1, they should show up as two different folders here, unless you get rid of the source code for the old one. If you have both of them installed, and you say to Julia, use the most recent one, as far as I'm aware, it will keep a copy of both. And you would see two folders here,
+--- --- --- --- --- --- --- --- ---
+18.0s,52min	 then, under stats base. Anyway, that [...]  gained a little bit of the weeds there aside, let's actually look inside this one. Okay, we see things that we can actually get our head around a little bit. We see a license, we see a TOML, we see a README. And then we see some other things that might be similar to a structure of a git that we're used to. I actually want to change and see that folder,
+--- --- --- --- --- --- --- --- ---
+40.0s,52min	 and let's take a look around. And as we see, there's actually a .github and .gitignore file. So this is largely based on git. It doesn't actually have a .git gear here, so it's not like we'd be able to get the git history, I think. Probably won't give me permission issues, strictly speaking. Okay.
+--- --- --- --- --- --- --- --- ---
+1.0s,53min	 But, anyway. And if I look in source, yeah, a bunch of Julia files. And because I confirmed that the other things were binary, might as well confirm that this stuff is something I can read. Indeed, source code. Now that's Julia code, what about Python? So if we go up a couple levels in the hierarchy,
+--- --- --- --- --- --- --- --- ---
+23.0s,53min	 and go to conda, three. Now this should be organized like a typical conda environment. And what I mean by that is, sure, it happens to be one that was installed and managed to a large extent, or an entrepreneurial extent, by Julia. But, underneath the conda folder,
+--- --- --- --- --- --- --- --- ---
+45.0s,53min	 it should follow the same logic. As, like the .conda that one would typically see in their home directories. So this is maybe not directly related to Docker, but it is related to what are the environments that we're using, what is our general setup for ANTSON, and does relate to the question that,
+--- --- --- --- --- --- --- --- ---
+6.0s,54min	 one of the questions I got yesterday in regard to checking the versions of things. This isn't the only answer, and again, it isn't necessarily even the first thing that someone should do to check versions. I would suggest using the .conda.com. I don't think it's the same thing as conda export, or the Julia command line stuff. But this is one that might not be as immediately obvious if one gets in a bind. Anyway.
+--- --- --- --- --- --- --- --- ---
+27.0s,54min	 Let me ask a follow-up question here. In the unlikely situation where we would like to change the source code that is being implemented, what we call a sort of function under, let's say, a Julia package. Obviously this is not the best idea, but the question is, if I want to modify one line, say let's just do print something, within the .jl file, that's easy to change,
+--- --- --- --- --- --- --- --- ---
+52.0s,54min	 but how do I make sure that when Julia calls it, it actually calls the version that has the print message in it? Well, that's actually a little bit of a deeper thing, deeper issue. So, first off, it's worth knowing that the answer I give for Julia is probably different than what I would give for Python. And part of that relates back to Python being interpreted in Julia Nog.
+--- --- --- --- --- --- --- --- ---
+14.0s,55min	 But then there's a further question, and even Python makes cache files that sometimes aren't automatically clean, or someone doesn't tell it. With that said, and again stressing what you yourself stressed as well, that it's probably not the best way to do it for one reason, if someone was desperate,
+--- --- --- --- --- --- --- --- ---
+36.0s,55min	 and I mean desperate, not just doing something quick because they wanted to do something quick, but desperate, what they could probably do is modify one of these .jl files, then clear out the respective content of the compiled file, and then tell Julia to compile it again.
+--- --- --- --- --- --- --- --- ---
+4.0s,56min	 And you can do that through the REPL to say something like precompile. Now, I would have to check that further. I think I might have done something like that once or twice, just to check the file, and then give it a little bit of a flow of logic, while getting this all set up. But in general, it's a bad idea to try and get too far down and dirty
+--- --- --- --- --- --- --- --- ---
+27.0s,56min	 in these package management systems without having a good idea. In part because I alluded to, for example, cache with Python. Just because, if I manually modify a file, and if the code that, is managing this package environment, doesn't check for updates in those files,
+--- --- --- --- --- --- --- --- ---
+50.0s,56min	 because why would it? It's the one who's managing those. You're not supposed to touch those. Then it could just grab something that it already parsed or something from a cache, a cache that was informed by the old code. So then the question becomes, okay, I made a change to the source code, and yes, I told it to precompile, but is all the material that it's compiling based off of,
+--- --- --- --- --- --- --- --- ---
+12.0s,57min	 what I see, or does it have some additional things behind the scenes? So it's kind of a fraught enterprise. I think Julia tries to set it up so it's, you can get away with some of what we described, just delete the compiler version and modify the code there, and then tell it to precompile. But that's something that,
+--- --- --- --- --- --- --- --- ---
+33.0s,57min	 if a person's going about doing that, they should really check. And again, that is not, you said it, I said it, and I'll say it again, that is not the first, second, third, or fourth thing that a person should be doing to modify code that they're using. All right,
+--- --- --- --- --- --- --- --- ---
+56.0s,57min	 so we're in Conda, and I guess the thing I wanted to show is, this isn't a tutorial about the layout of Conda, but there was a question about how do I find source code that's being used in the environment if I have questions. And let's see. Stored under a couple of these,
+--- --- --- --- --- --- --- --- ---
+17.0s,58min	 or one of these that has stuff that's like site package, et cetera. Oh, it might be packages. Okay, there you go. And if we take a look at one, let's say Plugly, whatever that is, probably dependency behind the scenes. All right. Site packages.
+--- --- --- --- --- --- --- --- ---
+38.0s,58min	 Okay, so then we see a bunch of Python code that is used behind the scenes. And basically this is having poked this sort of stuff in Python before.
+--- --- --- --- --- --- --- --- ---
+2.0s,59min	 My general impression is that indeed for the rest of the packages here, even though I'm not going to enumerate all of them, you can find their source code, or at least the code that's being used to produce things, somewhere under something something site packages. But the same warning that I gave about Julia, I would give to this as well.
+--- --- --- --- --- --- --- --- ---
+24.0s,59min	 Yeah. Anyway, so great. We getting back on the topic of Docker generally. Sorry, while I'm still here, let me ask a final question on this. Because this is a Dockerized environment, I wonder what is the safest, most elegant way of updating, let's say one of the packages among so many.
+--- --- --- --- --- --- --- --- ---
+45.0s,59min	 I guess, and I, both relating just to this conversation itself, but also somewhat tying back to our conversation the other day. I suppose what, that question seems to be motivated by a sense that,
+--- --- --- --- --- --- --- --- ---
+6.0s,0min,1hr	 it is or just might be more difficult, or involving a typical process to update inside the Docker, compared to what you would do in Ubuntu. I don't get the sense that's the case. Now it's worth noting that the way we're looking at the content of this home directory, is on the host,
+--- --- --- --- --- --- --- --- ---
+27.0s,0min,1hr	 right? And the host is exposing [...]  some of the implementation, implementation details of the, how we set up the Docker. Now if we looked at this, if we go on the Docker, and look at doc Julia, this stuff, we'll see the same things, right? That won't magically change. But,
+--- --- --- --- --- --- --- --- ---
+51.0s,0min,1hr	 the way we go about doing this sort of updates is inside the Docker. So, let's actually take a step back up the home directory, and short of anything else to really highlight, let's actually look at inside the Docker, to even try looking at some of the updating you're talking about. So, the rest of the stuff here I think is,
+--- --- --- --- --- --- --- --- ---
+13.0s,1min,1hr	 not something we need to go over now. I might come back to this terminal, I might come back to this terminal recording thing in a moment, but we can do that inside the Docker. So let's actually, so we've been talking about this stuff from, looking at it from the host side, let's look at it from the other perspective. So, if I ask Docker container, container ls a,
+--- --- --- --- --- --- --- --- ---
+34.0s,1min,1hr	 so similar to how I had a Docker image ls a, I have a Docker container ls a. And though I didn't show the process yet of how to make a container from an image, once you make a container, this is the way that you show it. And as a reminder, the only reason that we're not, we haven't gone over making a container yet, is because I'm waiting for the thing for [person A] to decompress.
+--- --- --- --- --- --- --- --- ---
+58.0s,1min,1hr	 I'd be surprised if it's done by now. So, anyway, now if I look among these containers, I can see that I've got a container, if I look among these containers that I have, indeed I have three, and one of them is listed as being up for five days. That means it's actively running. So I can attach to it. I'm sure we'll go over the commands to attach and stuff to Docker another time,
+--- --- --- --- --- --- --- --- ---
+22.0s,2min,1hr	 or even just something that's fairly well documented by Docker itself, so, if I don't describe it, hopefully someone won't be at total loss, but that all noted. If you have a running container and you want to interact with it, and you have a setup default command, the way to do it is with the attach. Great. So I run that, and now you can see that instead of David on the line above,
+--- --- --- --- --- --- --- --- ---
+43.0s,2min,1hr	 it has docker user, and instead of flpc3 as the server, it has this number, which by the way is the same as the container number. Great. Now if I go to the home directory inside the Docker, squiggle the line, TOTA, and I do ls, hey look,
+--- --- --- --- --- --- --- --- ---
+8.0s,3min,1hr	 it's pretty much the same content we saw above. Now, what else is there to talk about in this one? So, I can start talking about the data drives, etc. But before I move on from the home directory, I want to take a moment to talk about this terminal recording business.
+--- --- --- --- --- --- --- --- ---
+38.0s,3min,1hr	 So, if I take a look inside of that, I should see a file that's growing every time I type something in. So, net, oh, it's lt. Notice that the size of these top two files are growing, and the reason for that is because it's recording what I have going on in my terminal.
+--- --- --- --- --- --- --- --- ---
+3.0s,4min,1hr	 So, it didn't give a warning of recording here because I already had it running, and I just reattached to it. But basically, if I had just started this Docker up, you would see something very similar to this show up. In fact, I might as well do that for the sake of demonstration, and then I don't have to explain it again too much later.
+--- --- --- --- --- --- --- --- ---
+26.0s,4min,1hr	 So, let me just check to see if I have anything running here. Can you just list sessions? Okay, I'm running Jupiter, but I think it can kill that. For anyone watching this transcript, if you're not familiar with tmux, I suggest you do get familiar with it, and please use it over the screen command, instead of the screen command.
+--- --- --- --- --- --- --- --- ---
+5.0s,5min,1hr	 Okay, that's on that. That's on that as well. Well, yeah, I'll do that. So, I don't have any running jobs. I probably shouldn't. Oh, Jupiter is running. Okay. Um, Cool. Great. Now I'm going to tell it to exit, and when I type this in,
+--- --- --- --- --- --- --- --- ---
+27.0s,5min,1hr	 it should give out a message saying, recording done, and then compressing. And indeed, you see that it says, script done. Um, starting to store the script recorder, et cetera, here. Uh, this is a file that's stored on my home directory inside the docker. You'll notice that the path is home docker user, and that's because it's written in terms of,
+--- --- --- --- --- --- --- --- ---
+48.0s,5min,1hr	 um, docker centric, or I should say container centric, um, paths. And you see all that. Great. Just wanted to, uh, Anyway, uh, so I dumped out a record of everything that I was doing on the terminal, um, then I've added it to a compressed file.
+--- --- --- --- --- --- --- --- ---
+9.0s,6min,1hr	 It's a specific format called ZPack that I like, but, you can imagine that very much like a zip file or a tar file, what have you. It's just a collection of files that are then compressed together, that I happen to be storing this recording at. And it's a nice little, uh, more cute little thing where at the bottom it shows you how much it got compressed, so the original transcript, had I not compressed it,
+--- --- --- --- --- --- --- --- ---
+32.0s,6min,1hr	 would have been, uh, about 658 kilobytes. Then after compression it went down to, um, roughly 16 kilobytes. And then the total size of all my compressed transcripts is about 53 megabytes. Well, 54 megabytes. Anyway. So, uh, if I look at the docker containers again,
+--- --- --- --- --- --- --- --- ---
+0.0s,7min,1hr	 like, docker container, LSA, um, we now see that the container was in, is, exited, well because they exited, if I try and do docker attach, B, it will say it stopped, so, I need to start it. Docker container LSA is now saying it's running,
+--- --- --- --- --- --- --- --- ---
+21.0s,7min,1hr	 now I should be able to attach to it. Great. But, it should, here we are. So you can see there's a couple lines here, saying that I'm attached to the terminal, and pressing, uh, character to continue. Well, follow the advice, press any character, and now it says, do I want to record the terminal activity? And, um, if I say yes, it will, and then it will pump out all the input and the output,
+--- --- --- --- --- --- --- --- ---
+43.0s,7min,1hr	 um, that I type in, to, one of these files, one of these, uh, these, uh, these, these, these, these, these files, one of these script recording things, as stored under the, Terminal Recording folder in the home directory. And if I say no, well it won't record things. I'm going to press yes,
+--- --- --- --- --- --- --- --- ---
+4.0s,8min,1hr	 it tells me that it's recording, and this is the file that it's recording into. Great. I don't want to do anything else here for now, so I'm just going to press control P, control Q, uh, to, disconnect, and again, that's, I, I, or I, press, control,
+--- --- --- --- --- --- --- --- ---
+24.0s,8min,1hr	 P, . Um, now I realize that I kind of digressed into [...]  hey, how do you use Docker, as opposed to, hey, how do you set up our Docker? So I beg your pardon on that. And I, I realize that, I, I, I, I, I, I, I,
+--- --- --- --- --- --- --- --- ---
+45.0s,8min,1hr	 I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,
+--- --- --- --- --- --- --- --- ---
+5.6s,9min,1hr	 I, I, I, I, I, I, I, I, I, I, I, I, haha, I, I, ho, with respect to the docker I have set up. Oh, I didn't talk about how the data
+--- --- --- --- --- --- --- --- ---
+32.3s,9min,1hr	 drives are stored, or at least showing how they're stored. We can do that when we make a container, so... how the data drives are attached, or mounted, that's a better word. How they're mounted in the docker. So that... oh hey look, it finished.
+--- --- --- --- --- --- --- --- ---
+55.3s,9min,1hr	 And it only took two minutes. [...] And why don't we take a quick look to see... Given the fact that we gained the size of the .julia file before it took so long, I don't think this would be quick, but I might be pleasantly surprised.
+--- --- --- --- --- --- --- --- ---
+16.3s,10min,1hr	 Okay, that's all. That's surprisingly fast. So it's 18 gigabits, according to this. At least on disk. A little bit of an aside. Store 1 is backed by ZFS. ZFS, as we have it set up, has compression set up by default.
+--- --- --- --- --- --- --- --- ---
+42.3s,10min,1hr	 DUSH shows you how much space on disk is used, but that's after compression. Yadda yadda yadda yadda yadda. Not super important right now, but just nice to know. So you're saying the full size of .julia is actually something around 50 gigabytes? Not necessarily. I'm just... I guess I'm rambling on about...
+--- --- --- --- --- --- --- --- ---
+3.3s,11min,1hr	 Well, I suppose what I'm saying is that the DUSH, 18 gigabytes, is less than the amount if one were to copy this onto a typical hard drive. And that's because it's being actively compressed on our store.
+--- --- --- --- --- --- --- --- ---
+27.3s,11min,1hr	 Those are details about ZFS that if one's curious, you should look up at that. But I'm not going to get too far into already... too much further into, because I've already digressed a lot. Great. So we have that home directory decompressed. Where is it? Here. If we take a look inside, we should see something very similar to what we saw. It should see something very similar to what we were looking at online.
+--- --- --- --- --- --- --- --- ---
+49.3s,11min,1hr	 Tanger1. Oh, because it's a tar file! Oh, maybe it was untarring it that took a while. Maybe it was the decompression that was fast and that untarring was what took forever and a day.
+--- --- --- --- --- --- --- --- ---
+16.3s,12min,1hr	 I think that actually rings true. Right. So while that's going, let me talk about the other important step in the process. So we've talked about getting Docker images. We've talked about the home directory being the separate file thing that someone needs to copy and decompress on tar.
+--- --- --- --- --- --- --- --- ---
+41.3s,12min,1hr	 But then there's a command that someone needs to issue after all that's set up to actually form the container from the images. So what is that and where is it? Well, let's see. If we look again on store1-shared and docker-material, we already went over the docker-images-tar.
+--- --- --- --- --- --- --- --- ---
+5.3s,13min,1hr	 And we've gone over at this point docker-user-tar-ls. I mean, I'm saying not docker-user. Home, docker-user, home directory, right? But there's this third thing here. That is the command to make docker-container.sh. As you might imagine, that tells you how to make a docker container or at least the high level of it. First thing to do is to copy that wherever.
+--- --- --- --- --- --- --- --- ---
+27.3s,13min,1hr	 It's just a small bash file, shell file, so it's not something to worry too much about in respect to space usage. Now if we look inside, you'll see that I have a lot of information. And I hope that you can see that at the top there's something describing why and what.
+--- --- --- --- --- --- --- --- ---
+48.3s,13min,1hr	 So let me just read some of this out loud and interpret it as I go along. First thing it says is you need to change the home directory to point to a new copy for most machines most of the time. And specify the image as it corresponds to what is shown on your machine once it is copied over.
+--- --- --- --- --- --- --- --- ---
+10.3s,14min,1hr	 So that's part of this. First line of that is giving caution related to what I said earlier with the home directory and docker container thing. I'm not sure how well the transcript would be pumped out with the background noise or discussion.
+--- --- --- --- --- --- --- --- ---
+34.3s,14min,1hr	 Pause it here. We have that thing not long from now. We need to do some stuff. So yeah. So let me, even with the transcript is muddled up at this point, let me at least give some words on next steps. We'll leave off on the command to make container given the image and the home directory are set up.
+--- --- --- --- --- --- --- --- ---
+51.3s,14min,1hr	 What we actually need to do next then is confirm that the home directory is set up, make container, poke around a bit. And we're going to go ahead and stop this and have it save. And again, I have your permission to have made this recording correctly.
+--- --- --- --- --- --- --- --- ---

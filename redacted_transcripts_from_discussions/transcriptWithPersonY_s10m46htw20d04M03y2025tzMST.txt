@@ -1,0 +1,543 @@
+Transcription of Conversation Held Between D Bayani and [...] on March 3rd, 2025 Regarding Google-Sheet(s) Used to Record Experimental/Imaging Conditions Performed On (C. Elegans) Worms Under the Confocal Microscope
+
+Sound recorded by D Bayani. Transcription done via publicly available pre-trained deep neural network [...], followed by corrections and annotations (such as noting transcription errors and speaker identification) by D Bayani. 
+Annotations: Square-brackets indicate text that has been corrected, inserted for clarity, or paraphrased. Curly-brackets indicate transcriber-notes, not intended to be interpreted as text spoken during the meeting.
+SPEAKERS: D Bayani (DB), [ Other Person (OP)]. Generally speaking, one person is speaking until an different name is listed preceding text. Sometimes line alternations are used to indicate this; generally, the typical back-and-forth between two people speaking should be easy to infer by chance it is not made explicit anywhere.
+Separating lines occur roughly once every 20 seconds. Time stamps are included in each block.
+
+
+========START OF TRANSCRIPT==============
+
+21.9s	 DB: This is [D Bayani] on March 3rd, 2025 with [...]. It's currently 6.53 p.m. EST. We're talking about the Google Sheets for metadata recording
+--- --- --- --- --- --- --- --- ---
+43.8s	 in the lab of confocal and NIR experiments. Is that a fair summary? Is there any other data? Is there any other description you give this other than free-roaming experiments, I guess? Stim[ulation] experiments? Just confocal and NIR? 
+[OP]: I think we only have this, but we have multi-color images for the immobilized.
+--- --- --- --- --- --- --- --- ---
+5.6s,1min	 So I think if people just make one recording, obviously the one that's like 1600 time points is the recording. You don't need this for something that you can just know by looking at the file. But in these ones, the reason we need this spreadsheet or any other form of documentation for this is that this information literally does not exist anywhere else.
+--- --- --- --- --- --- --- --- ---
+28.5s,1min	 Because which file is which? They're just numbered, right? How can you possibly know their imaging configuration just from this? You might think that the software that we use to record would contain metadata, and indeed it does. And we have looked at it before. It's actually very helpful {TODO: check}. So the extent to which it has metadata is basically things like laser intensities, which are like these
+--- --- --- --- --- --- --- --- ---
+51.6s,1min	 two columns, right? And that's what these ones are. But what it doesn't have is which two columns are active during imaging. Because that's all mechanical. Like we change cables in order to change the excitation wavelength, and that's a mechanical change that's not tracked by the software. So the software only remembers pseudo-colors,
+--- --- --- --- --- --- --- --- ---
+24.1s,2min	 one and two, right? So which one is one and which one is two, it has no idea. Okay. So these numbers you can find from the metadata {TODO: check}. 
+DB: And to be clear, those are columns what and what? 
+[OP]: These are columns 480 and 561. 
+DB: Okay. I mentioned both for my confirmation and for the record. 
+[OP]: Gotcha. 
+DB: So I find this overview very helpful. I do, and if you want to get more of an overview so that the proper context for the rest of it makes sense, that's great.
+--- --- --- --- --- --- --- --- ---
+47.2s,2min	 I do want to make sure though, so long as you don't mind, that we [...] basically [go] line by line at some point. 
+[OP]: Of course. So basically the most important information that you literally can't find anywhere else is which column is which. Okay. But I'm going to start from the beginning like we suggested. So this is the date. These are string numbers.
+--- --- --- --- --- --- --- --- ---
+9.6s,3min	 Okay. I am not confident that other lab members follow the same format. 
+DB:Okay. And this format is date, and here you have two strings, 702 and 1212? 
+Yep. 
+Gotcha. 
+Yep. The reason why I say so is that there are people who just go in here, click [...]  make a copy. 
+Mm-hmm. 
+And in that case, even this is not the same name.
+--- --- --- --- --- --- --- --- ---
+33.0s,3min	 Gotcha. 
+[OP]: And this is the title of the document, that in this case you have the corresponding date and the name of the first string and then starvation. 
+DB: Why not the name of the second string [(SWF1212)]? 
+[OP]: So this is a very new thing. I usually only image one string on one day. 
+Okay. 
+So this is an example. Okay. So this is an example. So this is an example of an air bar, which of course is an exception. The reason why I have to do it is because I need to test both [strains] on the new camera {TODO: check}.
+--- --- --- --- --- --- --- --- ---
+57.5s,3min	 Gotcha. 
+[OP]: So this is an exception. And these, I am pretty sure that most people don't even think of it. The reason why I still try to keep them here is just to keep things consistent. So I wouldn't take this information super seriously. The reason being that things like slide size, these are ballpark estimates.
+--- --- --- --- --- --- --- --- ---
+20.4s,4min	 Um-hum. 
+[OP]: We don't actually read them. I actually take a ruler and measure it. I only use the ruler and measure everything the first time I did it just to make sure that my brain remembers it to some extent. But we don't keep doing it every time we make a slide because that will take forever. So these ones are ballpark estimates. I don't know why they would be useful to anyone.
+DB: Well, I mean, if someday we find out the evaporation size
+--- --- --- --- --- --- --- --- ---
+41.8s,4min	 is a thing. But I see what you mean. 
+[OP]: Yeah, we already know that. 
+DB: So to be clear, this [section of the document we're looking at] is slide prep. First line strain matches the top that we talked about. The other one is slide size mentioned in two dimensions, not thickness. And the third is basically just preparation of the slide right here. We're talking about beads in four corners. NGM is part of the auger, right?
+--- --- --- --- --- --- --- --- ---
+2.6s,5min	 
+[OP]: Mounting buffer, 
+DB: OK, gotcha. 
+[OP]: And people do have different mounting buffers. So the reason why I highlighted liquid NGM here is because that's what I use for my project. It is not what [...] used for their project. 
+DB: Oh, what do they use? 
+[OP]: Liquid M9. 
+DB: OK. What's the difference? 
+[OP]: So the difference is that M9 is basically an electrolyte.
+--- --- --- --- --- --- --- --- ---
+24.8s,5min	 It doesn't have, so MGM stands for nematode growth media. So it's basically the same thing as these plates, except that it doesn't contain the agar powder. So it's still liquid. It doesn't solidify when it cools down. M9 is the electrolyte part of it. So it contains even fewer stuff in it.
+--- --- --- --- --- --- --- --- ---
+49.9s,5min	 But then the idea is just to give the worm as naturalistic and liquid environment as possible. And I just find this to be closer to the environment than M9. I don't know why they stumbled upon M9 when I took over their recording task. It has already been done that way for many, many animals. I just kept it consistent. That's why there's a difference. And these ones, I think because I also used these kind of Google Sheets
+--- --- --- --- --- --- --- --- ---
+10.7s,6min	 for their project, I think I kept it fairly honest. Whichever one I use, I just put it down. So it should be trustworthy. But I also can't guarantee that everyone else takes this very seriously. Even I myself don't take it super serious. For example, when we run out of these beads, I sometimes just use 80 microns because they don't quite
+--- --- --- --- --- --- --- --- ---
+35.6s,6min	 make a difference. The worms don't sense it. It's literally just there to keep it vertical spacing so that image registration doesn't fail. 
+DB: For my own information, when you say take it seriously, I think I understand what you're referring to. But to be dense, yeah: There's, "oh, hey, I'm willing to vary the experimental protocol,
+--- --- --- --- --- --- --- --- ---
+56.1s,6min	 but I'll record what I did exactly". And there's, "hey, I failed to record what I'm doing very accurately". And what you're talking about, when people say substitute 80 [micrometer] -- yeah, 100 to 80? --- would they record that accurately?
+--- --- --- --- --- --- --- --- ---
+18.9s,7min	 Or are you saying that even that? 
+[OP]: Yeah. Yeah. Part of the record is questionable. I think it's questionable. 
+DB: Gotcha. 
+[OP]: Yeah. So also, these ones do not quite matter for the interpretation of the data. So there's not much attention. These ones, again, I think everyone actually paid attention to it. It was only there because at some point, [[...]] was superstitious about weather affecting the worms behavior.
+--- --- --- --- --- --- --- --- ---
+40.8s,7min	 
+DB: We have a whole sub-website about that, don't we? [For tracking air quality and weather etc.] 
+[OP]: I know. Yeah. So this is pre-experiment imaging-time weather. 
+DB: Gotcha. 
+[OP]: Yeah. Yeah. [They think that]  cosmic waves [might] effect the  worms and everything. So that's why. I'm not sure how much people care about this. Some people probably will never change it. 
+DB: Gotcha.
+[OP]: Have to guess. These ones, I don't think we've ever changed it.
+--- --- --- --- --- --- --- --- ---
+1.6s,8min	 So yeah. So let me see. General image settings, ROI size, 322 to 210. 
+DB: Yeah, that seems familiar [from the sizes of images that show up in ANTSUN]. And then 3 by 3. You had to change something recently for the new camera, correct? 
+[OP]: So I had to change things in order to not change it. 
+DB: Oh, so you're saying that. Well, just so I'm clear on that, yeah: So if I'm not mistaken, you wrote software
+--- --- --- --- --- --- --- --- ---
+23.0s,8min	 that post-processes these things so that in the rest of the code they look like 3 by 3. 
+[OP]: Yeah, exactly. This does not change for the vast majority of basically whatever ANTSUN processes. 
+DB: I see. So basically, the binning being reported here is not actually what the camera itself does. It's how you'll process it downstream. Or what eventually will reach ANTSUN.
+--- --- --- --- --- --- --- --- ---
+45.7s,8min	 [OP]: Yes. Yes. [...] And then I think we went through some of these columns or something. 
+DB: Sure. 
+[OP]: The idea is that there are two cameras. Obviously, cameras don't have colors. We only call them green camera and red camera because of the wavelength of light that reaches that camera. Green camera is horizontal [in the physical microscope setup, and the] Red camera is vertical. I don't see it changing in the future.
+--- --- --- --- --- --- --- --- ---
+6.9s,9min	 Duration, what we call loops, are actually Z stacks. You can think of it as volumes. 
+DB: Gotcha. 
+[OP]: Exposure time. So we have an interesting software where exposure time can be defined in more than one way. So in the parentheses, you see two numbers here, right? 
+DB: Yeah. 
+[OP]: This one is ---
+DB: This first one, 7.2 here?
+[OP]: Yes. It's a number that you have to type in in order
+--- --- --- --- --- --- --- --- ---
+27.2s,9min	 to get an effective exposure time of four. So four is the effective time where every frame is being illuminated and recorded. So illumination time and camera exposure time, obviously, that's achieved by two different hardwares. One is the laser, one is the camera. But they're the same {TODO: check}. It's all four milliseconds for each pixel. 
+DB: OK, so let me make sure -  I'm not claiming 
+--- --- --- --- --- --- --- --- ---
+49.5s,9min	 I know the full details of the mechanism behind this, but to repeat back what I heard. So I'm looking at a line under the column called, what was the column called again? 
+[OP]: Exposure. 
+DB: OK, yeah, exposure time. Units milliseconds?
+[OP]: Yeah, exposure time milliseconds. 
+DB: Here I see a 7.2, and then in parentheses next to [it] the four. The 7.2 stands for the actual how long the camera shutter is
+--- --- --- --- --- --- --- --- ---
+10.2s,10min	 open, roughly, or exposure time? And then the four in parentheses is actually [...]  roughly how much time worth of light actually gets to the camera?
+[OP]: Yep. 
+DB: OK. You, I don't mean to pick on your expressions, but is there any refinement of what I just
+--- --- --- --- --- --- --- --- ---
+30.8s,10min	 said that you would suggest? 
+[OP]: Yes. So there is a reason why these numbers are different, which just has to do with how signal is being read out by the camera. So if signal is being read out row by row, some rows are certainly going to start. Yeah. Yeah. And then the second row is going to start later than others.
+--- --- --- --- --- --- --- --- ---
+51.4s,10min	 So each row is being illuminated and recorded for four milliseconds. But because some rows start later than others, overall the cycle time, sorry, I should include this one, the entire cycle time is 7.2 milliseconds. Yeah, OK. Yep. That makes sense. Yep. And then these ones are empty.
+--- --- --- --- --- --- --- --- ---
+14.4s,11min	 The empty column just means that these laser lines are not active. OK. So like I said, those 4. köer grads acidity, gas, resistibility, the {TODO: check}
+--- --- --- --- --- --- --- --- ---
+41.0s,11min	 FDN data, there's all these different parameters of these laser lines, dakika businessman, the На hyung FDN data tests, FdN data So this faithfully reflects what an operator of the equipment would type in {TODO: check}. 
+DB: Gotcha. So the two that you highlighted as empty in the row we were looking at were 405 nanometers and 637 nanometers.
+--- --- --- --- --- --- --- --- ---
+7.4s,12min	 [OP]: So these two are not active in the first recording. That's why these columns are empty. So the ones that have number in it is the percentage. So why is there an error {TODO: check}? It has to do with photo bleaching. So the worm is imaged for 60 minutes. And in the beginning, it's definitely going to be brighter just because the fluorophores are more intact. And then as time goes on, there's like [...]  redox and other reactions that makes the fluorophore not as bright as they used to be.
+--- --- --- --- --- --- --- --- ---
+29.7s,12min	 So halfway through the recording, you need to step up the laser intensity to compensate for that loss. Otherwise, you get something like this for a neuron that's basically silent. 
+DB: And by this [drawing], you mean a flat line or the exponential decay? (Drawing lacked axes initially) 
+[OP]: Yeah. You're going to see some level of exponential decay like this. Yeah. But if you give it a step up in the middle, obviously, it's still going to bleach here.
+--- --- --- --- --- --- --- --- ---
+53.5s,12min	 But then here, at time point 800, it's going to have [...]  more excitation. And it's also going to bleach faster because the higher excitation is going to be [...]  more damaging. But this would allow you to basically be able to see bright images for both the first half and the second half of the recording. Otherwise, like towards the end, we're not going to see anything.
+--- --- --- --- --- --- --- --- ---
+21.2s,13min	 Okay. So that's why there is a step up in the middle. And you're going to be like, why don't you step up [...]  in a continuous fashion? And the reason is that you need enough data points, somehow like 800, to constrain the exponential decay parameter. The single parameter still needs to be constrained. 
+DB: That's an excellent point. So. And the notation, I mean, just for a matter of notation, here it's the first number [, then an] arrow as indicated by ASCII by that middle line [and inequality sign].
+--- --- --- --- --- --- --- --- ---
+54.1s,13min	 [OP]: I think it's this. And then the. Yeah. So [...]  little ASCII arrow between the first intensity and then the second intensity. Okay. And fluorophores is just like which fluorophores can be excited by the laser lines. So I usually, I think I type these ones in. People don't randomly change it because there's no point. The idea is just to give people a sense of like for the multicolor images, which fluorophores are being bleached by these lasers.
+--- --- --- --- --- --- --- --- ---
+27.4s,14min	 Okay. Where they're on. 
+DB: So. That all makes sense. And do me a favor and scroll back. Oh, wait. Yeah. But. So we went over the columns that in this case are. I'm just going to read them out. We went over green camera, red camera, duration and loops. That we'll probably have to come back to that to get into the nitty gritty. Exposure time was milliseconds. And then these different laser intensities. There are four columns. They're listed by wavelength and nanometers. Then at the very end, the flourophores.
+--- --- --- --- --- --- --- --- ---
+53.4s,14min	 Cool. Now, I want to talk about this first block in a moment. But if we could just scroll up to in regard to the, I mean, scroll down in regard to the columns. So I see that there's an actual, actually an extra column that was not labeled at the beginning [(i.e., in the header of the table)] that has a number. And then these first two. 
+[OP]: Oh, yes. Yeah. I also talked about these ones. So the reason why we think that each camera is seeing a very narrow spectrum of wavelength is because of these filters.
+--- --- --- --- --- --- --- --- ---
+16.7s,15min	 Okay. These are. These are emission filters. Mm-hmm. That means, it does means that, by the way, these are actually what the chroma filters are called. So we didn't invent these names. 
+Okay. 
+Um, this is [...]  the mean or median wavelength and 50 is like the range. 
+DB: Okay. So in this case, what we're looking at is the, uh, the green column under a record that is led by an 04.
+--- --- --- --- --- --- --- --- ---
+42.8s,15min	 And in particular, I'm looking at a 525 slash 50. Okay. 
+[OP]: And then this one. Is a 570 long pass, which means only wavelength longer than 570 will pass. And that's why this camera receives red light. 
+DB: Yeah. So the red, this is talking about the red camera, uh, column and it's under the same record. 04. Gotcha. 
+[OP]: Um, and then you would realize that, um, the row that says 05 is actually very similar to 04.
+--- --- --- --- --- --- --- --- ---
+5.8s,16min	 And that's because we intentionally, um, match this immobilized recording to the freely moving recording in terms of imaging parameters, such that it has the highest chance of being registered. 
+DB: Um, sorry. Uh, take a, I, I, I can further parts where my mind laps for a reason, but, um, repeat that first part for me. 
+[OP]: Um, so you see two rows that are extremely similar to each other, right?
+--- --- --- --- --- --- --- --- ---
+31.5s,16min	 It uses the same emission filters. It has the same exposure time. Uh, even the laser intensities are extremely close. This one could be a typo. I don't exactly remember, but 14 and 15 are not that different anyways. Um, and you see that the same set of, um, flourophores are being excited. So the reason why it has to be this similar, you would feel like this is almost redundant. This is because this is a freely-moving recording and this [is an] immobilized one. So you can only maximize the chance of this one being registered to the other one.
+--- --- --- --- --- --- --- --- ---
+52.8s,16min	 If everything else is kept constant. 
+DB: Gotcha. And for record though, this, I mean, this all rings a bell from the rest of the pipeline here. We see that the, um, two things, one that the parameter for the duration is [...]  for the freely moving 1600. Um, I think we quantify this as loops, correct? So it's full Z stacks, right? One full Z-stack, one loop.
+--- --- --- --- --- --- --- --- ---
+15.3s,17min	 
+[OP]: Yeah. Yeah. 
+DB: And that again matches with my understanding from ANTSUN. So 1600 [...]  volumes, uh, for the freely moving and then 60 for the immobilized. And I also see that someone [diligently noted] in the far right column [that the] 1600 time points [are for the] freely moving. And the second, the second one that is 60 time points is immobilized. Well, and this is a quote: "immobilized for registration with freely moving".
+--- --- --- --- --- --- --- --- ---
+38.6s,17min	 Well, free moving. Yeah. Okay, cool. 
+[OP]: And the reason why we need 60 loops of identical images is because they're going to be registered to each other. And average to provide high signal to noise. Um, obviously it would still work if you only image like 30 instead of 60, 
+but not, I mean, but with lower signal to noise, presumably. 
+Like for example, if you only have one frame, it's probably not gonna work, but 30 and 60, you don't make a huge difference in my opinion.
+--- --- --- --- --- --- --- --- ---
+1.3s,18min	 [OP]: Um, so the next one I'm just gonna introduce you to the, um, shorthand that we use. NDF is neutral density filter. And the reason why we have to do this is because, um, we basically want to block light. That's going to saturate one of the cameras. Cause it's going to [...] damage the camera. And we don't use this channel anyway, so we don't care about the intensity. It's just, it's very hard to only excite one thing without exciting other things.
+--- --- --- --- --- --- --- --- ---
+22.7s,18min	 Cause these flourophores, they're all activated by light. And even though they have some level of specificity, it's never going to be perfect. 
+DB: Gotcha. So this is, uh, we've been talking about the green column and in particular, we're looking now at the record that starts with 06 and 07 and they both have the NDF, which again was neutral density filter. 
+[OP]: Yep.
+DB: Uh, is there a reason why one has a plus sign and then the {The rest of the transcribed text was "yellow head of ourselves, the Yep.". My recollection was that I asked about a "minus sign" (really a dash) that occurred in the next column.}
+--- --- --- --- --- --- --- --- ---
+48.5s,18min	 column that's right next to it has no, they don't have an acronym, but a minus. 
+[OP]: Yep. That's a good question. So I believe this thing is one name. 
+DB: Okay. 
+[OP]: So NDF, these are two filters, like 525 50 and NDF. They're literally two filters. You can take them apart. Okay. Uh, whereas 655 LP dash TRF, it's just made that way. It's it's one filter. 
+DB: Okay. So it's a dash and not like a minus. Okay. Gotcha. 
+[OP]: And you see that we use longer exposure times here and that's because this is terribly dim
+--- --- --- --- --- --- --- --- ---
+11.1s,19min	 filter, uh, flourophore. So you can only get very clear images of it. If you expose for a long time, this is the mNeptune. 
+DB: Okay. And I see that the column shifted again, and this is presumably a different expectation. 
+[OP]: This is the 637. 
+DB: Okay. Is there a reason why we have a 0% listed here? Is that like a technicality or what? 
+[OP]: I say, so there is a reason it's because of the software we use that, um, it basically needs to have
+--- --- --- --- --- --- --- --- ---
+37.8s,19min	 two channels, even if one of them has to be zero. Okay. So if I am to do a single channel, I basically need to change, um, the pre-saved illumination sequence in order to do that. Whereas the simpler thing is just type in a zero. Okay. That's fine. Um, and zero actually [means] zero. There's no illumination in there to my knowledge. Oh, glad to hear it. Um, and then the next one is imaging a different flourophore.
+--- --- --- --- --- --- --- --- ---
+4.2s,20min	 I'm using the S uh, OFP VS Gcamp. And that means OFP goes here and Gcamp goes here. 
+DB: All right. So OFP [...] is corresponding to the red camera as in it's been illuminated by one light source. And then the Gcamp is going to [...] the green camera. Who would have thought green fluorescent protein would go to a green camera? 
+[OP]: Yeah. Uh, but, uh, the important thing is that, um, they're going to do two different cameras because we're [imaging] simultaneously.
+--- --- --- --- --- --- --- --- ---
+28.8s,20min	 We're not {TODO: check}. 
+DB: Sure. 
+[OP]: But not with two different light wavelengths. We're simultaneously illuminating with one wavelength and they go to two different cameras. Yes. And the funny thing is that even though one of them is orange and the other one is green, they have the same excitation wavelength. 
+DB: Gotcha. 
+[OP]: That's why it's unavoidable that when you activate one flourophore it, you. Also. I think some other flourophore. Yeah, but that's what those are for. Correct. Exactly. Um, we don't. So there's four is any seven 60 because that's in the blue spectrum.
+--- --- --- --- --- --- --- --- ---
+52.2s,20min	 [OP]: Um, and then we're also [...]  um, turning exposure time down because this is a very bright floor for, we don't need to expose for as long period of time. Yeah. And these flourophores here are, uh, BFP versus tagRFP and MNeptune. 
+DB: Now, just to make sure that I'm reading this correctly, uh, would it be correct to say thefluorescence from blue fluorescent protein.
+--- --- --- --- --- --- --- --- ---
+14.8s,21min	 DB: Yeah. Goes towards one camera, presumably here listed under the green column. And in this case, both the, the fluorescence from both of tagRFP and MNeptune go to the second red camera. Is that correct? 
+[OP]: Exactly. 
+DB: Good. I asked that because you're gonna imagine one other way of grouping this story[: ] have BFP versus tagRFP be one thing, and then the comma indicates something else for MNeptune.
+--- --- --- --- --- --- --- --- ---
+36.9s,21min	 [OP]: But yeah. Um, and the last one is pretty much redundant. So the only one, the only reason why we would sometimes take another one that looks identical. As a second one is because, um, there are times when the, the animal moved a little bit during these immobilized recordings. In which case we're like, we don't know if we could ever match this perfectly back to freely moving. So, um, this is basically a safety factor.
+--- --- --- --- --- --- --- --- ---
+59.2s,21min	 [OP]: I think I skipped this a lot of the time. I told other people to do the same. It's only when I feel really unsure that I would take a second one. So when you were like [...]  doing whatever documentation that you're doing, it's not too important to look at the last one. 
+DB: Gotcha. 
+[OP]: If it's redundant, the other one. 
+DB: Okay. Now quick question. The actual filter settings, are those based on the suggestions from the Neuropower manual?
+--- --- --- --- --- --- --- --- ---
+19.7s,22min	 [OP]:No. Okay. Um, so the Neuropower manual tells us, um, the presence of these fluorophores. Um, the reason why we cannot learn too much from their manual, um, in terms of imaging settings is because, um, basically they were imaging with a very nice, um, laser scan confocal. Which has a terrible time resolution. But who cares?
+--- --- --- --- --- --- --- --- ---
+40.7s,22min	 [OP]: Their spatial resolution is excellent. Um. So our setup is optimized for life imaging. So it has a [...]  I know our sampling frequency isn't great. It's like about 1.7 hertz. But it's really the best that we can afford without losing the spatial resolution too much. Um, and the way spinning disc confocals are created, they don't have terribly selective filters.
+--- --- --- --- --- --- --- --- ---
+1.2s,23min	 [OP]: So, um, the best kind of filter that we can have that's compatible with a spinning disc confocal are the chromafilters. And that's what these ones are. Whereas the laser scanning confocal that the Neuropel string was imaged with, um, has very selective emission filters built into the microscope.
+--- --- --- --- --- --- --- --- ---
+23.7s,23min	 Like you literally just need to click a button to change it. Whereas others you have to physically swap them in and out. [...] I was going to say [...]  these ones are optimized, um, because we tried many other ones. And these are just the ones that, um, emission-spectrum-wise makes the most sense. Okay. 
+DB: So it's, it's from experimentation [done] in-house. Okay. 
+[OP]: So it's just to find what [...]  most clearly images these.
+--- --- --- --- --- --- --- --- ---
+46.7s,23min	 DB: Gotcha. So just to, um, list out some maybe banal information given that we're looking at it. But, uh, in this case we have, uh, I'm just going to read them out and count them at the same time. In the green camera we have the [...] 525 slash 50[, and] the NDF filter. In addition to that, I understand that they're used in combination, but [I am saying them separately to better note] how many filters we have around.
+--- --- --- --- --- --- --- --- ---
+9.7s,24min	  DB: And then we have this, uh, 447 slash 70. Okay. And then we have the 421 slash 60. So, and for the green camera we have three filters, correct? 
+[OP]: Yes. 
+DB: Okay. And for the red camera we have, uh, we have [...]  570LP [and] 655LP dash TRF; So  that dash is just part of the same name as opposed to the thing we found on the green camera.
+--- --- --- --- --- --- --- --- ---
+30.2s,24min	 DB: And the, uh, 585 dash 40. Oh, what is the 585 dash 40? 
+[OP]: So 585 is the, uh, mean wavelength. 
+DB: Oh, right. 
+[OP]: That comes through 40 is like the range. Okay. Cool, cool. Um, yeah. And I should say, uh, 585 slash 40. 
+DB: Gotcha. So it's in the yellowish orangey zone [ in regards to coloring on the spreadsheet].
+--- --- --- --- --- --- --- --- ---
+50.7s,24min	 [OP]: Yeah. 
+DB: It's nice how you actually have them color coded to match. Is that something that you did or is that like standard in the sheet or? 
+[OP]: Uh, I think I made it and then people just like copy and pasted so it should be standard. Okay. Okay. So, um, right. [...] {NOTE: context cut that looks like it was transcribed incorrectly} 
+--- --- --- --- --- --- --- --- ---
+11.7s,25min	 [OP]: Yeah. So, what I'm trying to say is, um, this is a very personal contextual thing.
+DB: Um, if I'm not mistaken, if we continue down as opposed to going back up, we're going to be talking about the second animal, which is from the strain  SWF 1212 in this case. {redudant content removed, likely transcription error}. Yeah. Yeah. All right. So, um, would it be fair to say if we finished talking about the first animal, then we would get most of the sense for the second one? 
+[OP]: I think routinely. Yeah. 
+DB: So, correct me if I'm wrong, the part that we haven't really talked about yet is, we went through the columns with the information spread out. But you're good enough to leave notes, um, right above the first record in the table. Right. Uh, here I'm looking at one that says, in bold print, first animal SWF 702.
+--- --- --- --- --- --- --- --- ---
+34.3s,25min	 DB: Yeah. And then under it I see {likely transcription error; the content was: "a question about [...] [...] elektron"}. And then under it I see a couple different bullet points, and then under that I see a plot which I'm assuming is the, the trajectory of the worm over time. 
+[OP]: Yeah. And that's color coded for time. 
+DB: OK. Cool.
+{likely transcription error} 
+--- --- --- --- --- --- --- --- ---
+57.2s,25min	  [OP]: But then I do want to make sure you understand that the plot is made with my own code, which I shared with the rest of the lab. Most people don't bother plotting it because of their particular problem,
+--- --- --- --- --- --- --- --- ---
+23.0s,26min	 the trajectory of the worm does not matter. 
+DB: Do you think enforcing a standard around that would make more people do it?
+[OP]: I don't quite care. I only wrote this for myself and if they find it handy to use. We don't actually need this to be basically... Okay, let me unwind. The reason why I need to know this while I'm recording is that sometimes a worm would just [...]  crawl up and don't go anywhere, in which case I wouldn't bother taking the rest of these recordings.
+--- --- --- --- --- --- --- --- ---
+50.7s,26min	 Okay. Because immobilization takes time, and each of these is [...]  a few minutes. So I would be like, if a worm doesn't go anywhere, it's not worth me spending more time on this worm. Whereas for other people's problems, maybe they don't care about that, which is why. And you can just pull this post-hoc. You can definitely have it anytime. That's why I built that in [...]  you know, midway between the recording. I also, in the same piece of code, checked if the timesteps would align
+--- --- --- --- --- --- --- --- ---
+14.4s,27min	 between the confocal and the NIR. Because sometimes [...]  timestamps are just set to one trigger to be launched, and sometimes [...]  hardware, they have the stakes. So the timestamps do not align well, in which case I would also not be making more recordings in the immobilized worm because in that case, you can't align behavior with confocal images with confidence. Right? So I'd rather know it sooner than later
+--- --- --- --- --- --- --- --- ---
+59.0s,27min	 because I wouldn't bother imaging more if I don't have to. Okay. But it fails very, very infrequently, which is why most people feel like they can just err on [...]  always recording the immobilized images, and [...]  95% of the time it works. Okay. {...likely transcription errors...}  with this if it's easy to do.
+--- --- --- --- --- --- --- --- ---
+19.6s,28min	 It's easy to do. And the code is already on the tracking microscope. They literally just need to start a separate script to do it, because I don't want to damage the original script. Yeah, it's very pain-free. People are just not doing it because they don't have to. And you can always reproduce this post-hoc for every single animal. 
+DB: Oh, yeah, gotcha, gotcha. But just to read out some things,
+--- --- --- --- --- --- --- --- ---
+40.8s,28min	 I see that the axes [range on] the y is from 5,000 to 30,000. The x is from negative 70,000 to negative 50,000. 
+[OP]: Those are coordinates that are not supposed to be trusted, because those are stage coordinates. They change. Basically, it's all relative, right? So the reference point changes each time
+--- --- --- --- --- --- --- --- ---
+2.5s,29min	 you start the stage controller. So only the relative change here makes a difference. Makes sense. And the title, well, that's the time. And then duration of behavior equals 16.27 minutes. 
+[OP]: And that jives with it. I mean, if I'm not mistaken, it's in roughly 100 volumes, 100 loops, as it's called in the table, occur in one minute. And that roughly jives with the 16.25 minutes on the top.
+--- --- --- --- --- --- --- --- ---
+24.2s,29min	 [OP]: The reason why this is longer than 16 minutes is because we have a few seconds before. Basically, this is from the behavioral imaging. The behavioral imaging starts a few seconds before the confocal, and we terminate it a few seconds after the confocal recording. The reason being that it's the behavior computer that receives the timestamps from the confocal computer. So in order to have the full information, it needs to start earlier and finish later.
+--- --- --- --- --- --- --- --- ---
+45.5s,29min	 DB: OK. Now, one other question on this, because I'm sure that given the historic, well, it's not historical yet, the headaches with the confocal that have occurred and since, thankfully, been treated. I'm sure you could give a whole lecture on this. But briefly, you referred to trigger-trigger logic.
+--- --- --- --- --- --- --- --- ---
+5.8s,30min	 Could you give a brief explanation about that with the setup? 
+[OP]: That's mostly impulses, right? They're just like electrical voltages being sent from one, one piece of hardware to the other piece of hardware. They're very digital. There's no analog information in there. It's not graded. So it's either all or none. 
+DB: But in this case, I suppose, well, I don't
+--- --- --- --- --- --- --- --- ---
+26.6s,30min	 expect you to remember exactly what's in reference a couple minutes ago. But could you give us a sense of what was triggering what?
+[OP]: It's the confocal computer that sends a signal. So the confocal computer has a software called NIS Elements. The software would send it. It triggers the cameras.
+--- --- --- --- --- --- --- --- ---
+47.5s,30min	 And the cameras would send triggers to lasers. So now that's all. It all sounds like it's controlled by the confocal computer. But interestingly, the software does not keep a very fine-grained timestamp of these things. Information is very coarse. And obviously, it does not know about the existence of the behavior tracker.
+--- --- --- --- --- --- --- --- ---
+10.2s,31min	 So in order to have the timestamp information tracked to a high floating precision that has the behavior, the behavioral component in mind, the easiest thing to do is to have the confocal computer send over signals every time the camera is triggered. So those timestamps are part of the behavioral H5 files.
+--- --- --- --- --- --- --- --- ---
+32.2s,31min	 There's a separate group for it that contains that information. 
+DB: Great. OK. So that explains the plot and the title. But there are some bullet points here. If you could walk down them.
+[OP]: So I try to remember which side the worm is mounted on during the recording. Now, other people probably do it differently. So each person has their own trick of remembering whether the worm is lying on its left or lying on its right.
+--- --- --- --- --- --- --- --- ---
+53.2s,31min	 So I wouldn't say that this makes too much of a difference. And this is just saying ventral cord on top [...] when the head is facing left. So I try to remember which way the worm is on by looking at the image on the confocal when the worm's head is facing left. If the ventral cord is on top, the worm is lying on its right and otherwise is lying on its left. But that's just my way of remembering.
+--- --- --- --- --- --- --- --- ---
+13.3s,32min	 Other people do it differently.
+DB: And you also note one row of mature eggs. 
+[OP]: So the worm looks like this. This is the worm with uterus. These are developed embryos. Worm eggs. So the way I select my worms is to always have them have a few eggs in there. Now, other people do it differently
+--- --- --- --- --- --- --- --- ---
+36.5s,32min	 depending on their question. For example, once upon a time, there were recordings being made where they want to capture the worm laying eggs halfway through the recording. In that case, you basically need the worm to have a lot of eggs so that it has a high probability of laying one or two or three eggs during the recording. So those people are going to select different kinds of worms. This doesn't generalize, is my point.
+--- --- --- --- --- --- --- --- ---
+56.7s,32min	 DB: I suppose while this is probably getting more into the weeds of the actual experiments, just to tie up the point, would it be fair to say that the one row of mature eggs selects worms that have typical worm? Would that be fair? 
+[OP]: Yeah. 
+DB: So that's the question. I think the question is, would the worm actually have typical behavior?
+--- --- --- --- --- --- --- --- ---
+20.6s,33min	 [OP]: And the answer to that question is, I think the answer is, it would probably have typical behavior. 
+DB: And by that, I mean, this is in contrast to the example you just gave, where I'm assuming that if they have a bunch of eggs, that their behavior is going to be more akin towards egg laying behavior if there's such a template. 
+[OP]: Yeah. 
+DB: OK. 
+[OP]: That sounds about right. The other thing is that it's actually pretty hard for a human to disambiguate late teenagers
+--- --- --- --- --- --- --- --- ---
+42.0s,33min	 from young adults. So my way is just to use eggs. I mean, I'm not saying that the worm has a lot of experience in that. But I'm just saying, it's a little bit of a personal thing. This is obviously personal to my experiments. That would be generalizable. 
+DB: It's starved for how many minutes? 
+[OP]: The way I encode this is zero is like, whether I have pre-starved it on a separate plate. Five is how much I've rested the animal on the imaging arena.
+--- --- --- --- --- --- --- --- ---
+2.5s,34min	 OK. So this is the second bullet here that says, starved for zero plus five minutes. Yeah. OK. And then the lines that follow this are the time points. And sometimes the worm would coil up, in which case the tracker might fail, and we would lose the worm for a few seconds. If we lose it for too long, let's say like there's 20 consecutive seconds of empty tracking,
+--- --- --- --- --- --- --- --- ---
+22.5s,34min	 then there's no reason to keep the animal. I would just terminate the recording and go to the next one. But if we lose it for like one or two or three seconds, I generally don't care, because we can interpolate those time points. 
+DB: Gotcha. Is there anything more to be said for those bullet points? Otherwise, I might just read them off for record. 
+[OP]: I think that's probably all. I would like to,
+--- --- --- --- --- --- --- --- ---
+46.3s,34min	 while you're recording my voice, emphasize that basically all recordings made before 2025 February had the room light being on, because the older camera doesn't care about room light. Now from February onwards, I think room light makes a difference to image quality, mostly
+--- --- --- --- --- --- --- --- ---
+8.2s,35min	 contrast. So we turn the room light off during the recording. And I only keep track of whether I have lights on or off a few days in the beginning of February. Otherwise, it's always assumed to be on before 2025 February and always assumed to be off from 2025 February onwards. 
+DB: Makes sense. 
+[OP]: And then immobilization is a description
+--- --- --- --- --- --- --- --- ---
+28.7s,35min	 of whether it took me a long time to immobilize the animal. Because sometimes these immobilized fluorophores are going to be very bleached if it took me a long time to immobilize and find the worm. 
+DB: For corresponding with [...] the voice recording, this is the last bullet point we're looking at. It happens to be below the image.
+--- --- --- --- --- --- --- --- ---
+49.4s,35min	 Now I understand that the presence of the image is specific to you. But is there, does that typically go last in your notes? 
+[OP]: It typically goes last in my notes. Other people might not keep track of this. Because if it's a very difficult immobilization, they might just let the animal go and not make the immobilized recordings.
+--- --- --- --- --- --- --- --- ---
+13.1s,36min	 So I'd like to keep track of whether I have to try multiple times to immobilize the animal, in which case I usually step up on the laser intensities for the immobilized images. 
+DB: OK. So if we could scroll back to that first image. And I just want to read down some of the free text that you gave a nice summary of. But I just want to have it correspond on record. So you mentioned we went through line by line the first three
+--- --- --- --- --- --- --- --- ---
+34.1s,36min	 bullet points, which were ventral cord, et cetera. That's the first bullet point. Second bullet point, ["starved for..."], et cetera. Third bullet point, "lots of turns". And then from there down, it says the following. The fourth bullet point is lay two eggs. Tilde T equals 30. I'm assuming that [tilda means] approximate time, 30 seconds. The bullet point after that says laid another few eggs
+--- --- --- --- --- --- --- --- ---
+54.5s,36min	 in the next four minutes. Bullet point after that says lost worm for approximately five seconds. Tilde T equals 900. And to be clear, here it said the actual syntax is tilde five. I'm interpreting that as approximately five. And then [the person I'm talking with] is nodding along.
+--- --- --- --- --- --- --- --- ---
+16.0s,37min	 Following bullet point says lights on. And that's to the point that [the person I'm talking with] raised about the change in procedure. And then after the very nice plot that [they person I'm talking with] includes, it has the final bullet point in this section say smooth mobilization. So that is the first worm on this Google Docs sheet. And the name of these worms, by the way, I think you gave it a name is date, time, and then train,
+--- --- --- --- --- --- --- --- ---
+40.6s,37min	 correct? Could you say that again? [...] to identify which worm this is in regard to the files that are pumped out?
+[OP]: So this is the first 10 characters is date, and year, month, and day. The last one is not time of the day. It's which recording.
+--- --- --- --- --- --- --- --- ---
+5.1s,38min	 So the reason why this one starts at 04 instead of 01 is because the first three recordings just happened to not be useful. Or they were made for other purposes, such as, calibrating the intensity of background, for example. 
+DB: Would it be correct to say that across the entire lab, there should be no two worms that have the same day
+--- --- --- --- --- --- --- --- ---
+27.6s,38min	 and last number? 
+[OP]: Terrific question. It was the intention of to create the scheme in such a way that no two recordings are the same. But because the confocal is used by more than one person on a single day. And they're not aware of each other's presence. So it has already happened at least once, to my knowledge,
+--- --- --- --- --- --- --- --- ---
+48.9s,38min	 that two users both started with something like one. So there's at least one instance where the recording is not unique in its name. 
+DB: And that's one of the reasons I brought up. I figured multi-people sort of thing. So understanding that that's the scheme with the sort of flaw,
+--- --- --- --- --- --- --- --- ---
+9.9s,39min	 is it correct to say that, in-house, the way we identify them still continues to be with this method, at present, at least?
+[OP]:  Yes. You can assume that within the same project, all of these are unique. If the imaging personnel did a good job keeping track of the files. So if within the same project, you see more than one files with the same name,
+--- --- --- --- --- --- --- --- ---
+32.6s,39min	 that's a problem with the project manager, quote-unquote. 
+DB: But there's no ongoing effort to make sure that different project doesn't have conflicting, or different data UIDs. I'm glad we had this discussion. And I hope you don't mind me mentioning it while this is recording: [...] so part of the impetus, of course, of having this discussion is not only for my own information,
+--- --- --- --- --- --- --- --- ---
+54.0s,39min	 but more generally to have record of how we're recording things in-house. And getting the, I mean, while one could imagine that this sort of basically timestamp-based identification can cause issues, getting an actual confirmation that it has caused issues is a whole other thing that I'm not sure that was on my radar specifically prior to now.
+--- --- --- --- --- --- --- --- ---
+14.7s,40min	 I mean, I can look at that and think there's probably better ways to name worms. But again, this is one of the reasons why I'm glad we're having this conversation. Because I'd imagine that in the purview of things that [...] was considering for this, that might be one that was implied, but not explicitly mentioned to me until now. 
+[OP]: Yes, not explicitly. Both [...] and I were concerned with it at some point.
+--- --- --- --- --- --- --- --- ---
+35.4s,40min	 And then we stopped being concerned because has never actually happened before. Then [...] it was only brought to my attention very recently that there was a single instance where there was an overlapping. Then [...] called it when he was making World Wide Web. And he checked with me. And I was like, oh, OK, that makes sense. and I were recording on the same day. We're not aware of each other. OK.
+--- --- --- --- --- --- --- --- ---
+58.2s,40min	 DB: So I can tell that you probably want to move on. That makes sense. But as a hint [of part] that I want to come back to, you mentioned World Wide Web. Because presumably that has maybe not as much detail as this. [...] If ultimately this discussion - which is probably not going to fit today - but continuing discussions leans towards merging things together
+--- --- --- --- --- --- --- --- ---
+18.6s,41min	 or organizing it more broadly across people, it seems like building off of not only this Google Sheet, but what [the Worm Wide Wed] has would make sense. 
+[OP]: Yes. The reason being that, first of all, already solved some problems once. You shouldn't have to solve the same problem again. And more importantly, the things that exist on World Wide Web are things that actually went through.
+--- --- --- --- --- --- --- --- ---
+40.1s,41min	 {NOTE: likely transcription error} This data set just got found to help describe the error. All that is right now would have been wrong. But it happened in this Try toánhlines way and where Google Sheet can help you many times. So you can see this last part of the screen in another slideshow. If you have watched my minutes on Light Hodling, and you my job, I will also actually beest in the next about how you can find out of the data here, we kind of yell you in a way that's
+--- --- --- --- --- --- --- --- ---
+0.1s,42min	 unable to be figured out, that it just doesn't work very well in Microsoft Word at this moment. So don't worry. You'll be able to find the rest of the�로 Because the numbers you've got will help you. OK. [....{likely transcription error}...]  So they contain overlapping information, but those are not identical information. 
+DB: Gotcha. 
+[OP]: And there's not too much to actually understand about the second animal, given that you actually
+--- --- --- --- --- --- --- --- ---
+23.3s,42min	 already went through the first one. The only thing that I want to bring to your attention is that you see that laser [intensity] can change pretty dramatically from [strain to strain], because I was doing this intentionally to match the image quality of 1212 to image quality of 702.
+--- --- --- --- --- --- --- --- ---
+43.8s,42min	 DB: Yeah, those are the strain numbers. And how did you determine those [intensity] numbers? Did you do that based on prior worms that you experimented with? 
+[OP]: Yes. 
+DB: OK. So the reason I ask is because here we just have a single worm listed, and we have these nice numbers.
+--- --- --- --- --- --- --- --- ---
+5.7s,43min	 I'd imagine that if this was [...] empirically fit, then it would be on other worms that are not shown here. 
+[OP]: Oh, that is a fair assumption, but it's not quite true. So the reason why I stumbled upon these numbers was because I knew that when [...] was making recordings of GFP animals, so TOLTOL is the GFP animal,
+--- --- --- --- --- --- --- --- ---
+28.3s,43min	 because GFP is a lot brighter than GCAM, because GCAM requires calcium to bind to the GFP, right? It's probabilistic. Whereas for the original GFP, it's always shining. And the light is exciting the fluorophore. So it basically has a much higher probability to emit fluorescence. That's why in order to get images of the same brightness,
+--- --- --- --- --- --- --- --- ---
+49.0s,43min	 you need to basically reduce the laser intensity. And [...] has already done this once for a different strain that is pan-neuro GFP. So I designed these numbers based off of prior information. 
+DB: Gotcha. 
+[OP]: And because both. I have to scroll all the way back. Both of these lasers, they would excite the red.
+--- --- --- --- --- --- --- --- ---
+11.1s,44min	 So if I turned down on the green one, I would step up on the red one just so I compensate for the loss of excitation on the red fluorophores. 
+DB: OK. Does that change the photobleaching in any way we know about? 
+[OP]: Yes, it definitely does. So different fluorophores, they bleach at different rates to begin with. So you would imagine a single exponential decay is not the best way to fit it, but that's what 800 times can give us.
+--- --- --- --- --- --- --- --- ---
+31.1s,44min	 And [...] worked on some other ways of averaging across animals. And like getting the fluorophore thing covered. But that's a separate story. With different laser intensities, bleach rates will be different. And that's fit empirically in later parts of the nerve. 
+DB: And [...] was our post-doc.
+--- --- --- --- --- --- --- --- ---
+52.4s,44min	 What was [their] last name again? 
+[OP]: [...] was a technician. So [they were] imaging basically all of the pre-neuropile animals in the [{likely transcription error; human inferring here} [...] paper]. [They were on their] way out of the lab. And I believe [they] contributed to one or two neuro-parallel recordings before [their] last day. I took over after [them].
+--- --- --- --- --- --- --- --- ---
+13.5s,45min	 So we together tried these combinations of filters. Actually, the first design came from an undergrad that worked with me three years ago, I guess. 
+DB: What was [their] name, do you recall? 
+[OP]: [...] [They were] a physics major back then. I'm not sure if [they] changed [their] major later. Basically, we came up with the set. And then [...] experimented on the laser intensities.
+--- --- --- --- --- --- --- --- ---
+33.6s,45min	 I took over and fine-tuned it a little bit more. So it should be relatively stable after 2022 June, I think. And the spreadsheet, to my knowledge, the first time it existed was around 2022 May.
+DB: OK.
+--- --- --- --- --- --- --- --- ---
+56.0s,45min	 So quick question. I probably want to follow up on the prior to 2022 May on what records do not exist. But I'll look at this one. OK. OK. So I see that the first two rows for this work. The second one.... 
+[OP]: Yeah, for the second animal have the numbers 11 and 12. So that's continuing from the prior ones. 
+DB: I'm assuming that's just like literally order of recording.
+--- --- --- --- --- --- --- --- ---
+16.9s,46min	 [OP]: Yeah. 
+DB: And then if we scroll down, the rows don't have numbers. Should I just infer that it's 13, 14, 15, 16? 
+[OP]: So at least I don't do things this way. If I leave things empty, it means that those recordings do not exist. And the reason being that this immobilization is very difficult. I think [by] the time I tried a few times, the worms is probably very bleached.
+--- --- --- --- --- --- --- --- ---
+37.7s,46min	 I gave up after. 
+DB: I see. And to read off the bullet point you just read, which is the last bullet point after the image for the second worm, "difficult immobilization, comma, gave up after all red". And reading that, it jives with everything you just said. 
+[OP]: Yeah. Now, I'm not sure if every other imaging person does things the same way. Sure. Because I definitely do not want to make a mistake here:
+--- --- --- --- --- --- --- --- ---
+57.9s,46min	 If I assume this is 13 and this is 14, but somehow [when] I image, I swap the order, which sometimes happens. And I'm not sure if I remember the exact correspondence. I think I'll never remember it. But there must be people who think that they would remember. And there must be people who always follow this order in such a way that they don't have to type in these numbers anymore, because they do it very stringently.
+--- --- --- --- --- --- --- --- ---
+19.2s,47min	 They always follow this exact order. That would be another reason. 
+DB: Right. And to connect this back to the mechanical process that ANTSUN follows, when we use ANTSUN, we have to specify a couple of different files at the beginning that correspond to the various different imaging that we do during this freely moving, then immobilized process. And the way that we know which file is which
+--- --- --- --- --- --- --- --- ---
+40.7s,47min	 is referring to a sheet like this, because the files themselves are called something like date underscore 11, date underscore 12, something like that. Correct? 
+[OP]: Yes. 
+DB: OK. Is there any refinement to what I just said we'd like to [add]? [...] But basically, the point of date and then number [is] that were [it] not for a sheet like this, we wouldn't know which number is what?
+--- --- --- --- --- --- --- --- ---
+1.0s,48min	 [OP]: Yes. That's why this is important. Yeah. There's literally no other place that has this information. So I built this information in my preprocessing code for post-2025-02 data sets. But it's optional. You can skip that part if they don't want to include that. Because I didn't know you were going to work on this a lot. So I was like, I've got to build something in so that we solve future problems.
+--- --- --- --- --- --- --- --- ---
+23.5s,48min	 But I cannot solve historical problems. 
+DB: For record, and I don't mind saying this on recording, while elements in this regime have issues with data have been brought to my attention in some general sense, I don't think the exact scope has been pinned down by [...]. [They] didn't know about it either. {transcription issue: unclear what pronouns or names are said here} to figure it out as things go.
+--- --- --- --- --- --- --- --- ---
+45.7s,48min	 Because before, it used to be that [{likely transcription error; next word inferred} [...]] was the only person who was imaging, holding imaging worms. I just happened to be using the confocal for other purposes. So when we had a single imaging person, none of these matters, because it's already standardized by [...]. Now, I was the second person. And after me, there were so many other people. Yeah. And I am just not a very strong leader or whatever.
+--- --- --- --- --- --- --- --- ---
+7.7s,49min	 I just don't set standards when I don't have to. And also, people invent their own ways anyways. So now we have this issue of things not being terribly standardized. And it used to not bother anyone either, because each imaging personnel knows about their own data. So whatever, it doesn't matter. Someone knows the information. But now we have people like [...].
+--- --- --- --- --- --- --- --- ---
+30.2s,49min	 They came in to just pull everyone's data together to do some modeling. That's why this all of a sudden emerges as a problem. 
+DB: Yeah. Yeah, I figured. I mean, for my part, even prior to [...] mentioning it as something we'd like to address --- I mean, the exact impetus was one issue [...] had with data being overwritten, which,
+--- --- --- --- --- --- --- --- ---
+52.0s,49min	 on the computer science end, is largely a different issue than what we're talking about, but at a high level in terms of data management connects. And that's where [...]'s coming from. That and also an issue that I think you and I have talked about. And then you actually ran into where data was moved. 
+{Not sure which speaker is talking}: Yeah. And we [...]  things broke. So [...]  that is so even prior to those very concrete issues that broke the Anson pipeline, I mean,
+--- --- --- --- --- --- --- --- ---
+15.5s,50min	 even I myself trying to do some analysis of the nerve spikes was like, what is this data I'm looking at? [Where] do I find out? I know they're from a worm, but I don't think that's very much information. I'm not a biologist, but I feel like I should know something about the biology of the worm that I'm dealing with. 
+[OP]: So it just so happened that the problem that we were trying to solve around Christmas time, 2024, was a solvable problem just by me downloading all of the data
+--- --- --- --- --- --- --- --- ---
+35.6s,50min	 sets from the server, putting them back on NIS elements. And I think I've seen it sometimes. I can visually tell which one is which. And [...] had some supplementary information. He was like, there is a chance that some of them are incorrect. But then when I visually verified, I was like, OK, vast majority of them is correct. But you would imagine that this is a much harder problem
+--- --- --- --- --- --- --- --- ---
+57.0s,50min	 if, let's say, [...] didn't keep track of which worm is male and which one is hermaphrodite. Because when I look at those images, I cannot tell which is which. I'm not sure if anyone else could, to be honest, because they look very, very similar. So if this information is lost, it creates some problem that a human cannot solve, given some context. Whereas the ones that we were trying to solve back then
+--- --- --- --- --- --- --- --- ---
+18.7s,51min	 was at least a problem that a human can solve. 
+DB: Noted. Some again at the weeds, but just very briefly, while I can appreciate the fact that just looking at these small worms that move a lot in very weird ways makes it hard to figure anything out, when you're saying it was hard to identify hermaphrodite versus male, are you referring to from the confocal images or from the NIR?
+--- --- --- --- --- --- --- --- ---
+39.9s,51min	 [OP]: From the confocal, and sometimes also from the NIR. The reason being that our NIR image, the field of view does not cover the entire worm. So the tail of the worm, which is the most telling of its biological sex, is not often in the field of view. So if there happens to be a worm that never coils around itself
+--- --- --- --- --- --- --- --- ---
+1.8s,52min	 and has the tail part brought to the field of view, it's actually pretty impossible to just look at the earlier segment of a worm and know if it's a male or not. At least I can [not] do that. OK. Now on the note of NIR, of course, we keep those recordings along somewhere with the confocal. Stop me if we talked about it, but we didn't.
+--- --- --- --- --- --- --- --- ---
+21.9s,52min	 Yeah, so where are the NIR images? How do you know they correspond to these things? So usually the NIR video, which is a H5, is a file. And these are ND2 files. That's just because they're image[s] . The confocal image is an ND2 file, so. Yes. And then the behavior one is a HD5. So usually the HD5 behavioral video
+--- --- --- --- --- --- --- --- ---
+43.0s,52min	 would have the same name as the freely moving ND2 file. I think you basically have to make it that way for ANTSUN to run. So I would be very surprised if people change that. So basically there's some software we have implemented in the pipeline that ensures that they have corresponding names. And in terms of the memory, we have a lot of data. Yeah. 
+DB: So that's a good point. And then the NIR image, when being placed together,
+--- --- --- --- --- --- --- --- ---
+8.1s,53min	 that's just, I mean, obviously these files that you've recorded with the confocal, as well as the NIR files initially, are on the imaging computers. And then someone has to manually move stuff onto one of our data storage accounts. Yes? 
+[OP]: Yes. Yeah. OK. Is there anything else you think we should touch on about this
+--- --- --- --- --- --- --- --- ---
+30.1s,53min	 right now? 
+[OP]: I think I would encourage you to also collect the same set of Google Sheets from [...], because I think there's a chance that [they] modified the format of this, such as making each animal a new page and breaking this. So if you would start coding already for things that overfit
+--- --- --- --- --- --- --- --- ---
+50.8s,53min	 to the way I sort these information, there's a chance that the code won't generalize to those ways, just for very small nuances, like separate pages and stuff. And then [...], I think, also used the same one. And [...] also used the same ones. But I can't guarantee that their formats are exactly the same. I think all of the columns are pretty much kept intact.
+--- --- --- --- --- --- --- --- ---
+11.0s,54min	 But then the free text part, I think everyone does it very differently. I don't think everyone names their first animal as first animal. Maybe they do animal one, animal two. I don't know. And also, I am not sure if these grids are always filled with numbers. That's the first column. If the . . . If it's filled with numbers, then it's not.
+--- --- --- --- --- --- --- --- ---
+31.2s,54min	 But if the number is different, then it's not. And so you have to figure that out. And then there's some other things, like the number table. So I think this is probably the most important part. And if it's different, user to user, you might want to figure that out sooner or later. Check that. Yeah. 
+DB: Let's see. Oh, one thing to touch back on is the history of the {likely transcript error- have written here "SOAP", probably meant to say "sheet"}.
+--- --- --- --- --- --- --- --- ---
+57.9s,54min	 If I recall from the dates you said, prior to, was it May 2022, there wasn't this Google Sheet process. And by recent I mean February of 2025, you standardized a couple of things further at a high level, that's right, right? 
+[OP]: Yeah. 
+DB: Okay, so I'd imagine there could be a conversation in themselves.
+--- --- --- --- --- --- --- --- ---
+23.0s,55min	 Could you give me a sense of what organization, if any, there was prior to May 2022? 
+[OP]: So there was organization. It's just not any organization that I was part of. So I think what happened was that, so you had free text documentation of every single freely moving worm that [they] imaged.
+--- --- --- --- --- --- --- --- ---
+54.7s,55min	 Not all of them were put through [ANTSUN]. Some of them failed because [they] was trying new imaging parameters, for example. And the ones that did go through [ANTSUN] and got analyzed ended up on Worm Wide Web. Yeah. But because those ones do not have immobilization. So they were not immobilized recording. In fact, it was a totally different [strain] that doesn't even have these multicolor fluorophores. So you would imagine if we only have things like 04 and 11 here, there's not really a strong reason to [...]  have the rest, to have this Google sheet even.
+--- --- --- --- --- --- --- --- ---
+27.8s,56min	 [they] kept everything, to my knowledge, in free text. And [...], they don't compile them into some form of a Google spreadsheet. I think [...] shared it with me at some point. Yeah. [...] But that sheet is not 100% accurate, so I don't know how important it is to even find it. Also, people are not going to use those recordings as much as they use the ones that have these documentation just because there was not a good way of genetically identifying the neurons from before May 2022.
+--- --- --- --- --- --- --- --- ---
+55.1s,56min	 DB: Yeah. Remind me, when did Neuropal come out? It was 2019, wasn't it? 
+[OP]: Yes. So it was a convoluted story. Oh. We had the strain ordered when the paper came out. But we're not using it for a long time because I think - so I wasn't there when [...] tested [it]. What I heard from [them] was that [they] tried to use the brightest Neuropal transgene, thought the worm had
+--- --- --- --- --- --- --- --- ---
+19.3s,57min	 it on [their] bench, looked at the worm and be like they're all zero there's no way I can do any experiments with them. So [they] basically [paused] with using the Neuropal transgene and basically back then they were just trying to get some sort of traces out of neurons and wasn't thinking about genetically identifying any of them. But then later on they realized that if there's no genetic identity, it's actually really really hard to bridge information across
+--- --- --- --- --- --- --- --- ---
+41.7s,57min	 animals. Because you can't infer anatomy from where the neuron is for worms unlike mammals. So it was like all of a sudden more important to have the genetic identity. And [...] somehow came across someone in Boston, I think [...], that had this cool immobilization method by cooling
+--- --- --- --- --- --- --- --- ---
+3.0s,58min	 that's for the imaging of synapses or dendrites, one of them. So if they could immobilize it to such an extent that they could image such fine-grained details it must mean that we would be able to image the nucleus of neurons, right, because that's much larger. So that's why [...] sort of had this confidence that it
+--- --- --- --- --- --- --- --- ---
+30.0s,58min	 would work for us to collect neurons. But it became this hormone-intensive comparative signaling which allowed for him to see, and [because] 1993's Neuropal images, {Note: transcript issues in rest of line} those cursiveáng nailings of the brain. So we were able toonnen a reflexive systematic humans and we learned that, I would imagine, at certain points is that hippocampal etiology, but also chronic
+--- --- --- --- --- --- --- --- ---
+55.3s,58min	 weekends such as so we can ask fazemales to identify and train our saurian neurons and skin cancer. used in lab would be on the order of years. Oh so it just so happened that we got very lucky. So I think the gap between [...] hearing about the cooling and mobilization and this scheme coming into some form of existence, the gap was like one month. Oh. Yeah so it was like
+--- --- --- --- --- --- --- --- ---
+16.5s,59min	 really impressive back then. 
+DB: I'd imagine that there were a lot of thoughts on the [shelf] that came together like that. Interesting time. Cool. So let's see anything else to note? I mean I suppose the only other thing is like that some of these worms have less free text than others. I'm
+--- --- --- --- --- --- --- --- ---
+40.0s,59min	 not sure there's anything to say about that. 
+[OP]: No it's just that some of them are less interesting or like did less weird things than others. 
+DB: I see.  [...]
+[OP]: And then I also don't delete the empty ones. So the empty ones are just never being recorded. I'm not also not
+--- --- --- --- --- --- --- --- ---
+2.0s,0min,1hr	 sure if other people do the same. 
+DB: Okay so basically you copied a template form that had four animals listed. On this particular one you imaged three and you left the empty fourth and you're warning that "hey some people you know do delete the empty ones. So just be aware of that." Gotcha. Cool. So before I stop this recording is there anything else that you would like to note?
+--- --- --- --- --- --- --- --- ---
+28.6s,0min,1hr	 [OP]: I would like to know that the name of this Google sheet that we're talking about is 2025-02-03 space capitalized SWF702 space starvation. 
+DB: Cool. So by the way for record do I have your to confirm I have your permission to have made this recording? Do I have your permission to convert it into text in some way that's not overly public? 
+[OP]: Yeah. 
+DB: Okay.
+--- --- --- --- --- --- --- --- ---
+55.9s,0min,1hr	 I will probably touch on this later. Okay. So I'm going to have to do a little bit of research base with you again before I do it but do you have a rough feeling of whether or not you would mind that conversation translate to text shared with other people in the lab? 
+[OP]: So I think within the lab I'm totally fine. The original voice is probably just between you and me and the transcript of this as long as it doesn't contain like super specific information about which person does what I don't mind because
+--- --- --- --- --- --- --- --- ---
+16.9s,1min,1hr	 a lot of it is my recollection of what other people did and it sort of was the beginning of my time here. So I'm not sure if I remembered everything 100% like who does what at exactly when and a lot of them are secondhand information anyways but then I think every description that I made about how this Google sheet came into existence is probably accurate. 
+DB: Okay. So how about this I think during
+--- --- --- --- --- --- --- --- ---
+40.6s,1min,1hr	 this conversation there were a couple names that were mentioned a lot of people who you know generate the data or did like 20 blocks on it but what I can do is if I get this converted to a transcript I can run it by you [...] to see if you're like let's redact that part - and you're always welcome to redact part. 
+[OP]: Yeah also that information is just not important because [...]  if you ask [[...] who] should
+--- --- --- --- --- --- --- --- ---
+0.9s,2min,1hr	 still be in this building but like [they're] not gonna remember every single detail out there neither would I so like the names are just like not as important as the actual. 
+DB: Well I mean the the issue is that practically speaking we still have folders called with [their] name like [their] home directory so it would actually help out with [...]  if we have to dig up anything. Um I would be
+--- --- --- --- --- --- --- --- ---
+24.4s,2min,1hr	 surprised if [their] documents anything on the server [they] probably does most of [their] documentation on Google drives.
+DB: Sure but you can still I mean [them] specifically aside the notion of names that being relevant could be um useful but whatever the case is I can run a transcript by you when it gets pumped out. All right so this is the [D Bayani]  on March 3rd 2025. I'm going to stop [and save] this.
+

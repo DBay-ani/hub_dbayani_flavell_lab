@@ -1,0 +1,602 @@
+26.0s	  [D.Bayani] with [...] on March 14th, 2025. It's currently 1.28 PM, VST, talking about [...]. And I'll ask you again at the end of this, but to confirm you don't mind this being recorded.
+--- --- --- --- --- --- --- --- ---
+55.0s	 Yeah, that's fine. Okay. Now it's being recorded. Sure. Alright, so, um, where to start? So first off, let's, uh... Okay, I think before you start anything, I use the JupyterLab web browser thing, so this is the terminal that you're using, just to clarify what I should be using.
+--- --- --- --- --- --- --- --- ---
+19.0s,1min	 Yeah, yeah. The high-level process that we're gonna talk about is following. First we're going to talk about how to, um... Well, first off, a little bit of setting up the docker, which you're probably not going to have to do much of, but I'm not gonna go over it yet, in case you need handy reference, or in case it becomes handy at some point. How to start it, access it, and then use JupyterLab through that.
+--- --- --- --- --- --- --- --- ---
+40.0s,1min	 Now those first couple steps do involve using the terminal, but it's not too much, hopefully. Mm-hmm. And most of the commands involved, um, you should be able to just copy and paste. Is this like Windows terminal? Or, like... This is Linux. In my computer, it would be like, just like, the Windows terminal? Or...
+--- --- --- --- --- --- --- --- ---
+9.0s,2min	 Well, if you're SSH-ing with the server, which is what we're about to do... Okay. Then, um, this would still be a Linux thing. Sure. And, I mean, you also use Mac, correct? I mean, not for your primary work, I guess, but your lab work. Yeah, I would be primarily using this on the lab Windows terminal. Okay. So, the only thing that I could, the other thing that would be a modification is that, um, do we need to see how to use SSH port binding on, uh, Windows terminal?
+--- --- --- --- --- --- --- --- ---
+33.0s,2min	 Mm-hmm. With that, um, I'm assuming something that... Do you want to look it up quickly, or... Yes, sure. I can look it up for you, even. Okay. Uh, I just don't have a Windows machine to test it. Yeah, yeah, sure, sure. You know, right. Mm-hmm. Um, anyway. So, with that... Uh... Uh, all set. Mm-hmm. Where to start? So, first, I'm going to see if some files that I was copying into your account finished.
+--- --- --- --- --- --- --- --- ---
+56.0s,2min	 They should have by now. Uh, but in the off chance they're not. I made a couple notes that I'm going to be referring to back and forth here. In the off chance that they're not finished copying, they will probably go in my account, and I can start showing you stuff that way. Mm-hmm. And, um, I'm going to suck things up, probably, for you on the... C2, 3, and 4. Mm-hmm. But to check, you were primarily interested in using 3, correct?
+--- --- --- --- --- --- --- --- ---
+17.0s,3min	 2 and 3. 2 and 3. Okay. Uh, much... As far as I know, people don't use C4 for N, so that is my impression. Yeah, that seems like it. Okay. Um... All right. So, let's say, uh, C2, just for, uh... For the sake of things. All right. So, let's see. Uh, C2, just for, uh... For the sake of things.
+--- --- --- --- --- --- --- --- ---
+38.0s,3min	 All right. So, let's see. Uh, C2, just for, uh... For the sake of things. All right. Now, um... I was doing some other processing on C3. Um... C2 is fine. I also want to see... No, no, no. I understand. The copying of files that I wanted to see if they were doing... going was on C3. Um... So, if this takes too long to check up, I don't want to eat your time with it, but
+--- --- --- --- --- --- --- --- ---
+17.0s,4min	 if it's done, then it's convenient for us overall. Okay. So, let's see. Uh, C2, 3, and 4. Uh, C2, 3, and 4. All right. So, let's see. Uh, C2, 3, and 4. Uh, C2, 3, and 4. Uh, C2, 3, and 4. Uh, C2, 3, and 4. Okay. Yeah. It says they're all done. Um, so... Okay. Great. So... We need to talk a little bit about the fact that this is a very simple thing to do.
+--- --- --- --- --- --- --- --- ---
+45.2s,4min	 What I'm saying is, um... Okay. just the high level of what a Docker does and where are some things in it. And then I'll show you as we move on. So Docker you can think of as basically another computer that's running by software. And in order to give you a certain environment to work with inside of that
+--- --- --- --- --- --- --- --- ---
+8.8s,5min	 it uses containers. So one of the reasons why you're not going to have to be with setting up and some as much this time around is because when I set up for you you get a copy of this container that has it all established. And I think we've talked about it on quite a meeting so you probably probably already got to just there but that's part of it. Now we're not for the fact that I change
+--- --- --- --- --- --- --- --- ---
+29.8s,5min	 that you know I did extra work by default the docker would not have had access. So I'm going to show you how to do that. So I'm going to show you how to do that. So I'm going to show you how to do that. So I'm going to show you how to do that. Now the Docker does right I set that up for you. Now the Docker does right I set that up for you. Why am I even mentioning that? Well two reasons. First off there wouldn't be some parts of the Docker.
+--- --- --- --- --- --- --- --- ---
+51.8s,5min	 Hopefully not many, probably not ones you do very often but a few. But a few that if you save a file there it's only going to be in the Docker. We can show an example. The other thing to note is that the home drive directory. So whenever you use the servers probably are used to going into
+--- --- --- --- --- --- --- --- ---
+14.8s,6min	 your home directory and you have stuff there. What I just set up what I was copying was a folder that has various things in it that will be used by the Docker as your home directory. So to be clear about this well first to be concrete the path in
+--- --- --- --- --- --- --- --- ---
+40.6s,6min	 question here is store one trip or not for Docker FLZ. So on this machine on the native machine it's some path on store one. But in the Docker it's going to look like home trip or not. Well actually everyone in the Docker is called Docker user but you get the point.
+--- --- --- --- --- --- --- --- ---
+4.4s,7min	 The thing to know basically is that you say something to your home directory and then you're going to get a message that says you're going to need to do something. So if you have a Docker user and you're going to use the folder that you have on your home directory. Which may or may not be a good idea you should probably save it to your data or store one. But if you happen to it's going to end up on this path despite the fact that on the docker it looks like your home. And that also means that if you deal with like if you mess with this folder it's going to mess with your Docker. Right so if you find this and you
+--- --- --- --- --- --- --- --- ---
+31.2s,7min	 delete it you're going to screw up your Docker. Anyway with that all said. That doesn't change any of the file paths for like files that you have on like each of C2, C3 or whatever. That doesn't have like this font docker thing right. This is just to set up the docker. It's correct that this is just to set up the docker. The part where you're asking this doesn't change any of the file paths.
+--- --- --- --- --- --- --- --- ---
+53.6s,7min	 I think I know what you mean and I don't think there's something to worry about there. But let me check what could you give me an example of a file path. Like say like I have some answer. Some answer in directory and processing that has it's in C2 in data raw whatever date that shouldn't have anything to do with.
+--- --- --- --- --- --- --- --- ---
+15.6s,8min	 Well I mean to be clear that data might be you might be running stuff on C2 but the data itself is stored on data one, data two, store one. So you'll have access to data one, data three, data four, store one in your Docker. But you won't be able to see. As much of the host machine anymore.
+--- --- --- --- --- --- --- --- ---
+37.6s,8min	 And we'll give an example as a matter of fact. In fact let me give an example. So if you don't mind me going to your home directory right here. And let me just say make a file called hello world and then date. You see that here? In a moment we shouldn't be able to see that in your Docker.
+--- --- --- --- --- --- --- --- ---
+59.6s,8min	 Okay great. So I talked about these various file paths etc. That's fine. Just the high level. We'll deal with that more. But the next thing is well setting up a Docker container. The thing I mentioned right. So I don't expect you to remember this next part verbatim.
+--- --- --- --- --- --- --- --- ---
+25.6s,9min	 But just like something to store in the back of your mind in case it ever hiccups for you. User. So there is a service on the back end. It's the Docker service. And it's the thing that whenever you issue a certain command is actually what causes your container to start running.
+--- --- --- --- --- --- --- --- ---
+46.6s,9min	 Right? Most of the time you're not going to have to worry about seeing this thing on the screen that says like what's the status of this process running out of data. The only reason I bring it up though other than just like nice information is because it's possible. Very unlikely that like this process might die. Right? For whatever reason. The server goes into a bad state. What have you.
+--- --- --- --- --- --- --- --- ---
+7.6s,10min	 Anyway. If it dies you might start seeing weird errors when you issue the basic commands you expect to work. Right? Again I'm not expecting you to remember the details of this. But I just want to mention it in the off chance that it happens so that you get a sense of hey you know I should talk to David. But also hey this isn't like totally unheard of. Okay. Cool. So.
+--- --- --- --- --- --- --- --- ---
+28.6s,10min	 Um. But a bit. They don't care. passion. That's. The truth. You should at least try and help with that. You know. Yeah. That's what it is. So I would highly recommend that you go find them if not because it's not that easy to find about medically so to run a solution and then get our products out of this. Yeah. I don't know. When you discover. Right now, a problem come in like. I mean you go to any of those articles. Yeah. AWS core. Yeah. I don't know.
+--- --- --- --- --- --- --- --- ---
+53.2s,10min	 Yeah. All of them coming in really. Aksay you. Proxom. Aksay you. Yeah. So this is what. These. L Γ, it's. Zeddy, just call me out. couple steps I'm going to do in front of you just for your reference but if the sense of being more time than you want to take then I can probably show you an example my account to be concrete but basically I mentioned the docker container for general information those containers are based on what's called an
+--- --- --- --- --- --- --- --- ---
+15.8s,11min	 image why are there two steps well the image you can think of as the blueprint the container is the actual thing so for example you might you might know how to make a doughnut based on recipe but you cannot have multiple of those doughnuts I can have multiple containers based on the same recipe that recipe is the image
+--- --- --- --- --- --- --- --- ---
+52.3s,11min	 so I'm just gonna load in one that I prepared or the ones that I prepared for this that happened to be on store one material just take a moment to load this in so these are images that I prepared in the
+--- --- --- --- --- --- --- --- ---
+13.9s,12min	 past that Anselm etc on it I'm going them into your account usually it's fairly fast to do that this kind of like similar to it's similar to the dotdng file similar philosophy I think this provides a little bit more isolation than that but still you get
+--- --- --- --- --- --- --- --- ---
+34.7s,12min	 the idea the layers again this is probably more in the weeds than you care about so 90% of one talk about right now please feel free to like just repress the memory but basically you can make a series of changes to make an image right you might install one thing or a couple things
+--- --- --- --- --- --- --- --- ---
+58.0s,12min	 and say hey this is one image but then you might want to make another version of that that has more things installed right so the way the doctor deals with that for a variety of reasons and park the safe space is that instead of saving two completely separate copies of this thing where one is just put on top of the other it just says hey this is the first one is one layer and then the stuff you
+--- --- --- --- --- --- --- --- ---
+29.7s,13min	 did on top of it is the second layer you want to make the second one take that layer put it on top of the first one so it's done loading that part there is a second part to that that the next one shouldn't take quite as long [...]
+--- --- --- --- --- --- --- --- ---
+55.4s,13min	 [...]
+--- --- --- --- --- --- --- --- ---
+31.9s,14min	 but in the off chance it ends up being useful so that's loaded we'll get back to that in a second okay there's a third part to this by the way you shouldn't have to do this loading part again
+--- --- --- --- --- --- --- --- ---
+55.9s,14min	 I'll have to do it on the other machine as well I'll have to do it on the other machine as well I'll have to do it on the other machine as well I'll have to do it on the other machine as well so this is a little bit more complicated than the other machines for you but it's not a big deal so this is a little bit more complicated than the other machines for you but it's not a big deal I just want to give you a sense of this once but basically once that's done loading if we look at for example my account on c3 so this is yours this is mine and we say Docker Image LS-A
+--- --- --- --- --- --- --- --- ---
+18.1s,15min	 this is some of the stuff behind the scene each one of these is a separate image that's great those are the recipes that's the first part okay now we want to make some of those and that's why the containers come in and the container is the thing that you're going to be dealing with most of the time so all the prior stuff is like okay nice to know about kind of generally but this is the part where we start to talk about
+--- --- --- --- --- --- --- --- ---
+41.5s,15min	 commands that you need to know what it is. How do you know which image ID corresponds to what environment? That's a good question so in this case I know because well I made it but it is the case that there's also like nice metadata that goes with them a simple one is like when it's created so it happens to be the case that these are all building on top
+--- --- --- --- --- --- --- --- ---
+2.9s,16min	 of each other so you can see that hey the oldest one you know the newer ones built on top of all these other ones right if I wanted to know more about it and there's a docker inspect something like that maybe was docker image inspect something like that there's some command like
+--- --- --- --- --- --- --- --- ---
+27.1s,16min	 that but at a high level it's just recollection anyway so so there's this command which is about the images you don't have to deal with but then there's a similar command this is the one you do need to remember called docker container LSA why LS well you probably use that on the Mac so you're familiar with why the dash a by default docker would just show you the
+--- --- --- --- --- --- --- --- ---
+48.1s,16min	 containers that are currently running all right but right I have these add [...] here here's my amount right now so I'll like want to give that a turn so this last one it's okay I'm gonna take this one also use the have one that's running right now, I see that because it says status up. But I have a couple that are exited. So if I just say docker container ls, it only tells me about the one that's running. You're going to probably have to stop containers.
+--- --- --- --- --- --- --- --- ---
+10.8s,17min	 Similar idea to starting this off in your computer. So right now, you're using docker only for Anson processing, right? That's primarily the case. So say someone changes something about Anson, people should come to you and ask which docker image they should be using? Or because, or that's why I was asking, can I figure out seeing things like this is the latest
+--- --- --- --- --- --- --- --- ---
+36.6s,17min	 Anson version docker to use or not? Yeah, yeah, no, that's a reasonable question. So probably what would happen is, but one, I can always do it for you, but say you want to do it yourself. The process would probably be very similar to what we, that's still my account, I'm sorry. What we did over here, right? So, when I hit the tool docker to load the stuff I saved
+--- --- --- --- --- --- --- --- ---
+59.3s,17min	 to a file, I mentioned all these layers are being loaded in. Now your question is, okay, yes, I know how to load these, but which ones? And the short answer is in the case work, it's an update to Anson that you need to incorporate. I would make this file, you would load that, and then you would see which are the new IDs, and use that. Probably, even without you having to look,
+--- --- --- --- --- --- --- --- ---
+24.0s,18min	 what would happen is, I would prepare that image, say, hey, [you], please grab this. By the way, the ID you want to use is that one. Anyway, so great. We have all this stuff loaded. Now, the next question for you, this is your account again, is do you have any containers? The answer should be no, but let's confirm that.
+--- --- --- --- --- --- --- --- ---
+52.4s,18min	 No containers. So what do we do? There's a command. You don't need to worry about it, but we do need to modify it a bit. Just both for your general reference, but also because it's specific to you. It's a command that takes the recipe of the image and converts it to the baked product of the container. So, make container.sh.
+--- --- --- --- --- --- --- --- ---
+21.6s,19min	 So, ba ba ba ba. Again, this is just for your part. This is for your general reference, but I'm hoping that this part, if I mention it, will help make more concrete the fact that most of the things that you want are accessible from the Docker, but some of the things are specific to it. Basically, there's a bunch of commands here, yada yada, but you'll see that it specifies like,
+--- --- --- --- --- --- --- --- ---
+42.7s,19min	 hey, there's this one path on your host machine that inside your Docker, I want it to show up this way. But basically, specific path on your machine shows up this specific way on the Docker. Most of the time, it's set up so it looks the same way. I already mentioned how the home directory will be different.
+--- --- --- --- --- --- --- --- ---
+19.3s,20min	 Now, I just need to edit this so that the names are specific to you. So, store one [name 1], that should be store one [name 2], and that will show up on the Docker as a, as home. Yeah. Oh, actually, where did we put your home on this? Hmm. Here we go.
+--- --- --- --- --- --- --- --- ---
+50.5s,20min	 Yeah, this. Data one gets mapped to data one. Data three gets mapped to data three. Data four, data four. Store one, store one. That's the name of the container. This is the image.
+--- --- --- --- --- --- --- --- ---
+12.9s,21min	 Well, I've got to double check that's the right number. I promise it's not too much more general. I'll just go ahead and do that. More general information. Oh. That's fine. Right. I'm going to do image. This. Right there. Uh, ba, ba, ba, ba. So, it's that one. All right.
+--- --- --- --- --- --- --- --- ---
+39.2s,21min	 And let me just confirm by looking at my account that that is one that I'm using. Uh, image nine something. Yeah. Yeah. That should be fine. Okay. So, copy the most recent image ID to the command to make the container.
+--- --- --- --- --- --- --- --- ---
+0.2s,22min	 Uh. And would you prefer this container be named something specific or otherwise it's just going to be called container for Ansem in today's. Ansem. Timestamp. Okay. Should be good.
+--- --- --- --- --- --- --- --- ---
+21.2s,22min	 Uh, actually. Almost mounted here. So, your dropbox is. Huh? Yeah, I see that. Yeah, but I, I just want to confirm. Do you happen to remember? I can look. I mean, we're on your account so I can look, but I want to check. Um. I actually don't use the. I mean, I'm sure things get like all the time. I don't know. Probably it's called . I don't know. I don't know. I don't know. I don't know. I don't know. I don't know. I don't know.
+--- --- --- --- --- --- --- --- ---
+47.2s,22min	 I don't know. I don't know. I don't know. I don't know. I don't know. I don't know. Probably it's . Okay. Well, let's take a quick answer. So, uh, this is your home directory on the host machine. If I do ls notebook, we see stuff there. Uh, now the question is, um, is that a pointer somewhere?
+--- --- --- --- --- --- --- --- ---
+12.9s,23min	 Yeah. So, in your home directory you have a folder that's called notebooks, but in reality it's a link to another place in the file system. Um, and I'm just gonna make sure that that's actually not just another link. Uh, yeah, okay. So, uh, part of the reason why I'm going through this with, um, the person whose account I'm
+--- --- --- --- --- --- --- --- ---
+53.0s,23min	 setting up is [...]  to make sure there aren't little things that were being forgotten about. Uh, or little things that I might misunderstand. Dropbox or notebook. Anyway. Okay. So, that's fine. And if it's not, we can fix it. Oops. I just, uh, unfortunately on the server, some of the keyboard shortcuts I've used aren't
+--- --- --- --- --- --- --- --- ---
+19.5s,24min	 functional. Okay. That's right, we need to install NVIDIA runtime for you. I'll take care of that in a little bit. I need to dig that up. For reference, once it's set up, you're not going to have to worry about it,
+--- --- --- --- --- --- --- --- ---
+47.1s,24min	 but there's an oversight in my part. There are a couple of things I need to install to get the Docker running for you. Part of it is a specific thing with NVIDIA that allows the Docker to use the GPU well. And without that, I'm just going to complain. But I have that on my account, and for the sake of getting an idea of the rest of the process, I can show it on mine. So if I made that container, or if that command went through,
+--- --- --- --- --- --- --- --- ---
+14.1s,25min	 I would have a container for you that looks something like these. You would only have one. Here I made three at separate points. Right. And the... Where did it start? Right, so when making container, by default, it's not going to be running. It's just going to be there. It's going to be off. In order to do anything with it, you actually need to start it.
+--- --- --- --- --- --- --- --- ---
+36.9s,25min	 So the command for that is docker container start, and then you need the container ID, which you can get over here. You'll notice that there's also a names column. It's not shown well just because one of these columns is long, so it got shifted down. But [...]  here's an example. There's a name of that right there. In my case...
+--- --- --- --- --- --- --- --- ---
+2.7s,26min	 Sorry, you can finish your sentence. Yeah. In my case, I happen to... I want to use this container just because, and I'm going to copy and paste the ID. Now, if I hit enter, this should work. But for reference, it's also the case that... Are you smart enough to know based on just part of the name? So here, this is the only container that starts with an A.
+--- --- --- --- --- --- --- --- ---
+26.4s,26min	 So if I just tell it start A, it knows which one. If there were two that start with A, well, then it would have to ask, right? But in this case, it's smart enough to know. So no indicated error. It works out OK. It's just going to spit back out the name. Great, so it started. But now, how do I do anything with it? For that we use the docker attach command.
+--- --- --- --- --- --- --- --- ---
+52.4s,26min	 Can you send me these commands? Oh yeah. Just in order steps. Yeah, the important part of that I want you to get from this isn't necessarily specific commands and detail, but the high level like rough recollection and then like the syntax of what to write down. And I do on the side, I do want to make sure that this uses your time reasonably well.
+--- --- --- --- --- --- --- --- ---
+16.4s,27min	 Yeah, sure. But I mean, I know it's been a busy time for you. No, no, that's fine. It's fine. Good to know, but like I'm not going to remember the... Oh yeah, yeah. No, I certainly didn't want... Anyway, so docker attach and then again the name of which container I want to have going. Actually before I do that even, if I say docker container LSA again,
+--- --- --- --- --- --- --- --- ---
+41.4s,27min	 you see, so before I told it to start A, it had A listed as exit, so it's not wrong. Afterwards, if I ask docker container LSA again, you see the same container, now the status is up for about a minute. So once you finish an answer run, for example, would you close the docker?
+--- --- --- --- --- --- --- --- ---
+5.4s,28min	 Presumably. Okay. You don't have to. Let's see. So if I close this, I can do it again. Yeah, that's fine. So I didn't say anything wrong. I'm just going to say that's fine. So it's probably good to do just for system resources. Now, the way that I set up the containers, you'll probably see at the start something like this. And this is something I included. It's not something� specific to docker. And you'll see why this is in just a moment.
+--- --- --- --- --- --- --- --- ---
+30.9s,28min	 But were it not for this, there were times where the output would look blank. It's not that the container wasn't working. just that something was waiting for you to get input so by doing this step first as kind of weird looking as it is and make sure that the user doesn't like think something's broken when it's not anyway so you're attached now press any
+--- --- --- --- --- --- --- --- ---
+51.9s,28min	 key to continue or just there you go next little part you don't have to worry about but it's useful to have records sometimes what you type in so it asks you do you want to record your activity yes or no I'm just gonna hit yes if you wanted to you could say no whatever now it's recording that stuff so if I want
+--- --- --- --- --- --- --- --- ---
+17.7s,29min	 to refer to it at some point if I can refer to it anyway just things to be aware of you'll see that again it just press a button and you know if you don't care then just press something anyway so now I'm in my container and you'll notice that the username here is docker user but outside that the rest should be pretty pretty familiar from your Mac
+--- --- --- --- --- --- --- --- ---
+41.1s,29min	 maybe not Windows but from Mac and here we see these different files etc now behind the scenes this is actually going to a directory on store one similar calendar was setting it up for you but let's see I'm gonna see quickly if I can
+--- --- --- --- --- --- --- --- ---
+6.1s,30min	 touch now permission tonight okay I was going to try and show like some places in the docker where files might not be saved but by default you're probably not going to be the right I'd be able to write those anyway so you'd really have to do something where they save a file in the docker that doesn't show up outside the docker great okay great so you know how to start the container you know how to
+--- --- --- --- --- --- --- --- ---
+28.9s,30min	 attach to it how do we start running Jupyter lab for example okay I'm gonna go into show briefly the wrong way to run it and then how to patch it up okay so first off in the command line we're using Jupyter lab this is instead of
+--- --- --- --- --- --- --- --- ---
+52.8s,30min	 what you might be used to Jupyter hub on servers presently so if I start Jupyter lab it gives me all this nice stuff it tells me to go to the Jupyter web address so we copy and paste it and again I as I said this will not work so don't be surprised but if we do this you might see something like
+--- --- --- --- --- --- --- --- ---
+15.5s,31min	 this now I actually think I'm running you're probably going to actually see a blank screen in this case there's another reason I'm seeing this but point is this isn't what you want so you shouldn't see what you want okay what is it what is it do you want and how do you get it well first off I'm just gonna kill this so it's out of
+--- --- --- --- --- --- --- --- ---
+36.9s,31min	 our way let's just ctrl C then yes I don't know if you've had to run Jupyter lab from command line from command line oh okay okay I am notCause while recording like on photo okay yeah I I don't mean to be insulting at all but that's fine we have some
+--- --- --- --- --- --- --- --- ---
+3.2s,32min	 YouTube I'm Curious why this is wrong or is it like docker specific wrong or is it like docker specific wrong or is it like juicy don't wanna get away with that Oh it's it's just that this command doesn't know how to send us the information that's so let's take the the jupiter hub thing that presently people will access through the web right and that's by the way one of the reasons I
+--- --- --- --- --- --- --- --- ---
+24.2s,32min	 have to ask whether or not you were that you have to run this from the command line so the way that it knows how to get things to people is because it has an opening to the Internet that when someone opened the web browser issues a request that goes through the Internet that's open to the whole world back to
+--- --- --- --- --- --- --- --- ---
+47.7s,32min	 our server into our server to that process that's running and then they make the connection this process is just running locally not talking to the Internet as a whole we're talking to it through SSH but this process itself doesn't see much else going on so we give it a pipe so that it can send
+--- --- --- --- --- --- --- --- ---
+9.1s,33min	 information to us in a way that it's satisfied with and we can send information to it in the way it says right now this doesn't have anything like what a web browser would provide so how do we do that this next step is a little it's not it's a little annoying but it's not bad especially when you get used to it and it really isn't shouldn't be too much to get used to so I'm going
+--- --- --- --- --- --- --- --- ---
+29.3s,33min	 to detach from my container detach is different than stopping if I hit exit right now in fact it might be good practice for us to do that if I hit exit well first off it's going to it was recording stuff before right the first time I hit exit it stopped recording and
+--- --- --- --- --- --- --- --- ---
+51.1s,33min	 it's telling you hey listen saving what you just did I'm placing into stuff information you might not care about but I'm just explained because I hit exit I'm still in my docker container I need to hit exit again I'm assuming that in fact is you're just gonna type exit exit like it's I'm explaining this once for reference don't be surprised anyway so I did that and
+--- --- --- --- --- --- --- --- ---
+14.8s,34min	 now if I ask docker container LSA we see the one that I was using which was a something this is exit right so if I tried to attach to it it's going to give me the order of saying it stopped if you need to start it okay great I'm going to start that again
+--- --- --- --- --- --- --- --- ---
+41.7s,34min	 attach we see this thing again that's any key I'm gonna just hit capital no not recording that time whatever great now what I want to quickly show is instead of stopping the container which would cause anything you're running on it to stop I want to detach which is I'm no longer talking to it through this but
+--- --- --- --- --- --- --- --- ---
+1.9s,35min	 it's still running and to do that you type in control P control Q and then we'll I know you're right it's just then I'll let you know that's what happened by saying red escape sequence so that's printed out and now I'm back on my
+--- --- --- --- --- --- --- --- ---
+25.4s,35min	 original terminal etc but if we ask doctor container LSA we see that now the container is dealing with this listed as up so it's running great okay that's one thing stopping versus the patching the other thing getting towards giving to your lab what it wants to be able to show us an interface let's look at these
+--- --- --- --- --- --- --- --- ---
+8.9s,36min	 ports right so I mentioned that we need to lay a pipe between that process and our computer not just the server but this this physical computer the way it does that is by linking the ports which I'm guessing is the server and the computer is the server and the computer is the elf
+--- --- --- --- --- --- --- --- ---
+29.9s,36min	 is what notes shows up as in the docker. So if I'm on the docker and I do something over port 80 on the server in order to talk to that thing on the docker, I would use port 328045. That's going to be relevant in just a second,
+--- --- --- --- --- --- --- --- ---
+58.0s,36min	 but it's just part of the puzzle. I'm actually going to detach from the server and I'm going to do port binding. Now on Linux, I'm not sure what the syntax is on Windows, but it should be similar. I'm just going to name some random port on my machine. The number isn't too important. There are some that don't type in 0, but some number around between 8,000 and 9,000 is probably
+--- --- --- --- --- --- --- --- ---
+19.4s,37min	 fine. Just choose one. So I have a question. So do you need to be on MIT internet to do this? Yes, you do. So. If you've been able to access the servers at all before outside of campus, you've probably had your VPN set up? No, actually that's why I use my Windows computer
+--- --- --- --- --- --- --- --- ---
+42.5s,37min	 and I log into my Windows computer through my Mac if I'm at home. Like I do a remote desktop and then use basically my computer. OK. So the only part that needs to be through look like the MIT network. So the one that's connected to the server is the part that
+--- --- --- --- --- --- --- --- ---
+4.9s,38min	 connects to our servers. So if you have from your laptop to the desktop, then the desktop to our servers, that should be fine. Now of course, that's a couple more steps that would be ideal, not by your fault. I mean, that's annoying, but basically I have a browser with the screen of my computer showing up, which
+--- --- --- --- --- --- --- --- ---
+25.1s,38min	 is fine. I can edit that. OK. So I'm going to use just some port that I chose on my machine. I type in localhost. And then I'm going to use this number right here. We'll talk about why in just a moment. But what you should understand with this command,
+--- --- --- --- --- --- --- --- ---
+57.6s,38min	 again, maybe you've seen it before, but if you haven't, this is the command saying from my machine, this one. I want that port to connect on the server, our server, this port. So that lays down part of the pipe. And give it my password. So I'm logged in. I've given it a pipe.
+--- --- --- --- --- --- --- --- ---
+18.2s,39min	 Now I want to attach to my Docker again. And I could do that because it was already running. Um. Jupiter lab. Now there's two pieces of additional information I need to give Jupiter lab.
+--- --- --- --- --- --- --- --- ---
+39.1s,39min	 One of them is specific to what I'm doing right now. The other one you just have to memorize. And it's not that bad. OK. So first I'm going to tell Jupiter lab what port I want it to use. I'm going to say port 888. Let's see. Well, 8888. That's 4 8.
+--- --- --- --- --- --- --- --- ---
+2.3s,40min	 It's 4 8. Mm-hmm. OK. Um. And I'll talk about why that number in a moment. But the second part of information is 0, 0, 0, specifying the IP thing. This part you're just going to memorize. You just type it in each time. This part, the port number, the reason I chose 888
+--- --- --- --- --- --- --- --- ---
+27.5s,40min	 is because I laid a pipe to the server. I laid a pipe to this number on the server. According to Docker container LSA, that port number, 32848, got mapped into the Docker to 8888. So if I told Jupiter lab to send stuff through 8888 on the Docker,
+--- --- --- --- --- --- --- --- ---
+53.4s,40min	 it should work out. So two different pieces of pipe. My computer to the server, server to the Docker. Yeah. OK. And for you, you're probably going to add the additional pipe to your laptop. Sure. Laptop to desktop, desktop to server, server to. Crazy world. Anyway, so if I type this in now, it's fine.
+--- --- --- --- --- --- --- --- ---
+18.9s,41min	 Now, if I copy and paste this, it's still not going to work. That's easier to solve. It's still not going to work. It's still not going to work. But I just wanted to make sure. It's still not what you want. And the secret there is that semicolon 8888.
+--- --- --- --- --- --- --- --- ---
+43.6s,41min	 That specifies the port on my machine that I want my browser to check. But when I laid the pipe connecting my machine to the server, I chose this number. So I. These numbers. OK. machine-specific arbitrary in this case I'm largely choosing like this number
+--- --- --- --- --- --- --- --- ---
+7.5s,42min	 arbitrarily I'm just giving as a ball but like my machine would also have that same number more or less now there are certain like lower numbers like zero one two eighty you know those ones by convention when the computers were being developed can be used sometimes for special stuff but again if you're in
+--- --- --- --- --- --- --- --- ---
+31.8s,42min	 like that's one of the reasons I say like between eight thousand nine thousand you should be fine right in any case so that's this number I basically chose over Charlie this number I use I picked it up from the ports listed here right now I could have started Jupiter lab on 8080 but if I told you for the lab
+--- --- --- --- --- --- --- --- ---
+57.7s,42min	 you down here to use 8080 then the number I should have used is 32 847 instead of 32 84 8 anyway so I need to change the going to be standard for everyone who uses this or is it going to change
+--- --- --- --- --- --- --- --- ---
+24.4s,43min	 between machines between users so by this if you need the process overall the numbers that that can change right so yeah the the numbers would the only ones that will stay the same in terms of being available are the ones that the arrow is pointing to so in all
+--- --- --- --- --- --- --- --- ---
+47.9s,43min	 the doctors you will have available for 80 port 8,000 port 8,080 and port 88 88 those will be available on all the dockers. So if you wanted to, in your own personal docker, type in this command verbatim, you can do that. Just bear in mind that the rest of the process of connecting...
+--- --- --- --- --- --- --- --- ---
+29.9s,44min	 I should pick the corresponding numbers. Yeah, exactly. Anyway, so if I go back to this thing, and I type in the correct port number after the semicolon, as a side note, whenever you see a semicolon, the thing next to it is probably a port number. That's not what I wanted to copy and paste. I wanted to copy and paste that. Okay. I was going to hit enter, and I'm just going to hit enter. I'm probably going to have a little hiccup.
+--- --- --- --- --- --- --- --- ---
+56.3s,44min	 It's not. Nothing to do with docker. It just has to do with the web browser. Still not doing the thing we want for stupid reasons. There's this little token that you get, and when we hit enter the first time around... No. When I hit enter the first time around, the web browser screwed with the address. It's a little easier for me to see, since I'm closer, but that's presumably why that gave us a little issue.
+--- --- --- --- --- --- --- --- ---
+32.7s,45min	 So if I copy and paste that address that was on the terminal, and I just changed that one number, 9678, wasn't it? 9678. There you go. So now we have JupyterLab up. You can use it very much as you would bar JupyterHub, but there's a couple of additional things that are nice to point out, because now that we have this docker, that other people can use, I can hand you basically a uniform environment,
+--- --- --- --- --- --- --- --- ---
+60.0s,45min	 so what I'm going to do in the following is what you're going to see also. I mean, by see also, I mean you're going to have your own copy. So first off, we're opening on the root directory, and that's just because I started JupyterHub at that path. If I went to your home directory, it would have opened to my home directory, the Docker, which is his home directory. So let me navigate.
+--- --- --- --- --- --- --- --- ---
+28.9s,46min	 I'm going to navigate to the home. Again, inside the Docker, everyone will be called docker user inside the Docker. Outside the Docker, you still have your permissions. So great. This is my home directory there, and there is a repository called private Anson. I think we talked a little bit about Git with Anson before. You can give us the free capital. Yeah, exactly. And we also have slightly better tooling
+--- --- --- --- --- --- --- --- ---
+59.4s,46min	 than when we talked before. So I'm opening this up, and typical notebook. I click on it, and it opens. Great. Cool. So from here, this notebook is more or less as you would expect it. And a good way we can check is now that this is tracked with Git, you can see that it's not tracking. No, take whichever one you want. I can use either of them, and I'm not using them.
+--- --- --- --- --- --- --- --- ---
+24.6s,47min	 So I'm just going to go ahead and do a little bit of a test. I'm not using any of them. I'm just going to do a little bit of a test. So now that that's tracked with Git, I can actually just ask to make sure. So we're in the private Anson here as well. I type in ls. We see the same thing as over there. But now if I say git status,
+--- --- --- --- --- --- --- --- ---
+53.0s,47min	 it'll tell me if there's been modifications. Okay, there's some modification to Anson notebook. We'll get that in a moment. You asked, hey, is this the one with segnet and cropnet, et cetera. How do I find that out? If I ask git log, then it gives me all this lovely information that tells me what has changed in this notebook. All right, so here we see it has,
+--- --- --- --- --- --- --- --- ---
+21.7s,48min	 I'm looking at some changes that [some person] is proposing to incorporate into the main Anson. I know that because there's a thing called a head and it tells me I'm at that location. So reading off of what's in this, [that person] said [they] passed some additional packages and functions into spawn process for head detection. So that's new head detection. If you go a little bit further down, let's see what else was added.
+--- --- --- --- --- --- --- --- ---
+3.0s,49min	 Bringing in recent changes from that in order to proceed with PR4. What's that? What was that? What was that? What was that? What was that? What was that? What's that? What was that? What was that? What was that? What was that? What was that? a lot of fixes there's quite a few commits here um the reason i'm showing you this is like you asked a simple question if this is in corporate segment i can search for that but more generally i wanted to show that this is something you can use to find out now um being a unix junkie myself um yeah penthouse replace virtual code for the segment
+--- --- --- --- --- --- --- --- ---
+28.6s,49min	 outputs cool so the short answer is the one i'm looking at does have segment and we have a log same right here mainline adoption of updated segment and dev related quality of life improvements yeah so
+--- --- --- --- --- --- --- --- ---
+7.7s,50min	 no it should be in here but uh the good news is we have a record that i can actually search to see let's see so let's see replace code chunk that talks about you know one of the points one adjacent to it i guess it
+--- --- --- --- --- --- --- --- ---
+28.9s,50min	 helps you is have better problemabetting you just saw a couple of Why this I wanted to say is that hand of the tests on x8 Rider promoting comes the head to the mic first right this particular branch now one of the nice things about git um� it's a good thing about git is that some of the things that [...] said is are unlikely to beекаup respects autre' around Khit . I did not repeat, over time, even though連 fermenter is in c receiver now i'm just trying to make it more섯 in terms of okay this is all great tooling but like I need the thing that incorporates all the recent changes are you able to give it to me yes you can so
+--- --- --- --- --- --- --- --- ---
+54.7s,50min	 in that sense there's like the question of okay do we do this thing talking about kids in part you know not in detail but there are some things I want to be aware of because there I would hope you might consider using them to track your changes so first off how does it what is given how does it work
+--- --- --- --- --- --- --- --- ---
+32.9s,51min	 or how does it work is a big thing what are the what are the pieces you need to know about so you have say your home directory and you have some files and they have changes etc as one does get works with the building block of stage stage is the directory
+--- --- --- --- --- --- --- --- ---
+55.0s,51min	 and all the stuff inside of it that get is supposed to pay attention to a commit is a version of all that stuff that attracts right so I make some changes and I say hey get I like this stuff please make a commit here I'm drawing the files here are trying to commits will be clear why I'm
+--- --- --- --- --- --- --- --- ---
+17.3s,52min	 drawing it separately at the moment right and just so happens that all those logs we talked about the battery showed or messages that someone attached to one of these commits squiggly lines supposed to be right my handwriting looks like that great and that's a good thing you've got a lot of things that you want to add to your layout I've also got to tell you this button here is what you're going to need
+--- --- --- --- --- --- --- --- ---
+41.7s,52min	 to report you quite seriously your water
+--- --- --- --- --- --- --- --- ---
+3.8s,53min	 do the command said done muchísimas gracias the things that I changed here end up being recorded there. Why did I draw a line? Well, because this commit was building off of that commit. And just like how this commit, the first one, had a message, I can leave a message for that one as well. That's what we're seeing here.
+--- --- --- --- --- --- --- --- ---
+29.3s,53min	 One of the reasons why these are in order is because these are the commits in order, and they're connected in a certain way. So you can, of course, imagine this process continuing, where I continue to change things, and I want to record them, so I make commits. And we end up with this nice chain. One thing I want to emphasize again is that you can have changes sitting around your directory,
+--- --- --- --- --- --- --- --- ---
+58.8s,53min	 files you've saved, files you've modified. Git doesn't start tracking them until you tell it to commit. Once you commit them, there's some . And again, you don't need to worry about changes you make after a commit impacting the things you did commit. Now. Again, this is more like version history, or something.
+--- --- --- --- --- --- --- --- ---
+20.0s,54min	 Exactly. That's part of it. I mean, that is it. There are a couple. This is the first simple scenario where I have one directory, and I just do one thing after another. You might have multiple versions. And we'll get to how you switch between versions, or what do these versions look like in a moment. But first thing first, hey, this is all good in theory. What does it look like on here?
+--- --- --- --- --- --- --- --- ---
+47.7s,54min	 So let me see Git status. So first off, my stage here is this repository. You don't need to worry too much about this detail, but behind the scenes, the way that Git knows what your commit history is, and the fact that it should even care about this. And it's the same thing for this folder, is because it has a little hidden file called .git.
+--- --- --- --- --- --- --- --- ---
+12.0s,55min	 I'm assuming it's, I think it's the same in Mac, where if you start a file with a folder with a period, it's hidden. Yeah. In Windows it's different, but you're not coding in Windows, are you? No. OK, good. I'm telling you, if you start writing code for Windows, you're on your own. OK. I have a question with the commit versus the fork that we
+--- --- --- --- --- --- --- --- ---
+34.4s,55min	 did the other day. Sure. What's the difference between them? That's a good question. So the forking basically is a way of dealing with these commits, right? So I'll talk in a moment about how you can deal with different versions of your files.
+--- --- --- --- --- --- --- --- ---
+54.8s,55min	 Right. But at a high level you can think of it as this tool has a way of managing two different lines of commits, right? When we made a fork, what it did is it grabbed one chain of commits. And if you remember there was a little check bar that I had to click.
+--- --- --- --- --- --- --- --- ---
+16.2s,56min	 When I hit the check bar it grabbed a box. I hit the check box. It grabbed the whole series of commits and just made a copy, literally copy and paste into your repository. Now for record. Okay. So the tool I'm talking about here is Git.
+--- --- --- --- --- --- --- --- ---
+38.6s,56min	 And then there's GitHub. Now GitHub is not the same as GitHub. The connection is that GitHub is basically a series of servers. It happens to allow us to run Git on it, right? But it's just [...]  if they call their, they chose the name GitHub because the primary
+--- --- --- --- --- --- --- --- ---
+0.4s,57min	 thing that they provide is an endpoint for Git. But they could have just as easily called it YouTube for data or code. But I mentioned that just because as it relates to your question of okay what is this fork business?
+--- --- --- --- --- --- --- --- ---
+20.9s,57min	 Forking is just the name that GitHub gave to a process that Git has of copying or like making a copy of a repository, right? So it's just a process. So they added something on top of what Git provides you. Okay. And that's... Kind of, yeah. Okay. At the same time, I recognize that it might be being a little bit more verbose than what we care about. That's fine. I mean, I can also [...]  I'm just jotting down things I will probably look up and like try to understand.
+--- --- --- --- --- --- --- --- ---
+48.9s,57min	 Sure. Sure. I guess the, one of the core takeaways there, even if like what I'm saying about the fork isn't clear, which in fairness I didn't phrase it well, is that the fork is a very complex thing. It's a very complex thing. It's a very complex thing. It's a very complex thing. And I think that's the key to it. And I think that's the key to it. And I think that's the key to it. And I think that's the key to it. And I think that's the key to it. And I think that's the key to it. But [...]  being aware sooner than later that GitHub and Git are not the same thing is actually [...]  it's actually a common stumbling block, just because the two are
+--- --- --- --- --- --- --- --- ---
+8.9s,58min	 mentioned in the same breath. And they're names so similarly so often. Anyway, so, so this is my [...]  repo. This is peacetaging area, you know. Okay, Git uses those hidden files. You don't have to worry about actually dealing with that file.
+--- --- --- --- --- --- --- --- ---
+30.8s,58min	 Just know it's there. I have another random question. This is not applicable to me right now, but I know during projects people have this issue. So say I want to use a version of ANSAN which does not include head detection or whatever. How do you know which version to use or which commit to use? Exactly. Great question. That was basically going to be my next point.
+--- --- --- --- --- --- --- --- ---
+51.8s,58min	 So I'm going to explain the conceptual model and then we'll see how to do it. So what I drew down here is just a straightforward, like you have your own little repo and it's one thing after another. But what if you have more than one version of this piece of code or all your files?
+--- --- --- --- --- --- --- --- ---
+14.8s,59min	 Well, the way that happens is, or is managed, is that you would take a version of the code, based on this commit, right? So you're able to go backwards and forwards in time. If you wanted to use an older version of ANSAN, for example, you could just say, hey, use this commit and it takes care of the rest for you.
+--- --- --- --- --- --- --- --- ---
+36.8s,59min	 But now, okay, what if you don't just want to use an older version, you want to start with an older version and make modifications? Well, what happens is you check that out and then you make commits based on that. Now, how do you do that? How does it know to make a separate link?
+--- --- --- --- --- --- --- --- ---
+58.8s,59min	 Well, there's a, you basically tell it to make a branch. You basically go to this commit and then tell it, hey, listen, I want to go down a different path. Keep this thing. Don't get rid of this commit because I might use it later. But I want to start a new path.
+--- --- --- --- --- --- --- --- ---
+22.8s,0min,1hr	 This is called branching because, Okay. Well, if you start to draw this thing out and you did that [...]  a lot, you would end up with something that looks like a tree. Right? So that's the concept. But how do you actually do that? Well, we ask it branch. Also, one question about this is sometimes like commits are incorporating multiple changes in ANSAN.
+--- --- --- --- --- --- --- --- ---
+43.8s,0min,1hr	 Sometimes they're one package that's been changed. If I'm like forking or whatever, branching off from like a, previous version, how do I know like package dependencies, blah, blah, blah, is going to make work or not? That's a great question. Do me a favor and I promise we'll address that.
+--- --- --- --- --- --- --- --- ---
+5.8s,1min,1hr	 Sure. But put that in your mind. And if I fail to mention it [...]  let me know. But first thing first is what changed is building off the question of what change we're on. Right? So first, okay, this is the conceptual model. How do I map this part we talked about to what I do on the screen?
+--- --- --- --- --- --- --- --- ---
+28.8s,1min,1hr	 So if I type in git branch, again, call branch because it's referring to this idea, we see that there are a couple different names. And these are the names that I gave to each one of these different paths out here. So here we, just to read them off, they're ones like main. And the main one is like if there's one pristine version of ANSAN or something that most people should be using,
+--- --- --- --- --- --- --- --- ---
+50.8s,1min,1hr	 most of the time, that's probably going to be in main. But there are, for example, changes that I'm reviewing for [a person] and I'm doing some modification on. And I don't want to put it here just yet. I want to have it off to the side. So I made a new branch and I called it this. So when I do some additional modifications, like a couple more commits, it's not going to go in main.
+--- --- --- --- --- --- --- --- ---
+11.8s,2min,1hr	 It's going to go down here. Now, git does, now, okay, so that's how I set up the model. I see which branches there are, but there's at least two other questions from there. One, how do I make a new branch and get to it? Because, okay, great, I just showed [...]  these are there, but how do I navigate between them?
+--- --- --- --- --- --- --- --- ---
+34.8s,2min,1hr	 And then the second question is [...]  it's not uncommon for me to [...]  do something that I don't want to have affect the perfect version, but then eventually [...]  this feature, what have you, gets to a point where I don't want to use it all the time. Yeah, we're talking about how to branch things, but how do I get them back together? We'll get to that in a moment, but that's called a merge, right?
+--- --- --- --- --- --- --- --- ---
+56.8s,2min,1hr	 So, yeah, we'll get to that in a moment. So getting back to just establishing the branches, this is how you list them out. How do I navigate between them? So you don't need to worry about that command just because I had some dirty stuff sitting around. git stash is a way of [...]  temporarily setting my stuff to a side so I can come back to it.
+--- --- --- --- --- --- --- --- ---
+17.8s,3min,1hr	 Mm-hmm. So it's a better way to do that. Mm-hmm. But I'm just being quick right now. Mm-hmm. Just a second. Okay. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah.
+--- --- --- --- --- --- --- --- ---
+45.8s,3min,1hr	 Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. All right. So the ones that twirl up are a white point for me. Arm is a very strong point for me, which is the ability to connect with people [...] 
+--- --- --- --- --- --- --- --- ---
+7.5s,4min,1hr	 using a computer app. Okay. Okay. So Google is always there for me to make? Hmm? Yep. branch you want to go to. I'm now on main and if we looked we would see that it has changes from whatever the main branch was. Now you ask okay you know how
+--- --- --- --- --- --- --- --- ---
+30.4s,4min,1hr	 do I see what changed and there's two answers there. One is seeing what changed in the code but often you don't want to dig through a thousand lines of you know what does this stuff mean. To get the high-level description of what changed you would use git log. So these nice statements right. If someone because when
+--- --- --- --- --- --- --- --- ---
+51.0s,4min,1hr	 someone adds something to this you know a series of commits and by the way whenever you pull something with git all you're getting is a series of commits. When they commit something they should leave a message describing it. So that's one but okay suppose you wanted to go a level down not just a high level description but what specifically changed. The command for that
+--- --- --- --- --- --- --- --- ---
+11.1s,5min,1hr	 is git diff. So now it so happens that if I git was designed for code right in code script we're using the Jupyter notebook and that's basically a mix of
+--- --- --- --- --- --- --- --- ---
+33.9s,5min,1hr	 code and data. Like the reason that it shows up in a web browser is because it has a web browser stuff mixed into it. So if I ask just git naively you're gonna see some things that are maybe a little distracting. I mean let's do it so that you get a flavor of it. So if you look through basically highlights in red things that are gone from one compared to the other.
+--- --- --- --- --- --- --- --- ---
+55.8s,5min,1hr	 So if you look at this like like if I'm going from here to here red are the things that were specific to this one that this one doesn't have. Green are the things that this has that this doesn't have. But this is kind of messy right. Yeah I can kind of see what it's saying it's not that bad but still it's like why is there this quotation at the end. You get it.
+--- --- --- --- --- --- --- --- ---
+20.4s,6min,1hr	 Yeah so we have a tool that shows that a little bit more nicely. I'm just going to refresh this for reasons. I have my notebook right here and I'm gonna click this button at the top that says git and in fact if I hover over it says display nb diff.
+--- --- --- --- --- --- --- --- ---
+41.1s,6min,1hr	 Git head thing. We talked about nb diff before but the nice thing here is that same tool but more directly baked in so you don't have to remember additional commands. Now if I click it in this case it probably shouldn't show me anything. Why? Because I just went to a pristine copy of a commit right. Now it will take a moment
+--- --- --- --- --- --- --- --- ---
+6.8s,7min,1hr	 to finish loading. We see here that says no changes after that. Great. Well I want to introduce a change just so we can see what I can do. Just turn it off. Close that and if we're in our notebook I don't know. [...] is nice. There you go. Alright save that and I hit this button again. Wait for it to load.
+--- --- --- --- --- --- --- --- ---
+34.9s,7min,1hr	 So it also shows up like the commented outlines. Yes. Yeah there we go. So now it shows that and you can imagine that there are various ways to use this where. It can show not just the edit I made now but also changes between branches. I'm not going to go into that right now just because you know I don't know how often you're actually going to use that but we're not happy to talk about when it's useful.
+--- --- --- --- --- --- --- --- ---
+4.2s,8min,1hr	 But really the key to remember is that we have this thing. It's just one button. Click right here. That will show you nice and what's different. And one of the reasons that you might end up using this like a practical use case I can see for you in the near term is. Suppose. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Okay. So suppose you're working on processes and data and then someone adds a quality of life thing or there's a little bug fix somewhere in some part and some.
+--- --- --- --- --- --- --- --- ---
+25.8s,8min,1hr	 You want to incorporate those. But you know you don't have a pristine copy of the ANSI notebook anymore. You have to specify file paths. You have to do a little this a little that right. So you have some things that are different about yours than not everybody has. How do you deal with the two of those. And basically this is a tool. you would use to see like okay what is specific to yours because okay you probably remember saying
+--- --- --- --- --- --- --- --- ---
+53.9s,8min,1hr	 those up but do you remember everything you set up right so you can see what's specific to yours and then incorporate that into the main thing and then you can have everything all together i have a question about yeah we are still using ansan notebooks on yeah so i remember you had some comments about multiple copies and that's not the right thing or something but the way we are
+--- --- --- --- --- --- --- --- ---
+21.3s,9min,1hr	 i have been asked to do it is have a new notebook for every new data set so i just append the file name to ansan underscore say 20 95 or 3 or 14 or 1 would be today's data set and then if i have another case that would be or two or whatever and those are the things that we have to do so i think that's the thing that i would like to do and then if i have another case that would be or two or whatever and those are the things that i would like to do would like different ansan notebooks is that still the way people are doing things or you're
+--- --- --- --- --- --- --- --- ---
+51.0s,9min,1hr	 recommending people do things or it's not the way i would recommend it um and i'd imagine that probably the reason that you were told to do that before is because they didn't have this setup so to be concrete and walk through an example like that so let's say we um start with this notebook again and i'm going to get rid of the line i added it there what's this section the sd whatever this section is
+--- --- --- --- --- --- --- --- ---
+13.8s,10min,1hr	 tools for recording oh this is a newer newer version notebook okay i haven't used this okay what is this this is just for logging progress yeah you log in and uh also the out the part of the elf because these i'm sure you've had the experience with the network drops and that's been
+--- --- --- --- --- --- --- --- ---
+36.6s,10min,1hr	 annoying anyway so what i'm going to do is i'm going to use this branching mechanism to make a bunch of different versions of the notebook and instead of having to name them all differently and just pray i remember and name them correctly have this thing track which is which for me okay so you basically make
+--- --- --- --- --- --- --- --- ---
+2.9s,11min,1hr	 git commits for every data set um so just to make that concrete i'm going to say git branch i'm currently on the main branch uh you might use a different branch what have you but just for the sake of demonstration once again and i want to make a new one let's say it's for a data set called uh 05 22 01 for example you would probably Feh
+--- --- --- --- --- --- --- --- ---
+28.0s,11min,1hr	 name it something a little bit nicer than that but you know whatever in fact whatever you would have appended to the anson notebook name before maybe make that the branch name um good so i made this branch name it's called the branch name so i'm going to make a new branch name so i made the branch and then if i ask so git branch with the name at the end makes a branch if you just type in git branch up lists what branches you have right so just to visualize
+--- --- --- --- --- --- --- --- ---
+51.9s,11min,1hr	 this you know makes one if i don't specify a name i list them now you can see that there's this new branch with the name i specified but i'm still in the main branch you like to make branches uh but then i need to say okay listen i want to go to that one i want to start working on that checkout command and I say oh five two one whatever that is it has to have
+--- --- --- --- --- --- --- --- ---
+14.0s,12min,1hr	 complete so I just type in part and then hit tab and okay great now it told me that I switched to that branch everyone that be paranoid to check again on type them and get branch again and look hey the the branch I wanted is now highlighting green has the asterisk great now I want to start making some changes to this this notebook what are some changes we want to make I mean it's
+--- --- --- --- --- --- --- --- ---
+37.5s,12min,1hr	 arbitrary for example but I don't know to do I don't know and can you actually scroll up and they can just because this animal it's quite different I can't promise this is the up to eight number
+--- --- --- --- --- --- --- --- ---
+5.5s,13min,1hr	 and I'd be happy to walk okay okay yeah so I would make changes in the raw data
+--- --- --- --- --- --- --- --- ---
+37.2s,13min,1hr	 sure so and since this is just a dummy example if we want to call this what the what I call this what the what I call this what the what I call this what the because before I'm on branch oh five twenty two oh one for the sake of example I'm gonna say oh five twenty two oh one one and I'll just take a moment to copy that across
+--- --- --- --- --- --- --- --- ---
+9.6s,14min,1hr	 you sorry just one more question so far get branches does it matter like say I'm working on do different run disputes on their branching from the same please sorry is the bırakrika
+--- --- --- --- --- --- --- --- ---
+37.0s,14min,1hr	 element right or so different does that already tell you that the prior two digital place or is the branch dependent on the user or the project? It can be basically whichever way you want. How do I specify like that from the main branch? Sure, so in this case the way that I made...
+--- --- --- --- --- --- --- --- ---
+2.0s,15min,1hr	 The reason why I'm saying this is that two people recorded on the same day. This is actually a real problem. I don't know how people tackle this. It's going to become more of a problem down the line. Previously I think the confocal was not so good and usually one person recorded per day or whatever. But say two people and the way the data names are kind of like hardcoded across the lab.
+--- --- --- --- --- --- --- --- ---
+25.0s,15min,1hr	 So it's always like the date name with 01 blah blah blah. But say someone recorded in the morning with the 01 and then a new user is recording in the afternoon. Also, it's not the same. So it's also legal to use it 01. And I'm the person analyzing both the data sets. We have both called the same thing right now. Yeah. Sure. So part of that is a get code issue.
+--- --- --- --- --- --- --- --- ---
+51.0s,15min,1hr	 Another part of that is like data, right? And right now we're talking about the ANSI notebook. So if someone screws with the data files I'm loading, this doesn't treat that pain. So get this thing is primarily meant to deal with the code. That deals with the data. Now there are better ways to name data sets that are going on in there instead of 01 or what have you.
+--- --- --- --- --- --- --- --- ---
+14.0s,16min,1hr	 But if the issue is that hey, basically if I understand the part you're highlighting, it sounds like an issue prior to what we're talking about. So it's kind of a garbage in garbage out scenario. If I'm not mistaken. Yeah. So I'm just saying that the raw parts of these two files, even though they're named the same,
+--- --- --- --- --- --- --- --- ---
+37.0s,16min,1hr	 will be in different project folders. Oh, okay. So. Oh, I'm sorry. Yeah. That would be fine. So like project [...]  two different projects, two different people have recorded, but they have named the files exactly the same way. It doesn't matter if they're in separate folders. But now if I'm making like branches dependent on like file names, then I should call them like project blah update or that would solve the problem, right?
+--- --- --- --- --- --- --- --- ---
+58.0s,16min,1hr	 Ideally. But for the record, it's not. It's not as though Git will cause two branches that are named the same thing to overlap. It's smart enough to know that. Now, clearly, if you have. Tell me to reply on the GitHub.
+--- --- --- --- --- --- --- --- ---
+20.0s,17min,1hr	 Yeah, please. Okay. Yeah. And I mean, [person name], if you want to discuss in depth, I'm also happy to do that just because I know sometimes it takes a while to type. But I would appreciate like some record there since it's like. Anyway. Now, of course, if anyone hands you two things that are named the same, it might cause confusion
+--- --- --- --- --- --- --- --- ---
+41.0s,17min,1hr	 about which one you should use, but it's not going to cause things to be overwritten. And in fact, one of the ways that you can check that is if we look at the Git log again. Okay. Yeah. The message is there. Yeah. So, you can see the commit. There's a commit. Okay. So, wait a minute.
+--- --- --- --- --- --- --- --- ---
+4.0s,18min,1hr	 I'm sorry. I'm sorry. I'm sorry. So, this is an example of a built-in hash. Here's the commit. So, circle's right there. But then there's a number, unique hash. That number is unique for each commit. Okay. So, even if you had [...]  your two branches. Named the same one. Yeah, you'll have different commits. Okay. Okay. Anyway. Any other questions on that? Good question. I just wanted to keep you on. Okay. So, where are we? I was making some edits to this thing.
+--- --- --- --- --- --- --- --- ---
+24.4s,18min,1hr	 Right? And you asked the question about how do I know that, like how is it that this one came off of main? In this case, I know that it came off of main in part because I was on main when I created that branch.
+--- --- --- --- --- --- --- --- ---
+48.9s,18min,1hr	 But okay, suppose that you weren't there when the person created it or you're tired or you got distracted and you don't remember for sure. How can you check that? Git log is again useful there because we see that in addition to this unique number, it shows on the right side the names of the branches that correspond to that.
+--- --- --- --- --- --- --- --- ---
+12.0s,19min,1hr	 So all a branch, behind the scenes, all a branch is, is a pointer to one of these commits. So what we're going to do as a matter of fact in this example is we have nominally our own branch. But we haven't made any unique changes. We haven't committed any unique changes to it. But in a moment we're going to commit the changes we made to let in the file pass and
+--- --- --- --- --- --- --- --- ---
+32.3s,19min,1hr	 move over here. Now it's going to be the same branch name, but the commits that make it up are different. So the name of a branch just points to a specific commit. So as we keep adding commits, where that points will change, but you'll still be able to call it like your project.
+--- --- --- --- --- --- --- --- ---
+55.4s,19min,1hr	 That's what's happening here. It's just going to be the same thing behind the scenes. Anyway, but we haven't made any special commits yet. So let's go over that. So here we see that, hey, both the main branch and the branch you just made at present have the same most recent commit. But we made changes. And in fact, let's briefly look at those changes.
+--- --- --- --- --- --- --- --- ---
+18.5s,20min,1hr	 This takes a second look. So we made these changes. They haven't been committed yet. Let me commit them. So I just want to confirm with git status that I have things that are sitting around. So when I ask git status, this is the command that I use to ask about things in my staging
+--- --- --- --- --- --- --- --- ---
+39.2s,20min,1hr	 area that haven't been committed yet. And it tells me [...]  you have some changes that are not staged for commit. These are things that have changed, but if you tell me to commit, I haven't included these yet. So I'm going to say git add anson notebook. And I'm going to say git add anson notebook. And what this tells git to do is say, hey, listen, next time you make a commit, I want
+--- --- --- --- --- --- --- --- ---
+0.0s,21min,1hr	 you to record this present notebook. So I can git add. And then again, just to be paranoid, I'll ask, hey, git status, what is this now? And it tells me, oh, hey, these are the changes to be committed. It doesn't say these are committed. But it's letting you know next time it makes a commit, it's going to record that.
+--- --- --- --- --- --- --- --- ---
+27.0s,21min,1hr	 So I'm going to go ahead and do that. I'm going to say git commit. And I'll leave a message. And I'm going to say git commit. And then I'm going to say git update. And it's going to say, hey, changed file paths to e4 projects. What was it? 05, 22, what do we call it? 01, something like that. Yeah, there we Walter. It's nice that the message also has the name of the branch on top.
+--- --- --- --- --- --- --- --- ---
+49.0s,21min,1hr	 So there we go. Great. OK, let's git status again. It mentions we have std. It mentions we have some files that aren't recorded. But it doesn't say that that thing's changed because we made a commit. I haven't made any changes since that commit. We're clean. And if I come back to our notebook now and I ask git here again, we should get the same
+--- --- --- --- --- --- --- --- ---
+13.0s,22min,1hr	 thing, just pretty. It should tell us after some processing nothing changed. Yeah, so no changes. Great. Now, for the scenario, OK, great, you made one branch with one change in the notebook. But you might have multiple. How do I do that? Well, first thing is, let me go back to main.
+--- --- --- --- --- --- --- --- ---
+39.0s,22min,1hr	 OK, checkout main. And if I ask git branch, just to confirm which branch I'm on, we'll see that main is highlighted green with an asterisk. So I know I'm there. And we'll still see that the branch that I was on before is staying around. But it's not highlighted. I'm not on it. Great. So if I navigate to that, and then I look at my notebook again, I'm going to refresh
+--- --- --- --- --- --- --- --- ---
+0.0s,23min,1hr	 this just because if it weren't for the web interface, it would happen automatically. But web interface, well, we have to refresh things. If I look around, I get the data sets. Hey, they're back to what they were before. OK, well, let's make a new one. So that was what was called a new one.
+--- --- --- --- --- --- --- --- ---
+21.0s,23min,1hr	 We'll coin it May 22, 01. I don't know. Let's say June something, just to be clear. So very similar process to what we did before. But I want to walk through it so that you can get to interesting cases in a minute. 05, whatever. And again, you can name it more nicely than this. But whatever.
+--- --- --- --- --- --- --- --- ---
+44.0s,23min,1hr	 Git branch. Git branch again, just to see, OK, I made that branch, but I'm not on it yet. So I say git checkout. And then I'm going to go back to my notebook. And if I do 06, since that's the only one that's named 06, I can hit Tab. And now it tells me that it switched to that branch. I can confirm that. Yep, it's highlighted, so I'm there. Now I want to make some changes over here.
+--- --- --- --- --- --- --- --- ---
+20.0s,24min,1hr	 And just to be quick, I'll copy that name into these file placements as we did before. And I'm going to save it.
+--- --- --- --- --- --- --- --- ---
+43.0s,24min,1hr	 And just as a matter of habit, not something that's required, but just good to do, I'm going to see it highlights the changes I made. Only those. Right? Because that last part actually, only the changes I intended to make. It's not uncommon to get to garbage. But hey, so far it doesn't seem to highlight anything else that changed. It hasn't said it's done yet, per se.
+--- --- --- --- --- --- --- --- ---
+4.0s,25min,1hr	 But we can go along with it anyway. So those are all changes. Right now, ask git status. And you don't have to check with git status. But just like [...]  why remember? Yeah, why remember things if you don't have to, right? Like, you don't want to have to record and carry in your mind what the state of your files are.
+--- --- --- --- --- --- --- --- ---
+27.0s,25min,1hr	 You might as well ask. So, okay, it does tell me, yep, that changed. Well, I want it to record that change. Add it. Double check. Yep. Changed. One second. Commit. And now say, changed the file path to 0.2.
+--- --- --- --- --- --- --- --- ---
+50.0s,25min,1hr	 What we're calling this June 30 of 5. Yeah. 5.
+--- --- --- --- --- --- --- --- ---
+11.0s,26min,1hr	 I would suggest erring towards being more verbose on your messages than more sparse. Just because those are a record path. Great. So what branch am I on? I'm on that branch. Okay. So now I have two branches, both based off of main and both that have their own commit. A couple other things that might come in handy to look at this. So we've talked about git log. But it would be nice if instead of just a list of [...]  history, I was able to see [...]  these two branches and how they connect to a common part. You know, like if I could see this thing. Thankfully, there's a lot of history in this. I mean, I can see it. I can see it. I can see it.
+--- --- --- --- --- --- --- --- ---
+32.0s,26min,1hr	 I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can see it. I can दिशि लिशि लिशि लिशि लिशि लिशि लिशि लिशि लिशि I don't expect you to remember it, but I'll share it just to know it exists called git graph. I'm going to say [...]  all.
+--- --- --- --- --- --- --- --- ---
+54.8s,26min,1hr	 I'm showing the history for all the branches. And if I do that, it'll show me something like this. Let's look at the top two to begin with. Each one of these asterisks is a commit. As you might have inferred by the fact that there's a commit next to it. And then if we look on the right again, there's this different branches that are there.
+--- --- --- --- --- --- --- --- ---
+16.8s,27min,1hr	 And we see that, okay, there's my May branch, there's my June branch. And if I follow this line down, we see they have a common origin. Now, I have a couple other branches on my commit. Okay. on my get, which is why we have some of this stuff going on here with [another person]. Let me take a moment and just specify a little bit further which one is 05 and 06
+--- --- --- --- --- --- --- --- ---
+42.2s,27min,1hr	 and main. So here I see that they each have their own independent commit, but they come together and have this common commit. And again, I can see that's the commit that corresponds to main. So, what do I want to do from there? Well, we already saw how we can see the differences
+--- --- --- --- --- --- --- --- ---
+10.9s,28min,1hr	 between these different commits. I saw a little bit of how I could navigate from one to another, but that was kind of like when I was making the branch. Just to be concrete, why don't I show how I go from one to another now that I've made. So, what branch am I on again? And again, I am on... So just to clarify, the notebooks folder is kind of like a redundant thing. Everything is on get. Now, the only little pickup that I think you might run into, so it's better we talk about,
+--- --- --- --- --- --- --- --- ---
+39.3s,28min,1hr	 is like, okay, what if you want to run more than one notebook at the same time? Which you sometimes have to do. So, there... Can't you run different get branches? Yeah. That's probably what I would do. That's a good way to do it. So, yeah, the business of... You know, for the sake of having a record, copying the file.
+--- --- --- --- --- --- --- --- ---
+5.4s,29min,1hr	 That's not something that should be happening anymore. There might be once-in-a-blue-moon circumstances where someone [...]  very quickly wants to run two notebooks at the same time. I can see that. The better way, as you just mentioned, is just have two copies of the repos. But, anyway. So... What do I want to show? I want to show the differences between the branches.
+--- --- --- --- --- --- --- --- ---
+31.4s,29min,1hr	 Actually, here's a... Maybe the better way for this is like... And I do recognize that while you said that you had to go to five, it is the case that you only have so many hours in the day. So, if it gets to a point where it's like... No, no, no, that's fine. Yeah. Also, one's brain can only handle so many arbitrary commands. No, I do want to understand this so that I can start an Ansem run today. Yeah. Yeah. Well, so... The business is starting Ansem today.
+--- --- --- --- --- --- --- --- ---
+53.9s,29min,1hr	 Mm-hmm. That's something I can help with. Mm-hmm. So, some of those specifics, like I want to mention, but [...]  if it's a matter of time, I don't want you to... I mean, we can handle that. Okay. But going forward [...]  you know, better practices with the notebooks for record. Yeah, I do want to do this like... Yeah, I understand. Just do it the correct way and not have to change every [...]  whatever.
+--- --- --- --- --- --- --- --- ---
+21.9s,30min,1hr	 No. Yeah. Well, we will have to change as updates come in. No, that's fine. But there's a more principled way. Yeah, yeah, exactly. And more straightforward way. Yeah. Sure. Yeah. Anyway. So, great. I guess the natural question is, while I could continue rattling on about [...]  how we can do this and that and look at that, a more direct way, maybe a more challenging way, is for me to ask, okay, if you were in this circumstance, what's another thing you might like to do?
+--- --- --- --- --- --- --- --- ---
+47.9s,30min,1hr	 Mm-hmm. At least for branches and... Yeah, I think I would probably run two to three different... Yeah. ...gift commits or whatever [...]  the branches that I have. At the same time. At the same time. Different GPUs, different folders. Yeah. Things I am thinking of encountering are same names, but I think I can name the things differently enough, and they are all in different folders, so they should overlap in data.
+--- --- --- --- --- --- --- --- ---
+13.4s,31min,1hr	 Mm-hmm. Yeah. That's it, I think. Okay. So, why don't we go over that specifically, because... And ideally on... Like, I book GPUs on CPUs. Yeah. I book GPUs on C2, but if C3 works, that's also good. But, yeah, I don't know if C3 GPUs are available this weekend or not, but I booked two GPUs, I think, on C2 today, so it would be good to at least have [...]  two branches running.
+--- --- --- --- --- --- --- --- ---
+43.4s,31min,1hr	 Okay. Yeah. Sure. So, the first thing to notice is that... You already know the answer because you said it, right? But I might as well just connect it in my own terse way. I'm a very pedantic person sometimes. Yeah. [...]...the way I like to think about programming sometimes, likes the wrong word. The way I think about it, perhaps begrudgingly sometimes, it's like one of the most pedantic math proofs, because with a proof in math [...]  you can kind of hand wave sometimes.
+--- --- --- --- --- --- --- --- ---
+14.8s,32min,1hr	 Not saying you should, but you can, and the teacher might be like, I know what you mean. But if you hand wave on a computer program, it's not going to let you get away. It might look like it's doing what you want, but it's going to get to you. Yeah. So, it's a good idea. Yeah. I mean, how do you... So, it's a good idea. Yeah. C2, I think, is very, very good. Yeah. C2 is very, very good. Yeah. Yeah. you in the end anyway so all the stuff with it helps you know track and correct and all the stuff your current directory but your current directory per your
+--- --- --- --- --- --- --- --- ---
+40.0s,32min,1hr	 commits and for what you're doing only has one five one answer now as you suggested hey couldn't you just have more than one repo yep and that's exactly what we're about to do so if I go back up this is something you shouldn't have to do very often so I mentioned this more like for your record as opposed to something you have to do all the time but if I do git clone private
+--- --- --- --- --- --- --- --- ---
+1.0s,33min,1hr	 and son which is the repo I have here I want to say private and son 2 whatever there you go so it made a copy of this over here
+--- --- --- --- --- --- --- --- ---
+29.9s,33min,1hr	 if you take a look it's not making another main branch it's it has the full history with it right so it's basically yeah exactly that's basically what the fork does right they just decide to call it something else but one of the reasons I want to highlight the slight subtlety there is
+--- --- --- --- --- --- --- --- ---
+53.9s,33min,1hr	 that and it's a good subtlety is if you make changes on a branch that here it called main and you want to share those changes with someone else you don't have to start copying files around you would just issue a command to say hey my changes please share them with other people and then they have them right which is not necessarily what would come to mind if one was like making quote-unquote separate main branch
+--- --- --- --- --- --- --- --- ---
+18.4s,34min,1hr	 changes right so why would I need to do these if I'm just making branches right so the branches take care of the version history and everything for you but in each one of these commits how many notebooks that you have how many do I have to when you commit it like in this folder right here how many notebooks do you have
+--- --- --- --- --- --- --- --- ---
+42.4s,34min,1hr	 how many files do you have 25 or 30 right here though oh one Right. Yeah. Now you have 25 or 30 versions, but where are those versions? You think you can check them out whenever right, but they're on the shelf You need to pull them out off when you want, right? So what I just did is like, okay, you want to have more than one version running? You want to have many different different versions running?
+--- --- --- --- --- --- --- --- ---
+6.9s,35min,1hr	 I'm going to have my records still. I see what you mean. Yeah, so So you do have like two different folders now But those folders have the full record so that if you want to like share those changes or track those records Yeah, so if I can make like different Branches with different Data sets that I would run but if I'm planning to run two data sets at the same time
+--- --- --- --- --- --- --- --- ---
+28.3s,35min,1hr	 I need to clone the repo like once or if I'm running two data sets I need to make another clone Yeah, and then you would once you make that clone and you you would use all the git machinery to track the changes share the changes Etc right Now if at any point you have like some question about that or like if you even don't want to do it yourself
+--- --- --- --- --- --- --- --- ---
+54.5s,35min,1hr	 I'd be happy to do it for you The key thing I want to highlight there is that while you have these multiple I know you already said it but given given that we're fighting against historical precedent not just with you, but like it's a lot Oh And get the thing I want to highlight is that? Within those folders you don't need to start saving 20 different versions of the Anson notebook because that's taken care of for you
+--- --- --- --- --- --- --- --- ---
+29.7s,36min,1hr	 Anyway, so here we have one and just to be concrete Right so I'm currently on that branch let's say that I want to actually look at the O5 branch Alright So in this folder, that's a clone. I'm on this version of the code Then if I go up and I go to these namings are off just because I did it quick
+--- --- --- --- --- --- --- --- ---
+1.1s,37min,1hr	 But that one was to this one was just normal I'm on this what branch am I on? I'm on those six so and if we we have at our disposal would be get tools to see and confirm the differences, right, but basically I was just able to confidently Set up two different versions of the code These two different places now, let me let me show you one other thing that might not be quite as obvious
+--- --- --- --- --- --- --- --- ---
+25.1s,37min,1hr	 I know it's not in the front of your mind right now, but just to highlight that this buys us stuff I want to make a change in This repo the to to this branch and then I want to share it with this other branch here without having to like manually Copy files or have you were while maintaining the record Maintaining the record that's a key word there
+--- --- --- --- --- --- --- --- ---
+4.0s,38min,1hr	 Go up go to that A branch on my own That one what are my commits yeah, I changed it to that whatever Well, let me Go look down these or may And I go look down these or may Go look down these or may Some people might want to do let's say
+--- --- --- --- --- --- --- --- ---
+33.2s,38min,1hr	 Trivia will change whatever Is working to the difference to visually confirm that's all the changed seems to be the case the case hasn't quite finished processing yet because of okay now it has everything else is the same great I just want to cool
+--- --- --- --- --- --- --- --- ---
+2.5s,39min,1hr	 okay great so it says it's going to commit that well now I want to tell it to commit that and I'll tell it exactly what I did cool okay look at the log yep that's included great but that's on this
+--- --- --- --- --- --- --- --- ---
+30.1s,39min,1hr	 form let's go look at the history of that on the other folder because we were to prevent right now we're on the June branch let me over here is on May let me look at May local link and let me switch to May on here and see what it's like all right so I asked get log here it doesn't show that all right it's one commit back how do I
+--- --- --- --- --- --- --- --- ---
+54.0s,39min,1hr	 grab the changes I made over there bring them over here well see first I'm going to tell it where those changes are you're not going to have to do this basically ever it usually does this for you whenever you clone from github but here it's a special case so I'm going to do so I'm going to say get remote add not private
+--- --- --- --- --- --- --- --- ---
+26.0s,40min,1hr	 and some to what I want to call that I need to give it a name our what yes Oh aí a pão senhorheit ok ísa selection rockårt
+--- --- --- --- --- --- --- --- ---
+47.2s,40min,1hr	 ok so on what just happened couppel!!!!! so first you can see that it did something and this is what a new branches so on these are the names of the branches in number two price
+--- --- --- --- --- --- --- --- ---
+15.4s,41min,1hr	 great saying that a graph financial position dropping down killed me a three point sensitivity chain carrying off the other two things so comunque um it's saying to the graph system it's showing it talks around those brought you a copy and in your folder it saved them at this location now why did it save it with this name in front because you can imagine if two people are working on the same branch at the same time you want to be clear which branch is yours and which is the one you're getting from the other place right so if i say get branch okay or it's all yeah so i ask it to show me like what
+--- --- --- --- --- --- --- --- ---
+44.0s,41min,1hr	 are all these branches you'll see hey there are these two new ones here right okay great now if i ask you to get log hey show me what is the log of uh may here press the wrong button you know what if i actually type it because there should be log uh tab complete yeah uh so i just press one letter and then i tap complete cool
+--- --- --- --- --- --- --- --- ---
+8.9s,42min,1hr	 great so it shows me that this is the log of that other one right so locally my may is this one right here right and then the other one is may over here and i can see that the one commit ahead okay how do i incorporate that other change but this is where we have to get merged right so yeah i guess i prefer later if we talked about the process of making new branches
+--- --- --- --- --- --- --- --- ---
+36.0s,42min,1hr	 but how do we bring them together so that command is get merge do that in if Palstop we just want toERG we don't want toerg but let's say if i select uh step one
+--- --- --- --- --- --- --- --- ---
+3.2s,43min,1hr	 um now typically you just want to double check where you are again i'm always a paranoid person i don't like remembering where i am i like to check where i am So if I ask now, get log 05, this is the name of my one. It says that, hey, the head of the other branch, my branch, are the same one. And even if I had this line removed, I could see that the log for where I am says,
+--- --- --- --- --- --- --- --- ---
+25.6s,43min,1hr	 add a trivial print statement. Let's go one step further to confirm that. Let's actually look at the file. So if I go back to private anson, we're in the private anson folder here, and I open this, and I go looking down, there's that trivial print statement.
+--- --- --- --- --- --- --- --- ---
+53.2s,43min,1hr	 Now, of course, you can imagine that there might be a lot more that changed. Now, one other mechanism that I'll leave it up to you whether we talk about it today or not, but there's a notion of a get merge conflict. And what happens there is you can imagine that two people are working on something together, but they... The same line has changed. Exactly, right. So there's a way that gets, you know...
+--- --- --- --- --- --- --- --- ---
+21.0s,44min,1hr	 In this case, it was straightforward because the other branch was the same as ours but had more. But in the cases where there's a merge conflict, it doesn't go and make a new... It stops and says, hey, could you resolve this for me? That's a thing you could be aware about. We don't have to talk about today if you don't mind, if you think we've covered enough. But just be aware that these tools exist and hopefully make life easier
+--- --- --- --- --- --- --- --- ---
+46.7s,44min,1hr	 when bringing in multiple things from all over the place. So, I have at least one question, and then I know the further orders of business that you care about advancing. So, my question is, are there any other examples of things that you'd be interested in doing
+--- --- --- --- --- --- --- --- ---
+15.6s,45min,1hr	 that you might want to bring up for us to talk about? State processing. Ah, yes. So that's not Git. But that is Ansem, which I will get to that in a second. Good question. But prior to stepping outside of Git land or even file management land, is there anything in the file management? Git land that you're curious about? I don't anticipate using anything more complicated at this point of time,
+--- --- --- --- --- --- --- --- ---
+42.1s,45min,1hr	 but probably will come up, I don't know. Well, please do ask. And, I mean, listen, I'll be the first to say that. I mean this seriously. I remember learning Git and finding [...]  kind of [...]  I typed in a bunch of commands here, but at first it wasn't like I had this in the back of my mind. The good news is that [...]  I lost memory pretty quickly.
+--- --- --- --- --- --- --- --- ---
+6.3s,46min,1hr	 And you're probably [...]  it sounds like I'm not going to have to do too many sophisticated things. So hopefully just commands like git commit, git add, that might be all you have to do. Right. So now stepping outside of Git land, I'll go to Ansem stuff. Okay. So there's preprocessing. I need to circle back with [another person] on that. The code's around.
+--- --- --- --- --- --- --- --- ---
+34.2s,46min,1hr	 And basically. Okay. So. So. So. So. So. So. So. So. So. Well, to state the obvious and then talk about how to get it done, you want to start processing Ansem stuff. The first step in Ansem now is that you have to preprocess the data you've loaded. I've done that once with some version of [a particular person]'s paper. Okay. So your question then is, hey, how do I make sure I got the most recent version of that?
+--- --- --- --- --- --- --- --- ---
+57.5s,46min,1hr	 Yeah. Okay. Good question. So. So where do you last remember having that code? [A particular person] set up something on my computer. Which, your desktop or your server? All server. Okay. I can probably look it up. You know what? Let's, to a certain degree, hopefully it shouldn't matter. Let's. I know that things have changed because we were like chopping it into blocks and then running things.
+--- --- --- --- --- --- --- --- ---
+36.2s,47min,1hr	 I think it's probably about six months. Yeah. Yeah. Okay. So let's say we have, I don't know, like a few days left, we have a lot of things going on. Yeah. So I guess we can talk about that. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Yeah. Okay. So I guess one is I has baking information and running and I've started my
+--- --- --- --- --- --- --- --- ---
+56.7s,47min,1hr	 projects. Sure. Cool. Thank you. That was really thought. Thank you. Thank you. yep yep so maybe it is on topic of get so I am actually going to for reasons and this is in part you know something I'll follow for [person] I'm actually going
+--- --- --- --- --- --- --- --- ---
+20.4s,48min,1hr	 to grab that outside of the docker so the main and I also probably need your help to like like do this exact thing on my computer and make sure it like works for one day doesn't and I'm actually going
+--- --- --- --- --- --- --- --- ---
+43.9s,48min,1hr	 to I mean the next question is exactly the same with browsers do you want me to shut this down might as well so that was the jupiter lab browser it's closing the curl but whatever we're still in the docker and I'm actually going to cause the docker
+--- --- --- --- --- --- --- --- ---
+6.0s,49min,1hr	 to stop so I'm not going to detach I'm going to exit great now that's my account your account we want to see about not you know okay I need to finish setting up that one thing with the video on your account but beyond that this thing of like was the pre-processing code
+--- --- --- --- --- --- --- --- ---
+28.3s,49min,1hr	 I got this connection probably died let me just fix that quickly oh I
+--- --- --- --- --- --- --- --- ---
+5.5s,50min,1hr	 I I I I I I I I
+--- --- --- --- --- --- --- --- ---
+28.3s,50min,1hr	 I II II Y Boom. Now, I'm assuming you have your git keys on the server, right? Right. Who doesn't know? Okay. Now I just need to check the name of the place I found this from, which, conveniently enough... No, no, I'm sorry. Oh, go ahead.
+--- --- --- --- --- --- --- --- ---
+4.3s,51min,1hr	 [...]
+--- --- --- --- --- --- --- --- ---
+35.3s,51min,1hr	 Okay. So, I am on the Favella GitHub, and I will go to repositories. Actually, my other question is, is this set up on C2 as well? It will be. So, when I fix this thing on C3, I'll fix it on C2, and in the process we talked about today, it should be the same.
+--- --- --- --- --- --- --- --- ---
+57.3s,51min,1hr	 Should be. Okay. How long would it... Just because I have GPU root on C2, not on C3, would it be an easy fix, or would it take time? I mean, the steps involved are not distinct between C3 and C2, so it's not going to take any especially extra time.
+--- --- --- --- --- --- --- --- ---
+18.3s,52min,1hr	 And the time that it takes is like... I think that it should be fairly fast. Okay. That's fine. Okay. Let me see. Did [they] mention it on Slack, the name of the repos?
+--- --- --- --- --- --- --- --- ---
+40.3s,52min,1hr	 I think so. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Yep.
+--- --- --- --- --- --- --- --- ---
+27.9s,53min,1hr	 [They] might not have made it available as widely as we would have hoped. Can I double check with [particular other person]?
+--- --- --- --- --- --- --- --- ---
+2.0s,54min,1hr	 But that might not be necessary because I have the name now. I mean, it would have been easier for me to confirm this, but [they do] have a match in here. You use an SSH key, right?
+--- --- --- --- --- --- --- --- ---
+34.8s,54min,1hr	 You use an SSH key. Okay. Okay. Okay. Okay. Do you use an SSH key or do you log in to get the password? I think I log in with the password. I'll type this just in case. Let's see if it works.
+--- --- --- --- --- --- --- --- ---
+0.0s,55min,1hr	 Okay. Okay. We probably don't. What are you using?
+--- --- --- --- --- --- --- --- ---
+33.4s,55min,1hr	 If you want to type it, be careful. I don't. Let me go to my computer and see. On C3 or on GitHub? GitHub. It's my name with [...].
+--- --- --- --- --- --- --- --- ---
+54.0s,55min,1hr	 [...]. Okay. Uh, ba ba ba ba. Okay. And password. Well, you can type that. Hold on. Actually, I'm good.
+--- --- --- --- --- --- --- --- ---
+22.5s,56min,1hr	 I don't know if this is useful. Put this on your lap or put it on there. Oh, it's fine since I just put it in here. You can go over here. You caniberalize this . All right. I'm going to leave this as no'm sale.
+--- --- --- --- --- --- --- --- ---
+1.9s,57min,1hr	 Even if this doesn't evolve. Do a relatively simple command.gest entãoξ I'll try it. You want to fix it and ours with a dare Zero. Like it was different and it didn't alter the dimensions? Of course. You have to be careful here, don't you? Press the arrow and then enter. Username, password. Okay. To be clear, this is your password on GitHub.
+--- --- --- --- --- --- --- --- ---
+39.1s,57min,1hr	 Okay. [...]. Would you mind if I open a text editor, type it in, and copy it in? Sure. I mean, I'm typing it in. Yeah, but you can't see what's being typed. That's kind of the issue. Or part of the issue. So I'll look away, in fact. Okay.
+--- --- --- --- --- --- --- --- ---
+21.7s,58min,1hr	 [...] When's the last time you logged into GitHub?
+--- --- --- --- --- --- --- --- ---
+50.5s,58min,1hr	 I mean, we had it open the other day. That was like it was working on my computer. How do you log into that? [...]  that's what I looked up. Can you get Google to... Yeah. Yeah, that's what I typed in. Well, let's... Do you mind if I see the thing? First confirm. That's what you meant to do? Um, and you're sure those are the characters? Like, those...
+--- --- --- --- --- --- --- --- ---
+28.5s,59min,1hr	 I just typed the radiations. Okay. Oh, sorry, I know. No, actually, no. That is the correct one. Yeah. Just to be clear, it's not a confusion between... This, this, and this. I tried the zeros and those. Okay. Maybe go and change the last... This auto-capital one. Okay. Okay. And, you know what, just... That's the username, right?
+--- --- --- --- --- --- --- --- ---
+23.7s,0min,2hr	 Okay. Okay. All right. Let me just double-check that I'm not... I think that might be... Capitalization. Okay. I just wanted to double-check that I typed in my end correctly. Okay. Okay. Oh, support for password authentication.
+--- --- --- --- --- --- --- --- ---
+58.7s,0min,2hr	 What is that? I know GitHub does two-factor authentication. Yeah, but it's basically saying you're not allowed to log in with a password. How do I log in then? So if it's through the web browser, with a web browser, we could do that if you wanted. Okay. Yeah, the other one is with an SSH key. I don't think I have that. Okay. Let's take a quick...
+--- --- --- --- --- --- --- --- ---
+25.1s,1min,2hr	 Not host. Hey, you need to write it up. I don't have a password. I have this text two-factor authentication. I see. So if it's all right, do you have any qualms about logging in on this machine? No, it's fine. Okay. Just because, bear in mind, in general, someone could [...]  record your password. But you trust me, don't you?
+--- --- --- --- --- --- --- --- ---
+9.1s,2min,2hr	 Sure, you have my server password. You have my GitHub password. [...]. All right. I guess I tried that on your computer. Yeah, I guess. Well, let's try it with the new password. Very interesting.
+--- --- --- --- --- --- --- --- ---
+36.5s,2min,2hr	 I still haven't logged in on my computer. I don't know how that works. [...]
+--- --- --- --- --- --- --- --- ---
+2.6s,3min,2hr	 Spread from what I had interpreted you to say before, one could imagine a circumstance where they [...]  the password is saved in a way that they can access on their computer. Now, if I understood what you said a moment ago, it sounded like you saved that with Google, and Google shows it on your phone. It's just the way it's [...]  automatically filling in the password.
+--- --- --- --- --- --- --- --- ---
+36.3s,3min,2hr	 [...] Couldn't we just load it on my computer? Yeah? Yeah, that's a good point.
+--- --- --- --- --- --- --- --- ---
+3.5s,5min,2hr	 Okay. Yeah, let's do that. Okay. Yes. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Thank you.
+--- --- --- --- --- --- --- --- ---
+33.5s,5min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+3.5s,6min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+33.5s,6min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+3.5s,7min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+33.5s,7min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+3.5s,8min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+33.5s,8min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+3.5s,9min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+33.5s,9min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+3.5s,10min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+33.5s,10min,2hr	 Thank you.
+--- --- --- --- --- --- --- --- ---
+59.0s,59min	
+--- --- --- --- --- --- --- --- ---

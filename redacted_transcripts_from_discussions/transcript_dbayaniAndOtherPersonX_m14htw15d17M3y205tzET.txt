@@ -1,0 +1,184 @@
+22.0s	 This is [D.] Bayani with [...] on March 17th, 2025. It's currently 3.14 p.m. Eastern Time, USA. Discussing various things about ANS-GET for tracking notebook changes and incorporating notebook changes for ANSUN,
+--- --- --- --- --- --- --- --- ---
+43.0s	 as well as some details to begin with on the preprocessing code that is not necessary for ANSUN. And again, I have your permission to record this, correct? Yep. Could you verbalize it? Yeah, sounds good. Okay. All right, so let's start. The question was on preprocessing.
+--- --- --- --- --- --- --- --- ---
+4.0s,1min	 Let me start a new terminal just so we can have that recorded too. Recording. Just to be clear. So, it's going to be on the same page. Like, I've logged in through JupyterHub on the web page. Okay. We can JupyterHub or JupyterLab? Jupyter... Did you... Not Lab. JupyterHub. The browser version.
+--- --- --- --- --- --- --- --- ---
+43.0s,1min	 The browser version. Okay. We can see that too. JupyterHub. JupyterHub.
+--- --- --- --- --- --- --- --- ---
+4.0s,2min	 JupyterHub. operational. Yes. Okay. So, let's start. You don't have a photographic memory, do you? Just in general. Okay, good.
+--- --- --- --- --- --- --- --- ---
+26.0s,2min	 Just to make sure. Just to make sure. Okay. All right. So, I'm going to... Don't want to record that and then have it shared with people.
+--- --- --- --- --- --- --- --- ---
+47.0s,2min	 Okay. So, this is yours. Mm-hmm. And you're curious about the preprocessing code running, correct? Mm-hmm. And you have a command that you want to run in one of these tabs, correct? Yes. I love this one, actually. Left, right? Left. Okay.
+--- --- --- --- --- --- --- --- ---
+8.0s,3min	 Left. Are you sure it's not this one? Because this looks like... No, this is the one you asked me to run. Yeah. Oh. Okay. I didn't know that. I mean, unless like something... Like the one I was running... Well, let's do both just because this one is very quick and then... Sure. ...to avoid some... So, I have to briefly show what happened here. This last part is a little bit of garbage, but... So, this is the main command I ran in Python, of course. Time just puts out the statistics. Okay. So, I'm going to run this one. Okay. So, I'm going to run this one.
+--- --- --- --- --- --- --- --- ---
+30.2s,3min	 Okay. So, I'm going to run this one. Okay. So, I'm going to run this one. So, this is the main command I ran in Python, of course. Time just puts out the statistic at the end. So, it took a little over four hours, like four and a half hours to run this thing. And this is the new code, right? So, input path, obviously, output path. I changed it to be like a temporary one just because...
+--- --- --- --- --- --- --- --- ---
+56.2s,3min	 So, it took four hours? Four and a half hours. Interesting. Okay. On GPU. And that's the GPU number. Okay. And [...] told me that this is actually dependent on CPU, not GPU. Yeah. Yeah. Yeah. Yeah. Yeah. I'm not exactly sure what [...] had in mind with that. It's currently... I mean, first off, when [...] says dependent on, that's a breakdown of like where the bottlenecks
+--- --- --- --- --- --- --- --- ---
+18.5s,4min	 in the runtime are. That doesn't mean that it doesn't use a GPU. Okay. So, it does use a GPU as far as I can tell. In fact, I know I looked at it. I mean, I saw it running, but... Okay. You raise it up. Okay. Yeah. I mean, you raise it up at a point, but it's a little orthogonal. Okay. Anyway, so that's the thing. And then, I'm going to run this one. Okay. So, you run the thing, and then this last part, which you don't need to worry about, but basically it lets you save out what's good print...
+--- --- --- --- --- --- --- --- ---
+41.0s,4min	 Save what gets printed out while at the same time printing it to the screen. Anyway, so that is the thing. So, just to be clear, if I run this thing, I go into my private pre-process videos folder, change directory code there. Yep. Then run that bit. Well, first thing you need to do is check up the right...
+--- --- --- --- --- --- --- --- ---
+2.0s,5min	 Yeah, yeah. So, that's... It sounds like that was one of the hiccups before, and might as well go over that while I'm here. So, let me... I can actually X this. Are you familiar with Tmux at all? Okay.
+--- --- --- --- --- --- --- --- ---
+24.0s,5min	 So, it's just a way to allow you to run commands when you're not connected to the server. Absolutely. Yeah. So, it's a way to allow you to run commands when you're not actively connected to the server. Now, in this case, it looks like JupyterHub will probably fill that for you. I mean, we reconnected and things seem to be running. So, I'm not going to bring up Tmux just for the sake of simplicity, but just bear in mind
+--- --- --- --- --- --- --- --- ---
+48.0s,5min	 that if you run these things in the terminal outside of JupyterHub, when you disconnect, typically things you're running will die, if you don't run them in Tmux. Anyway, so first thing first, you'll see that we're in base, as normal. So, I'm going to do conda deactivate. Right? And for obvious reasons.
+--- --- --- --- --- --- --- --- ---
+9.0s,6min	 Now, the next bit is that we need to activate the environment that has all our dependencies. I, of course, don't remember the name, so what's a way we do that? It's conda env list. Environment for environment, list for exactly what you'd imagine. And I called the one in question N for and some preprocessing. Okay. Cool.
+--- --- --- --- --- --- --- --- ---
+34.0s,6min	 So, I'm just going to copy that. And then conda activate method. Okay. So, right, the next thing is to check we're in the right directory. So, pwd, and yep, we're in private preprocess videos for Anson.
+--- --- --- --- --- --- --- --- ---
+55.0s,6min	 Okay. And the next... Sorry, I have a question. Yeah. Can you show me how you knew which file you had to do it for? Or did you do a single file or did you do all the files? Oh, you mean in the input path? Yeah. That's a good question. I think it was the syntaxes directory here. So, this is just a copy. This is a text file I have open. Yeah. So, I think this is how I used to do it previously. Yeah. Which is file by file. Sure. And now [...] has a way of doing it for all the files for one data set. Okay. So, that's probably a simple way to do it. Yeah.
+--- --- --- --- --- --- --- --- ---
+16.0s,7min	 So, I'm going to do a simple one. Okay. So, I'm going to do a simple one. So, I'm going to do a simple one. Okay. So, that's probably a script that's in there. I saw a script in here. So, what is it? Submit multi, submit multi old? Something like that? Probably. I mean, she... It's in the GitHub thing.
+--- --- --- --- --- --- --- --- ---
+37.3s,7min	 This is... I don't know what it is called. It's like on the GitHub... Read me or... Yeah. Okay. So, I'm going to do a simple one. This is a simple one. This is a simple one. Okay. So, I'm going to do a simple one. So, I'm going to do a simple one. Okay. So, just as a point of clarity, GitHub hosts the repo.
+--- --- --- --- --- --- --- --- ---
+57.5s,7min	 As you know, this is a clone of that repo. So, all the content that's on GitHub should be here, modulo, just administrative stuff that's on there. So, like if someone... We can talk about the subtle differences, but for the most part, if it's something like, hey, this is part of the code, that should be in the repo. Anyway.
+--- --- --- --- --- --- --- --- ---
+20.4s,8min	 So, let's do this. Read me. So, if you just настро it on... Oh, okay. Yeah. So, that last bit... The submit multi. Oh, submit multi. Okay. Maybe Modern SQL Gurkha. Here's an example command line submit take a prior a file, take a call, all the data
+--- --- --- --- --- --- --- --- ---
+44.6s,8min	 expected from the син zitten metadata.txt, and run all of it together. Okay. And, of course... Looks like that path is maybe... you were referring to some things being hard-coded before and I don't see in this anyway if this works this works sure I can take a look but well metadata
+--- --- --- --- --- --- --- --- ---
+5.1s,9min	 dot txt is just a name of the file nothing in what I'm looking at specifies the path to that file so either it makes a default assumption about where it is or I have to change it for it so there's another flag that you pass in so I understand that [...] what you need to do is change it for every data set I'm
+--- --- --- --- --- --- --- --- ---
+27.6s,9min	 talking about what the code does which we can take a look at but basically the cool I think [they] went through it [they] did it should be fine okay so you're saying [they] fixed it earlier today okay so I'm going to do get fetch all I don't think [they] changed anything I think [they] looked through [their] board I think it's fine issue was one of the things we had a confusion about the environments but also another issue was
+--- --- --- --- --- --- --- --- ---
+52.3s,9min	 I didn't have access to the folder I was trying to access and [...] fix that for me now so the path service providing was giving me an error of like I don't have writing permission sure so I think I understand what you're saying now but basically the the point I was seeking clarity on is I understand that
+--- --- --- --- --- --- --- --- ---
+16.6s,10min	 what I believe I understand for me now is that this metadata.txt file which the code needs to process these results resides in the folder with the data that you can't process okay that makes sense that's reasonable what I was asking towards is you could imagine that metadata.txt living somewhere else in
+--- --- --- --- --- --- --- --- ---
+38.0s,10min	 principle and what I looked at didn't specify that so the question then is where is the code is going to be in the folder and I assume that sort of thing lives but now I think I it makes sense that's with the data but that was a bit anyway just in the off chance something was checked I'm just going to run this quickly didn't pull anything so I'm
+--- --- --- --- --- --- --- --- ---
+59.6s,10min	 assuming everything's fine so you're saying that you ran a command earlier today to run this and then yeah you can write that bit like the one you call it from github and I can tell you what part it is
+--- --- --- --- --- --- --- --- ---
+31.7s,11min	 you're referring to this one yeah okay give me just a second to just I'll do it in a text file and that's fine so go ahead no no I have the path I just it's not that much work to type it this is the
+--- --- --- --- --- --- --- --- ---
+6.3s,12min	 project rim was it yeah okay yeah it's fine if you send it to me on slack that's fine be careful I heard from [...] between catchy I know I'm talking online now it was all about all the code you don't say anything about exchanging synonyms message for me or anything [...]
+--- --- --- --- --- --- --- --- ---
+51.2s,12min	 anybody know about any of that you anytime so I'll come back to say that you just want to give it a little bit we already deal with here it was not 1200 like not contaminating the even when you think I have for analyst put the cluster after that because it's happened here in you over the other business over the spend in the process minute made when fun [...] don't you just compare to be same time I don't understand nothing terrible it does more or It vocês estudiarão este le operada uma pará That seems to be a very long time for pre-processing just the pre-behaving data.
+--- --- --- --- --- --- --- --- ---
+35.6s,13min	 Four and a half hours. I hear you. Part of the conversation is when they're having [...]. I was wondering if you have something to say to that I don't know.
+--- --- --- --- --- --- --- --- ---
+57.1s,13min	 This is loading to see what will happen faster. I can tell you. I can dictate it. Yeah. And I'm just bringing this up so it. So what's it? Store one project room or [...] or something like that. If you paste that whole section. Oh, I mean, I'm in. I'm. I can just tell you what to change here. Sure, but I'm...
+--- --- --- --- --- --- --- --- ---
+28.9s,14min	 I hear you. I'm just getting the path from you right now, then I'll paste it in here. The reason I have this open is because then I can [...]  check it's the right path. Yeah, project rim. Yeah, R-G-R-I-N. Data raw. Data underscore raw. Slash 2025. 2025. Dash 0310. One zero. One zero. That, okay, and there's the metadata file. Great. Okay.
+--- --- --- --- --- --- --- --- ---
+25.4s,15min	 And that, you want as the input, correct? Where do you want the output? Same thing. Instead of data raw, it'll be data processed. Data processed. Leading date or not? No date. No date. Just project rim data processed. Data processed. Yeah, that's it. Will it automatically pull that date out from the... It'll create a... It'll create a... It'll create a pre-processing code or call it data processing 0310.
+--- --- --- --- --- --- --- --- ---
+58.1s,15min	 Yeah. Okay. Oh, and this is the pre-processing code, okay? Yeah. I'm just... I just want to take a quick look to see if something like that already exists and it doesn't appear to... So, okay, fine. So this is the command you want to run? Mm-hmm. Okay. And this is the environment for it. If I press enter, fingers crossed. Mm-hmm. Fingers crossed? Sure. Okay, there we go. No such file or directory. Metadata.
+--- --- --- --- --- --- --- --- ---
+36.8s,16min	 Oh, because... Let's see. The date. The date is a separate parameter. Okay. That's why it doesn't need... My bad, but that's why it doesn't need it on the data process because it just says this is a general path. I see. And then it pulls the date. Yeah. Now it seems to be good. Okay. So... That's awesome. So I can do this for every business. Yeah, but let's take a quick look to see
+--- --- --- --- --- --- --- --- ---
+1.9s,17min	 that there's not an issue with GPUs or something like that. So first off, we see that you're running something now. You're on the dev one. Let's make sure that you have that reserved. Yeah, I do have it. The question is, how do you specify which GPU number to use? I think there's a flag for that. It might not be in the convenience script,
+--- --- --- --- --- --- --- --- ---
+34.6s,17min	 but let's take a look. Oh, we navigated the project. We're in there. And that is exactly where we were. Oh, this is... And there we go, huh? Something's just spoilin' things. Right. Right. Yeah, we're just gonna draw a huge pile of++. extension trees next to one each table.
+--- --- --- --- --- --- --- --- ---
+4.7s,18min	 Hit that. Roll up the Grandma Code Su Ford and just hit the red arrow. But, with everything else, we can still direct the customer to you on a sheet of paper. Yeah. Yeah. Okay? And let's go right back to the engine job. Right. I've got a piece right now that's running this market. Right. Okay. All right, so user specifies the parameters of this one we looked at.
+--- --- --- --- --- --- --- --- ---
+25.0s,18min	 There's GPU. Now we'll see if the submit multi allows that.
+--- --- --- --- --- --- --- --- ---
+53.0s,18min	 Okay. Okay. Not obvious, or at least I'll have to read through that more to see.
+--- --- --- --- --- --- --- --- ---
+19.7s,19min	 The easiest way to test it is to restart the pre-processing and see if changing that flag changes the GPU. Are you up for that? Okay. I'm hoping this dies gracefully. This is a nice question. Do you have to go and delete some, whatever amount was created or will it get overwritten
+--- --- --- --- --- --- --- --- ---
+40.7s,19min	 when you run it the second time? I'm hoping it won't get overwritten, but we can check. Nothing wrong with being sure. Especially since like the data is chopped up and processed, I'm a little concerned about like some weird... No. Okay. You're a good point. I appreciate you raising it. It doesn't look like it got that far. It looks like the only thing that produced so far is the noise.tiff.
+--- --- --- --- --- --- --- --- ---
+1.7s,20min	 Okay. And so I'll just... Okay. Sounds like a good... I mean let's do something in data-raw. I mean just to adopt the tease across the eyes. Okay. So I'll just... Okay. Okay. I'll just... Okay. So I'll just... Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay.
+--- --- --- --- --- --- --- --- ---
+22.7s,20min	 Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Teka. Okay. Okay. Okay.
+--- --- --- --- --- --- --- --- ---
+48.7s,20min	 Great. Now let's say this command again but let's say GPU... I'm just trying to see... Can you say any other thing? Well [...] is... It's a little... It's a little... It's a little... I don't know. It's a little... Yeah. Yeah. Well [...] is on at least a couple right now.
+--- --- --- --- --- --- --- --- ---
+10.7s,21min	 You do have the whole block reserved. But then that means that [...] probably shouldn't be on one. Well I mean that's fine but [they] is showing up here. Is this the checkerboard? Yeah. Is this the checkerboard? It looks like it is but you do have your name on it.
+--- --- --- --- --- --- --- --- ---
+31.7s,21min	 Yeah. It's fine. I'll avoid using that one for now. Okay. So let's say GPU 2 then. Unknown option GPU 2. So let's try this then. Okay.
+--- --- --- --- --- --- --- --- ---
+52.7s,21min	 So let's see. I'll put it here. And... I'll say what I'm doing here in a minute.
+--- --- --- --- --- --- --- --- ---
+17.7s,22min	 Okay. So let's see. Okay. Okay. Okay. Okay. Okay. Okay. This should work. Jessie good to go. This should utilisable. Okay. Alright. I'll see. I'll see.
+--- --- --- --- --- --- --- --- ---
+28.6s,23min	 Do you this? Okay. Oh. Alright. Alright. Alright. Speak in makes sense, isn't it. So... Okay. Okay. Perfect. So let's take a look. Let's see.
+--- --- --- --- --- --- --- --- ---
+14.8s,24min	 Let's see. I'm just going to take a second here, and then if it takes too long, we'll wrap something else up. Okay, I'm out of here.
+--- --- --- --- --- --- --- --- ---
+15.5s,25min	 Okay. Might be. Keyphrase is might. Might. So we can get a, there's a question of how big of a deal this is, which is something
+--- --- --- --- --- --- --- --- ---
+36.1s,25min	 to address, but this is something that should be easy to dig into and address if it's an issue. We'll talk about if it's an issue in a moment, but clearly the easiest thing is, or the best thing is just to find a way to change it, as opposed to having to worry about what to
+--- --- --- --- --- --- --- --- ---
+56.8s,25min	 do if we can't. Okay, it says... .
+--- --- --- --- --- --- --- --- ---
+28.0s,26min	 Yeah. . I'm going to use the equals sign. I'm going to try that. Oops.
+--- --- --- --- --- --- --- --- ---
+4.0s,27min	 Jacks.
+--- --- --- --- --- --- --- --- ---
+26.0s,27min	 Jacks. Jacks. Jacks. Jacks. Jacks. Because it's hard coded in.
+--- --- --- --- --- --- --- --- ---
+48.0s,27min	 Was it automatically always supposed to be zero? Yeah, it looks like an easy fix though if I'm understanding what I'm looking at. That's a canon. So let's try this and see. . .
+--- --- --- --- --- --- --- --- ---
+12.0s,28min	 . . . . . .
+--- --- --- --- --- --- --- --- ---
+34.0s,28min	 . . . . . . . . .
+--- --- --- --- --- --- --- --- ---
+56.0s,28min	 . . . . . . . . . .
+--- --- --- --- --- --- --- --- ---
+18.0s,29min	 . . . . . . .
+--- --- --- --- --- --- --- --- ---
+40.0s,29min	 . . . . . necessary right here and now. No, that's fine. You can do it later. As long as I...
+--- --- --- --- --- --- --- --- ---
+2.0s,30min	 Right now I'm in people anyway, I have to pre-process all the datasets so I can hopefully redistribute amongst themselves. The thing that I think we needed to sit down and do together was the thing saying the notebooks, right? Now obviously that doesn't mean much if you can't run them immediately, but that that
+--- --- --- --- --- --- --- --- ---
+24.0s,30min	 That was the thing that was the thing, right? But tell you what, so this is something that, just drafting up this part, this is something that I can do, but at the same time you and I will be chatting and the person who probably has more direct knowledge of that is [...]. Which is, I don't like bothering [them] because in part it's like, oh come on, I know how to do it, I just need to do do do, but at the same time at some point you have to be prudent with timing.
+--- --- --- --- --- --- --- --- ---
+56.0s,30min	 So I'm gonna see if I can just grab [them] for a second to share this with [them] and then hopefully [they're] like, oh yeah I forgot this one line, as opposed to me having to dig through what [they] did. Um Not hard, but just [...] I have you sitting here, you're concerned about writing this sooner, might as well get those things running in parallel. You know Slack is not wobbling for me. Let me just grab [them]
+--- --- --- --- --- --- --- --- ---
+50.0s,31min	 quickly. . . . So quick thing that I spent a few minutes debugging, but I don't want to debug it here because we're trying to set something up for [...] in a timely manner, but in regard to the pre-processing code, it looks like part of it is
+--- --- --- --- --- --- --- --- ---
+12.0s,32min	 hard coded to use GPU 0. You mean here or do you mean downstream? Just in general. Um, this isn't something we're gonna do here, we already spent a couple minutes. doing it. I'm bringing it up to you. You can pass it in as an input argument. I did that, but it doesn't work. Um Interesting. I feel free to change the default, but
+--- --- --- --- --- --- --- --- ---
+34.0s,32min	 I was able to like, basically pass it in as an argument and it will change from there, but if that doesn't work, just change the default. Alright, so let's take a quick gander, and again I don't want to get too far into debugging this now, I already took [...] time looking a little bit. So this is, where am I? I am in the, that's main, but if we look at say the multi uh
+--- --- --- --- --- --- --- --- ---
+56.0s,32min	 submit multi, correct? Uh, if I add that line to where it calls main dot py it doesn't do it. And if I set the environment variable Oh, that might not work. And if I set the environment variable that doesn't work. Gotcha. And I did a couple other things including if we uh, I'm sorry
+--- --- --- --- --- --- --- --- ---
+20.0s,33min	 if we change um, this one part that's saying [...]'s device is GPU this says zero. Oh, this probably also wouldn't work. Yeah, well fine, but in any case there are a couple, it's not hard to debug but it's something that's going to take a few minutes. [They want] to start running the screen later. That's fine, I mean. Yeah, but I bring it up to you because I'm assuming if someone [...]  either I can take more time to do this and delay [them] or I could ask you and if you know one line. Yeah, of course, of course.
+--- --- --- --- --- --- --- --- ---
+46.0s,33min	 If you know one line, tweak. It's in main. Yeah, okay. Uh, if you go down to the bottom um, it's right in here where it's GPU. There's a argument called GPU. There you go, there you go. Yeah, and I think I gave it a default of three, but you can change the default. Or you can pass it in as an argument. And also [...] had a
+--- --- --- --- --- --- --- --- ---
+8.0s,34min	 question for you. So it seems like just the view processor on C3 yesterday adjusts the pre-nuping to four and a half hours. Yeah, the swap memory is full. That's why I don't know how to debug. So the thing is I tried, uh, running one data set through, it's one speed. If I run two simultaneously, it's like a lot slower.
+--- --- --- --- --- --- --- --- ---
+30.0s,34min	 Hold on. Um. Those are separate problems. Swap is not, you have reserved memory, but you have plenty of actual memory available. And swap isn't something you use directly. Yeah, yeah. I'm saying if things get pushed into swap, how does it affect things? That slows it down, sure. Um, but, um,
+--- --- --- --- --- --- --- --- ---
+54.0s,34min	 you can talk about the speed of that a little bit later, but the point is that at the moment what it does is four and a half hours. Um, okay, so if you give the fault, I'll change it to two, just to see what happens. Um, divide zero. It's only going to see zero because, um,
+--- --- --- --- --- --- --- --- ---
+16.0s,35min	 actually, do you mind if I reverse something? In May. Sure. Well, let's see. Get status, get checkout head main. Uh, no, just main dot pi. Right. Um, sure. Or you can just like do vi main dot pi. Like we just did. When you, you said you wanted to revert it,
+--- --- --- --- --- --- --- --- ---
+38.0s,35min	 you want to set it back to the state that you had in the head, right, or the most recent push, right? It doesn't matter, it doesn't matter. I think I remember what it was. Because it seems like you guys changed very few things in main dot pi. Hold on. Okay. Get stash, and I just want to make sure we don't have confounding variables. Um, Mm-hmm. And, um, do you mind reverting
+--- --- --- --- --- --- --- --- ---
+60.0s,35min	 upstream, there's a GPU equals here. Hold on. Where was it? Maybe a few lines down? There we go. Oh, yeah. Oh, okay, this is already in zero, so that's intended. Um, and do you mind keep going? Just trying to see where else GPU is called. That looks fine.
+--- --- --- --- --- --- --- --- ---
+22.0s,36min	 Keep going? Yeah, that's also what I remembered. Keep going? That's the end? Mm-hmm. Okay, so, um, in the command line, I guess we can exit from main dot pi, and then, uh, if you just go with the upper arrow to have your, yeah. And then if we just delete, cue the visible
+--- --- --- --- --- --- --- --- ---
+44.0s,36min	 devices. That wasn't there before. So I tried running this out of the box. Uh-huh. Did that work? No, it didn't. Well, see, maybe it works now. It still says device zero, but okay, maybe it's saying device zero is something weird. Yeah, if you go to Nvidia, oh, yeah, that too. Device one
+--- --- --- --- --- --- --- --- ---
+6.0s,37min	 now. This is C2, right? Mm-hmm. I don't remember exactly how Nvidia was mapped to CUDA on C2. No, the problem is that without setting that, it was using the same exact command a moment ago. It used zero. That's because, um, what was I saying? I didn't change the code. I'm talking about when we use the code as pooled without me modifying
+--- --- --- --- --- --- --- --- ---
+30.0s,37min	 it, it used zero. It doesn't matter, uh, so long as we can specify it. So, if that was a one-off thing that was weird, that's fine. Uh, it could be that maybe something [...] was doing was stepping on [their] toes because[they're] on there, and who knows if there's some sort of device rotation. Uh, he needs you in just a second. Um, it's neither here nor there.
+--- --- --- --- --- --- --- --- ---
+56.0s,37min	 If there's not a quick answer, then, uh, if the answer is try it again with a different flag, then that's something we can do in a moment, but if this isn't resolved, I'm gonna [...]  just so we can get things moving forward faster, then you can dig into it. Thank you very much. Anyway, uh, where were we? Right, so that's pre-processing stuff. That's fine. As long as things move however long it takes, that's fine. Alright, do you want to start one off while
+--- --- --- --- --- --- --- --- ---
+18.0s,38min	 we're doing other things? Yeah, sure. The one you were just starting. This one? Yep. Okay, and, uh, well, let's see, we'll change let's make sure we're actually using something clean. Yeah, it looks gets- prop. Okay.
+--- --- --- --- --- --- --- --- ---
+10.0s,39min	 Alright. And [...]  why speculate about the time? Let's actually do that. Okay. Clean up. Well. Uh, T is the name. Great. Now, uh,
+--- --- --- --- --- --- --- --- ---
+32.0s,39min	 so the next thing we want to do is set up your notebooks, correct? Okay. Um, just to be real Yep. Alright. So, um, first question, just to keep things organized, what do you want
+--- --- --- --- --- --- --- --- ---
+54.0s,39min	 me to do with this business, the notebooks that are open now? I mean, we can try avoiding using Try avoiding using what? These notebooks. We can kill the carnivores. That's fine. Actually, it might be easier to do this in the, um, through the docker, just because the tooling is there. In particular,
+--- --- --- --- --- --- --- --- ---
+22.0s,40min	 the nice visual that they get isn't available here, um, at least not directly. So, um, we're not gonna mess with this. Um, um, I'm just digging up your password quickly and then we'll set up the thing for the docker. And I'm actually willing to stop, I would say, because we spent a fair amount of time talking about the pre-processing, which
+--- --- --- --- --- --- --- --- ---
+26.0s,40min	 is fine, but I want to make sure that we have a clear record for the, I think they get stuff.
+--- --- --- --- --- --- --- --- ---

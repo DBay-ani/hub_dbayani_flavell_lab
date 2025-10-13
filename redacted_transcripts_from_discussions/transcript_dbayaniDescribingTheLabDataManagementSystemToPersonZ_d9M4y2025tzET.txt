@@ -1,0 +1,386 @@
+TODO: preamble.... or put it in a README file...
+
+21.8s	 We can talk a little bit further, but I just wanted to hit the thing to sync. ZPack used is just a local build. It's on GitHub, so just cloned it and then did the typical make of things. The rest of that is just built in Linux stuff that you just need to pipe together, script utility, etc.
+--- --- --- --- --- --- --- --- ---
+42.8s	 Anyway, so this is what we're looking at code right now. What is the code we're looking at? This has to do with basically the daemon. I might be abusing that term a bit, but basically the code that's supposed to continue to run in the background provide services relating to where
+--- --- --- --- --- --- --- --- --- 
+4.4s,1min	 our data is and providing that as a reasonable foundation for other things. For example, getting a little ahead of myself mentioning this, but just to give an idea of the impact, in the short term, it's already planned that Anson, the notebook would use this and also the pre-processing, so that all people have to do after they load it into this, to specify which dataset they're talking about to the rest,
+--- --- --- --- --- --- --- --- ---
+27.8s,1min	 instead of each data file and what have you. What are the parts to it? Probably going to start with file directory. These are open headers. This is in a GitHub repo that I can share and intend to. At a top level, we have a couple of different Python files.
+--- --- --- --- --- --- --- --- ---
+49.2s,1min	 The one that is a going to be overseeing the logic we talk about today is called the communication daemon. That name is maybe not the best, so we can change it, but basically, there's at least two parts of what's envisioned. One is like a maintenance script that checks every
+--- --- --- --- --- --- --- --- ---
+16.3s,2min	 so often that all the files that are on record are where they're supposed to be, and if not, email people. That's one thing, and we're probably not going to talk about the details of that today, but everything we talk about feeds into that. Then the other part, is accepting and responding to requests for like adding files to our madness, etc. The communication data, maintenance is meant to be the latter. If we look at the script,
+--- --- --- --- --- --- --- --- ---
+37.7s,2min	 this is the file itself. There's probably a summary view you can do in VS Code, but I'm not as familiar with it. But basically, it has a tricam. It's a patch with a main loop there. I can scroll up and down for however long we want
+--- --- --- --- --- --- --- --- ---
+59.0s,2min	 to just say this, that, and the next thing. But basically, if we take for a moment and assume that this is like the main run of the cycle or what have you, there's a number of places in here where you'll see something called object database interface. A little bit of a janky name, but what it should convey is that that's the way that you talk to the actual database,
+--- --- --- --- --- --- --- --- ---
+21.5s,3min	 the actual database behind the scenes, the actual database being referred to as an SQL light database, which I sent some pointers on Slack and we can delve into a little bit further. But basically, there's not sure it's the best pattern overall, but it's actually pretty reasonable and stuff above other things. You see that has a rollback, execute, and commit.
+--- --- --- --- --- --- --- --- ---
+43.9s,3min	 Let's break this down. Rollback is if there are things that, for this session with the database, haven't been cleaned up or haven't been recorded properly, it clears those off. So when it says rollback, it gives it a clear state to whatever was the last good state of the database.
+--- --- --- --- --- --- --- --- ---
+10.3s,4min	 That's in part in case there were any errors that happened before this, so that the errors don't accumulate in the database. The next part is the execute, which does some stuff on the data, or retrieve something from the data. In this case, it's recording to a log file. We can give some examples what the log looks like when you start running this. Then after that, it does the commit. So one of the main ideas of proper databases is a transaction.
+--- --- --- --- --- --- --- --- ---
+32.4s,4min	 Transactions often have a couple of properties known as ACID. We'll talk about ACID another time. But basically, it's this notion of I'm going to do something to my database, and then when it's all set, I'm going to commit it. If something goes wrong before I commit, then it doesn't change the database at all. That's a safety measure that it's
+--- --- --- --- --- --- --- --- ---
+55.2s,4min	 pretty necessary when you start building these things up, and really caring what's inside of them. Of course, the flip side of commit is a rollback. So when you do a rollback, it goes to the last commit. This terminology is probably familiar from Git, but Git actually adopted it from this. There is a configuration file, which I'm not sure I have open right now,
+--- --- --- --- --- --- --- --- ---
+15.3s,5min	 but a lot of the constant paths that you can adjust are listed there. So if we go back to, right, and we do configs. This part is in Python. So you can see that there are certain things like checking for
+--- --- --- --- --- --- --- --- ---
+36.6s,5min	 the existence of files, etc., and you can change them all here as opposed to having to dig through the code. This one actually is worth mentioning a little bit. The name is a mess, but again, name of file to cause daemon to exit. I think that's it. [redacted]
+--- --- --- --- --- --- --- --- ---
+57.1s,5min	[redacted]
+--- --- --- --- --- --- --- --- ---
+19.6s,6min	[redacted] So, what is this thing trying to do? Basically, if someone makes this file, like with touch, like literally just makes the empty file, but if the file is there, it causes the code to exit. Now, why would I do that as opposed to something like Control-C?
+--- --- --- --- --- --- --- --- ---
+41.3s,6min	 There's a couple reasons. One is that sometimes with code that is deeply nested inside of [...] error catching, it can actually be hard to [...] get the code out of the way. So, I'm going to do a little bit of a test here. Um, to kill it with [...] a Control-C or something. You can use [...] a beep or kill command. That's like a blunt instrument. Uh, whereas if you build in this sort of thing that's easy to communicate with it by file, and it just checks, that's an easy way for it to exit gracefully
+--- --- --- --- --- --- --- --- ---
+4.2s,7min	 without you having to go through a bunch of headaches. This is also particularly interesting, uh, useful when you have multi-threading of certain types. Now, in this case, the code we're looking at is single-threaded. But behind the scenes, the database actually allows multiple things to read from it at the same time. And if you remember when we talked about [...] the two parts of the system [...] routine checks and this communication part, um, those can run
+--- --- --- --- --- --- --- --- ---
+26.6s,7min	 and probably will run as two separate processes. So, it's just way easier to have [...] if I make this file, then the entire system stops. Yeah. Right. Now, uh, going on from there, um, there's a collection of, I call them routines. Um, I'll show what those are, but basically do your main business logic there.
+--- --- --- --- --- --- --- --- ---
+51.2s,7min	 Um, and then every so often [...]  log that you go through this loop. Now, in the communications on this thing, it should go through this main loop fairly often because the idea is that if someone puts up a file, you'll get a response back pretty quickly. Mm-hmm. Uh, so I don't necessarily want to log every time you go through the loop. Uh, so one of the parameters, um, in the configuration file
+--- --- --- --- --- --- --- --- ---
+13.7s,8min	 is how often to do the logging. And, um, as you can imagine, whenever that's [...] whenever that, it hits that tick, it puts something in the logs to let you know. And so the reasoning behind doing this at a [...] set time frequency as opposed to [...] whenever there's some sort of action or change from the interface of the database
+--- --- --- --- --- --- --- --- ---
+34.2s,8min	 is because something else could affect the data, and you want the database to be able to still recognize that something happened. Yeah, basically. Yeah. And it might be possible to do something like a more clever wait in some, fancy way, but that's [...]  if you can get it away with just a routine loop, that's fairly robust and fairly simple. Right.
+--- --- --- --- --- --- --- --- ---
+54.7s,8min	 Um, okay, so I mentioned that there's this block where it does this sort of something-something routines. Again, that's where the main logic happens. Mm-hmm. And at the moment, it only contains this, but this actually does a fair amount. So read and address messages. Uh, well, that's the actual function. This is just the name that will show up in the log. Down here, some of the logging reads that in.
+--- --- --- --- --- --- --- --- ---
+15.7s,9min	 Uh, now, what does this do? It loops over the files that are in this directory. Um, in this case, it's the inbox directory. It has some name behind that, but that's just [...] where it is on my computer. We'll run it in a minute and see, but it looks over the inbox, reads each of the files, and hands them to this thing that handles the message. What does the handle the message function do?
+--- --- --- --- --- --- --- --- ---
+36.3s,9min	 Um, there's a try-except, because part of the, [...], there's many different layers of, uh, error-catching so that people get feedback that's useful. Um... And it... It progressively reads it in to check that certain things are okay. So, for example, um, check the file exists.
+--- --- --- --- --- --- --- --- ---
+58.0s,9min	 Check that the file is not excessively large, which, for our use case... I mean, this isn't designed to [...] prevent a hacker from getting into the system, but I could also imagine someone accidentally uploading a large data file to the wrong place, and you don't want to have [...] this thing crash because it's trying to read it. So, it's trying to read in a 40-gigabyte file.
+--- --- --- --- --- --- --- --- ---
+19.0s,10min	 So, one of the other configurations here is the maximum file size to read in, which here is half a megabyte, which, for the text files we're talking about, should be plenty. So, does that checking, of course, if something goes wrong, um...et cetera, et cetera. It records what the message was it received and some details about it.
+--- --- --- --- --- --- --- --- ---
+40.0s,10min	 Um... And then it goes on to [...] more details along those lines. It goes on to [...] more details along those lines. It goes on to hand it to the proper interface, um, after... [...] Matching interface. Yes. No, it's... I hear it, too. If [a person cares, they'd be like,]
+--- --- --- --- --- --- --- --- ---
+2.0s,11min	 whoo, save onto the next one. [...] Yeah, I think there's definitely gonna be a point in this project where we're gonna have a video. in this project where we're gonna have a video. Sorry. I mean, why can't they just paint it? I don't understand.
+--- --- --- --- --- --- --- --- ---
+24.0s,11min	 [...] Anyway, so, it does this thing with [...] matching the interface, um, and basically, if you remember from... I don't know if you saw the message on the confocal channel. You probably did, but I know it's been a while. Part of the keys there was specifying an interface ID, and the idea there is that, um,
+--- --- --- --- --- --- --- --- ---
+46.0s,11min	 we're gonna roll out some things now that serve our current purposes and might be reasonably good, but in the future we might need to change things, or expand it, or [...] what have you. It would be good to have a safety valve where we can say, listen, um, we're not gonna abandon the... what we had before, completely break things, but we're gonna switch to this format. How do we do that?
+--- --- --- --- --- --- --- --- ---
+8.0s,12min	 Well, you specify which interface you're using. Maybe that was self-explanatory, but that's part of the idea. Yeah, so the, um, it's like, for generating the JSON file, I think some people are a little intimidated by just the idea of [...] organizing that and [...] doing that as a step. I think it would be, I'm sure you've found this,
+--- --- --- --- --- --- --- --- ---
+29.0s,12min	 it would be pretty easy to make some sort of little application that just has some text boxes and it's just like, put this in. Example, it should look like this. And then you just go through and do that, and then click go, and then it just generates the file for you. And then also the Google Sheets, [...] was telling me this.
+--- --- --- --- --- --- --- --- ---
+51.0s,12min	 One problem with doing Google [...] having everyone have Google Sheets is then it's tied to that person's Google account, which doesn't always stay. Like, for example, the GPU reservation sheet is technically [...]. So, um [...] um, I mean,
+--- --- --- --- --- --- --- --- ---
+15.0s,13min	 I think you might have just said this, that [...] we have an existing system, and you don't want to completely [...] abandon the existing system. Like you mentioned in the JSON file, that included [...] a reference to the Google Sheet as well. Yeah. But yeah, I think if we can go to some sort of system that is more time robust
+--- --- --- --- --- --- --- --- ---
+38.0s,13min	 and lab member existence robust, then I think that makes sense. Yeah, I totally agree with you. Certainly this is just one step along the path, and hopefully we'll get there. In terms of the Google Sheet, yeah, the current definitely has its pros,
+--- --- --- --- --- --- --- --- ---
+5.0s,14min	 but you highlighted the major cons. A hope with this is that once you provide the Google Sheet, we can actually automatically download a copy. Now, I looked into that briefly, and so far I haven't gotten that far. I don't know if it's going to be quite to pan out. The reason for that being, so a lot of websites, especially Google, as you might imagine, have [...] bot blockers.
+--- --- --- --- --- --- --- --- ---
+30.0s,14min	 So at least by default, things like curl and wgit indicate to the website that they are, quote, unquote, a bot. And then the website says you can't have this. There are also things like redirects, which are not as hard to handle. Basically with curl, you do curl that L, but still it's sort of unfortunately not as straightforward as,
+--- --- --- --- --- --- --- --- ---
+53.0s,14min	 at least to the extent I've tried it, as [...] wgit, the thing they provide. But certainly that's a hope. Yeah, and there's probably an API, but then it would also require [...] verification or approval from the user, which is just another step. Well, that's true. But in a certain sense, if the system isn't able to get a copy because,
+--- --- --- --- --- --- --- --- ---
+14.0s,15min	 not because [...] Google's being stupid, but because the person didn't provide enough approval, it's a similar safeguard or similar check as [...] the other files you specify exist. Right, so it may well be the case that, hey, there are these stumbling blocks, but the fact that we have thi [...] debug it up front and [...] tell the person, someone, please do this,
+--- --- --- --- --- --- --- --- ---
+36.0s,15min	 will hopefully make things more time robust, albeit at least in the current way. Oh, yes. Being a little bit more involved than the ultimate goal. Yes. Yeah, good points. Yeah, that looks great. So, hands out to the interface. I want to see if there's anything else to really talk about in this file before going forward.
+--- --- --- --- --- --- --- --- ---
+60.0s,15min	 So here is just some utility functions that we probably should take a moment to talk about before just switching over to what the interface does. There's a thing for forming the reply when an error occurs, and that just hands out [...] sets up stuff to hand to the issue reply, which is functional here, but it just starts on the text and sets this flag to true.
+--- --- --- --- --- --- --- --- ---
+21.0s,16min	 And then in terms of issuing the reply, basically the thing that gets pumped out to another file that a person can look at to see what the system says about their response isc [...]  name of the file that's replying to the original input, whether or not error was detected, true or false, time that the original message was sent, like the one that the user provided was received,
+--- --- --- --- --- --- --- --- ---
+42.0s,16min	 and then further content of the reply. Now, this file is saved under the outbox, right? And the name of the file, thinking of some human factors here, is reply for what was the name of the original file and then the time that this showed up, right? A little bit of a verbose name,
+--- --- --- --- --- --- --- --- ---
+5.0s,17min	 not one that I want people to lean on in the future. It gives you all the information you may need. Yeah. The hope is that someone who is [...]  at the level of being somewhat intimidated by just the notion of JSON, even if we are using that elsewhere, would be able to navigate and find this easily, hopefully. Anyway, so that's that thing.
+--- --- --- --- --- --- --- --- ---
+26.0s,17min	 I think I'm going to breeze through the interface thing just because the high-level notions there might be pretty apparent. The mechanics are kind of a thing. Then I'll start talking about [...] the actual, okay, what's this SQL in the database stuff? So the interface has a [...]  an init function.
+--- --- --- --- --- --- --- --- ---
+47.0s,17min	 I have it give a human readable name. This is the primary thing to identify. This is hopefully the numbers, right, the actual file number, et cetera, for [...] the internal machine use. But for other people to identify it, this is that, which, as I mentioned in the message on SQL,
+--- --- --- --- --- --- --- --- ---
+11.0s,18min	 Slack was randomly generated, but I think you probably can recognize this. This is [...] one of those notions of picking random names that are more memorable than some long random function. And by the way, I added something since that message on Slack so that now someone doesn't actually need to define the interface value all the time.
+--- --- --- --- --- --- --- --- ---
+33.0s,18min	 It would default. It has a default value. And since we only have one, that's the right one. Anyway, besides for that, there's [...]  just a process function, which is what the communication daemon calls. And from there, it reads the stuff and determines where to send it. So basically, it reads what the request field was in the JSON pumped in. And if it was add, it sends it to an add function.
+--- --- --- --- --- --- --- --- ---
+55.0s,18min	 If it was LS, et cetera. And then details of how it does that stuff is below. There might be some stuff of general interest there, but nothing that's [...] you know, not anything so fundamentally different than it would be. So that's the benefit from additional words from me at the moment. So that's basically the Python end of it.
+--- --- --- --- --- --- --- --- ---
+16.0s,19min	 And then there's this business of the database. So let's see. On one hand, it probably makes most sense to just delve into [...] the scripts that set up the database. But at some point, I do want to run this code to show some of what it does.
+--- --- --- --- --- --- --- --- ---
+37.0s,19min	 So we can either do that now or later. Probably makes... Okay, yeah, it does make sense to talk more about the database first. Sure. Yeah. So there's this Python file. I swear we're almost done with the Python. Called database interview with IO manager.
+--- --- --- --- --- --- --- --- ---
+59.0s,19min	 And it sets up this whole thing with the database. Now, most of this [...] the heavy lifting is done by this SQL life free package, which is default, a part of Python. It's not something that someone has to specially install. But then there are some custom things or [...] some particular preferences that one has to specify.
+--- --- --- --- --- --- --- --- ---
+21.0s,20min	 So, for example, one of the fundamental units in an SQL database is the notion of a table. It's pretty much exactly what you think. Rows and columns, with the columns having names. This little additional bit of code... This is a bit of code. This bit of additional code says, hey, when you get something from a table that you retrieve from the database,
+--- --- --- --- --- --- --- --- ---
+44.0s,20min	 I want you to return it to me as a dictionary so that it's name of column value. Otherwise, it can just return it as [...] if I hadn't done that. I think the default is just to return the values as a list, which is not bad, but it's not as [...] robust. Another thing, and this is actually worth pointing out, because it's a little gotcha,
+--- --- --- --- --- --- --- --- ---
+5.0s,21min	 is that you can put a number of constraints on it. So, if you're using a database, you can put a number of constraints on it. So, this is a number of constraints that... This is a pro of SQL. There are a number of checks and constraints you can put on a database. And not only does that help ensure that the data you put in is correct, it actually, behind the hood, also gives it the opportunity
+--- --- --- --- --- --- --- --- ---
+27.0s,21min	 to make things more efficient. It's a very similar idea to [...] compilation, et cetera, where if it knows something, it can take advantage to make things more efficient. As I mentioned, one of the fundamental concepts in the called relational databases, but SQL has a specific flavor, is this thing with a table. And there are times when you have values between tables
+--- --- --- --- --- --- --- --- ---
+51.0s,21min	 that should correspond to each other. For example, if you have a table that says mortgages and table of people, you can imagine that the rows in mortgage specify what person is the signer on it, sparing the idea of multiple people, whatever. But there's some column in this mortgage thing that says [...] mortgage ID, person ID. That person ID should be somewhere in the person table.
+--- --- --- --- --- --- --- --- ---
+14.0s,22min	 So that is called a foreign key, because it's foreign in the sense it's in another table. Now, if you don't set this, by default, SQL Lite doesn't check that that constraint holds true. Four reasons. Other databases, whenever you specify it, they check it all the time. This has to do with [...] just the fact that you have a specific type of key.
+--- --- --- --- --- --- --- --- ---
+38.0s,22min	 And then, of course, you have to have a specific type of key to make sure that Sundays are not just little specifics of what they had to balance, what their design goals for SQL Lite 3. Anyway, no bit in the weeds, but just something that's easy to miss if it wasn't pointed out. Other things having to do with just basic business logic that primarily call the original Python implementation.
+--- --- --- --- --- --- --- --- ---
+3.0s,23min	 There's some stuff that whenever... things to highlight in the rest of this code here. So when this code starts, it spins up a database object, which is the thing that we use to pour data into the database. Hence the name. But prior to just [...] saying, hey, this thing exists, and handing it to this function, the communication daemon to use,
+--- --- --- --- --- --- --- --- ---
+26.0s,23min	 it does some other things to [...] record... metadata about the session. Like, okay, where am I running? What time did I start? What's the environment variables I'm working with? Just primarily for reference in the future, not necessarily because it's something that we think is going to be used right now. And you can see that some of the commands I run here are what it does, right?
+--- --- --- --- --- --- --- --- ---
+47.0s,23min	 So ID, that's [...] what users it's running under. Some stuff that's [...] machine ID, et cetera. And then things like the git standards, git log, et cetera, for the current code that's running. And those can end up being pretty useful, because goodness knows it's not atypical for someone to make a code. They make a small tweak to the code and forget to commit it before they start running it. So it's good to have that.
+--- --- --- --- --- --- --- --- ---
+12.0s,24min	 Yeah. And also the environment, which I know I mentioned, but it's actually just worth reemphasizing that that's there, too, and goodness knows how useful that may or may not be at some point. So that's all run, and that ends up being recorded in the logs table. No, no. I'm sorry. That's recorded in session context, et cetera. And then in the logs table,
+--- --- --- --- --- --- --- --- ---
+34.0s,24min	 we say done gathering the process context. Okay, so that's all noted. Basically, nice extra data in case debugging or context ends up being useful. And then the next thing is [...]  running a bunch of these scripts. So this code runs without assuming that the database that we want to pour things into
+--- --- --- --- --- --- --- --- ---
+55.0s,24min	 already exists. So if you start with nothing, it will start constructing the database. The way it does that is by running this series of scripts that basically just say, hey [...]  execute these commands. And that's where we're going to delve into next. I'm not going to [...] walk over every part of it,
+--- --- --- --- --- --- --- --- ---
+16.0s,25min	 but [...] some high-level features that are useful to know about, not just in terms of this implementation, but just generally [...]  some of what the value added of a proper database is. So that's probably the last point to really highlight in this code. And now we're going to get into what some of these things look like.
+--- --- --- --- --- --- --- --- ---
+44.0s,25min	 I'm probably going to start with the end, not just because that's one of the more recent things I added, but also because that's probably... has some of the nicest showcasing of what is... what can be done with this without having to think too much more about it after you do it. So we have a couple different tables, and we have, technically, what are known as views as well.
+--- --- --- --- --- --- --- --- ---
+5.0s,26min	 And this file, this one called datasets.sql, is the thing that's responsible for storing the... storing information about what datasets we have, the [...]  the blue fluorescent protein files, the Google Sheet that corresponds with that, et cetera. Now, most of the code that's actually in the Python
+--- --- --- --- --- --- --- --- ---
+28.0s,26min	 and that, ideally, a person would start with to interface with this is... call it a table in quotes and then describe the distinction in a moment. Dataset and most recent files. And that's the name of the table, right? And these are basically the names of the columns, right? And hopefully some of those are self-explanatory, but just for the sake of reading it off to tie it off elsewhere,
+--- --- --- --- --- --- --- --- ---
+53.0s,26min	 we have a dataset ID. That's largely just like a machine that assigned a number in case it's useful to someone, but you don't really need to know that. But dataset ID, okay, fine. Dataset name, like mayo32001. Worm sex, worm strain, and then hopefully the rest are self-explanatory. Great. Now, to delve in... And the idea there is that someone can
+--- --- --- --- --- --- --- --- ---
+14.0s,27min	 get data from this with a select statement. They can add data to it. They can do a variety of things. I suppose at some point we'll... Once I have this running as demonstration, we can start seeing what some of the... some of the faculties of SQL are. But part of the point here is that there's a variety of very typical things you want to do with type of data,
+--- --- --- --- --- --- --- --- ---
+36.0s,27min	 such as [...] filter by it, match it up between tables, et cetera. That's just exactly what this facilitates. So it's right at your fingertips instead of having to recode it each time. Okay, but I mentioned that this is kind of like a pseudo-table. What is it really? It's called a view. So in SQL, there are proper tables
+--- --- --- --- --- --- --- --- ---
+57.0s,27min	 that show up on your disk, and then there are things that are the assemblage of data from either one or multiple tables that are presented with an interface like they're on your disk. In this case, it's a view. So if we take a step in... Well, I realize that I haven't really explained the syntax of SQL.
+--- --- --- --- --- --- --- --- ---
+18.0s,28min	 One of its strengths is that there's a lot of it that's inferable from just the simple naming. So we have these columns, and I'm saying the select basically means to grab these other variables and put them in these columns. I have A and a bunch of Bs. Well, what are those? Well, each one of these is a table,
+--- --- --- --- --- --- --- --- ---
+39.0s,28min	 and then the name that I assign them to is over here, right? So A1.id is really a data set's ID, and that ends up being shoved into that corresponding place. Well, I don't just want to cobble these things together randomly, right? It's not just some random row of data sets that I'm going to put in. So I'm going to call this table and I'm going to call it
+--- --- --- --- --- --- --- --- ---
+2.0s,29min	 this that I want to assign to some random row of this. So how do I match them together? Well, that's where the where clause comes in. So I say select from these tables where the IDs match, right? And okay, the column name is this thing. I haven't explained what those columns are, but at least some of that I hope is intuitive, that okay, it belongs to this data set.
+--- --- --- --- --- --- --- --- ---
+25.0s,29min	 That's what that's supposed to convey. And the type of data in that data set is OFP. But all that matches, everything happens behind the scenes. What the user sees is this nice thing cobbled together. Okay, but we should actually take a minute to delve into these bits, and in particular why we have these separate bits as opposed to just making this one table. I'll highlight more in detail,
+--- --- --- --- --- --- --- --- ---
+47.0s,29min	 but actually it's worth answering that upfront. One is because it allows us to have additional provenance that it's not atypical for a user not to care about, but it's also at times when it's very useful. So you can imagine having different versions or like someone needs to update or move these files, instead of just overwriting the original record and not having the original record. It says at this time was this thing,
+--- --- --- --- --- --- --- --- ---
+8.0s,30min	 and then at this other time was this thing, doing that behind the scenes. That's one. Second reason is because there's an idea in databases, and it's generally true, that if you decompose your tables into the fundamental bits, it allows you to reuse your data more easily later
+--- --- --- --- --- --- --- --- ---
+32.0s,30min	 by cobbling those together as you need to. So you can imagine that if I insisted that everything be presented like this, it can kind of make things more complicated, slow things down, or hamstring things down a lot. That's kind of vague, but the general point I think that we both agree on
+--- --- --- --- --- --- --- --- ---
+54.0s,30min	 without me having to argue too much because we're both programmers, is that okay, if I make things into their, minimum useful component, and then cobble them together, that's more useful than having bulky things that are kind of monolithic and I have to reverse engineer each time I use them. Right. Anyway, okay, so there's two basic tables that that draws from. What?
+--- --- --- --- --- --- --- --- ---
+15.0s,31min	 Two basic tables and then one last one. First, datasets. And by datasets, I mean just like the name of the thing. We'll get into what belongs to a dataset at the moment, but just like the general name of the set of things there. It has a session ID. That has a name. That's a sign behind the scenes, but if you remember when we talked about this database IO thing, I mentioned how there's metadata collected each time
+--- --- --- --- --- --- --- --- ---
+37.0s,31min	 that the database objects created, etc. That metadata is recorded with a session ID. The session ID is then recorded with a, which recorded along with the dataset whenever a dataset's added, just so you have a record of when and where and what situation these things were. But a user doesn't have to see that, right?
+--- --- --- --- --- --- --- --- ---
+58.0s,31min	 Because nowhere in the table that, nowhere in the view that we looked at below was there the session ID. Right. We have that information, but you can grab it if you need it. It has an integer that's an ID, self-explanatory name, self-explanatory time started, warm sex work, strain, and missed text. A little bit more on this text as a record,
+--- --- --- --- --- --- --- --- ---
+20.0s,32min	 as a footnote. While relational databases have a lot of pros, sometimes they can be a little bit of a pain if you need to radically redesign something, right? Because it's [...]  the classic cost to tear something out and then build it back up.
+--- --- --- --- --- --- --- --- ---
+42.0s,32min	 So it's often good to include a little bit of a safety valve. In this case, I have it as a missed text, but that could also prove to be a little bit of a problem. So [...]  I'm not sure if you can see it, but that could also probably be listed as a blob. While probably in the near,
+--- --- --- --- --- --- --- --- ---
+4.0s,33min	 if it were to be used within the medium to long term, it would probably just be free text that covers low corner cases as opposed to generally being used. The extreme end that one can see it as potentially facilitating is if someone needs to store something like JSON or other structured data in that field to be read,
+--- --- --- --- --- --- --- --- ---
+25.0s,33min	 by another thing. And that kind of goes around all the mechanisms in the database, which is one of the reasons why I don't encourage it. But again, it's the safety valve for those special cases. I kind of did that unintentionally. Well, not unintentionally, but like I didn't think about it in these terms. But for the utility package,
+--- --- --- --- --- --- --- --- ---
+46.0s,33min	 when I was thinking, okay, there could be more recording scenarios that I'm not taking into account or that could come in the future. So I just made it so that each, each data set had a tags list. And you could just add whatever you wanted to that list. And then in the front end utility of where you call the function
+--- --- --- --- --- --- --- --- ---
+7.0s,34min	 and it actually looks for things, you could say everything that has this tag and the code was agnostic to what those, what tags existed out there. So, yeah. Prudent. Very prudent. Yeah. Same idea, obviously. So you're definitely less powerful than what you have here.
+--- --- --- --- --- --- --- --- ---
+28.0s,34min	 But yeah. Well, sometimes, sometimes the things that sound simple are actually the most, most important to the idea there. So, anyway. So, okay. So that table was a thing, but there's two points further, well, three things to point out. Four things, actually. I keep adding things.
+--- --- --- --- --- --- --- --- ---
+49.0s,34min	 First, okay, create table. That might be self-explanatory. There's this keyword saying if not exists. If you're, we didn't look too far at it, but the code where this is called, the database IO manager just reads these every time. And one of the things SQL does is that
+--- --- --- --- --- --- --- --- ---
+10.0s,35min	 if you're trying to create a table that already exists, it throws an error, understandable. The way that you deal with that is to tell it, hey, it's okay if this already exists with, well, exactly the words if not already exists. That's one. Two, you'll see that these have different data types, et cetera, kind of as you can imagine. There are some things here like primary key
+--- --- --- --- --- --- --- --- ---
+31.0s,35min	 or auto increment, et cetera, which are sort of fundamental database things, but we can delve further into if you're interested. But some additional [...]  magic there. This bottom part are some additional checks, right? So even above you can see certain checks like worm strain, it's text, and it can't be null.
+--- --- --- --- --- --- --- --- ---
+53.0s,35min	 It has to not be empty. You can add additional checks beyond just like null or uniqueness down here saying like, hey, the worm sex not only does it not, should it not be null, it should be one of these two values. And then I mentioned this foreign key constraint before. So we see here that session ID, this thing should refer to the sessions table. So we were promised if you don't get an error,
+--- --- --- --- --- --- --- --- ---
+14.0s,36min	 then D does line up as we'd expect. So that's, those are three things so far, the non-exist data type stuff, and then these checks. And then the fourth thing I wanted to mention, that is one of the many values added of SQL in addition to these checks is a trigger. Now, basically the idea is that there are certain operations that you might want to have happen every time you do something
+--- --- --- --- --- --- --- --- ---
+39.0s,36min	 in particular to a table, right? In this case, I'm making this trigger and that's the name of it. It's operating on this table up here. And then what it does is that it updates the value in this table so that the session ID is basically the same as the current session ID. So basically there's another place where it had the current session store, right? So this is how the session ID is added to each entry in this table
+--- --- --- --- --- --- --- --- ---
+3.0s,37min	 without me ever having to think about it again. So every time I write to this table, I don't have to specify the session ID. I might not even remember that it's doing all this work for me. It just does it behind the scenes without me having to think about it again. So going down with a lot of that sort of highlighted, there's another table here just very briefly
+--- --- --- --- --- --- --- --- ---
+24.0s,37min	 that I'm calling data content type. Basically, we have a couple of different things we care about of PBFP, Google Sheets, et cetera. And it's just good to specify that those sort of categories of things exist so we can use them elsewhere. Where do we use them? Well, the data set content table. What's in the data set content table? Session ID. Well, we talked about that before.
+--- --- --- --- --- --- --- --- ---
+48.0s,37min	 It's kind of internal logistics. REL ID, that's just an ID. Location. It's like where it's supposed to be on disk. Time added, self-explanatory. Data set member of. Well, that's if we look at the foreign key constraints. Data set member of refers to data sets. Table itself of. ID. So that line explains it, if not the name. Data record type or foreign key refers to the one we saw just a moment ago.
+--- --- --- --- --- --- --- --- ---
+10.0s,38min	 ID. And then session. Yeah, session ID, same thing. And they also have some triggers on this so that it does a little bit of the logic for me. In this case, I'm going to set an ID automatically again so I don't have to think about that. Great. Now, as we scroll down, there's two last bits. The very last bit we already looked at.
+--- --- --- --- --- --- --- --- ---
+31.0s,38min	 That's the view. And this, as a recap, this thing itself doesn't sit around as a file on disk or taking up data. But you can interact with it like it's a table. And it combines all the data from the different tables we looked at over the past few minutes in a way that avoids a lot of the mess that we had to deal with.
+--- --- --- --- --- --- --- --- ---
+52.0s,38min	 But even before that, there's one other table that I'm calling data set of most recent files that grabs from a variety of our tables and only selects the files that are most recent, as per the name. I should take a moment to formulate what to say about this because I realize I'm going like this.
+--- --- --- --- --- --- --- --- ---
+13.0s,39min	 And oh, yeah, of course, this is self-explanatory. Excuse me. Of course, anything self-explanatory to a person who's already explained it to themselves if they're talking to themselves. Okay, so here we see create view. This is in contrast to create table above. If not, it exists again. Great.
+--- --- --- --- --- --- --- --- ---
+36.0s,39min	 View name, similar to add table name, nothing new there. Columns. Those columns should be filled with these values. Fine. What do these things indicate? Well, these are the tables of views. And there were the names. Matching them up in this fashion. Group by. So there are a couple.
+--- --- --- --- --- --- --- --- ---
+58.0s,39min	 These things here were select from where group by having another one that's available, sort, etc. Those are part of a typical SQL specification. So regardless of whether you use SQLite or Postgres or another relational database, they should support those. And each one of them has a certain meaning. Once you know those meanings, it's pretty transferable across platforms.
+--- --- --- --- --- --- --- --- ---
+23.0s,40min	 So these first few ones are probably [...]  maybe some specific mechanics or something one would have to visit, but the intention is clear. The group by is, well, indeed, you're grouping things together. But one of the reasons that operation exists is because you might want to collapse a collection of records.
+--- --- --- --- --- --- --- --- ---
+45.0s,40min	 Right? So you might want to collapse based on what category, what selection. So I'm saying that I want you to take everything that has the same data set ID and same data content type.
+--- --- --- --- --- --- --- --- ---
+11.0s,41min	 I want you to collapse those together. And what I want you to do is across that set, select the one that has the most recent time. So basically the difference between where and having is that where thins the herd to begin with, and then having operates after you [...]  thinned the herd, decide to group them, etc.
+--- --- --- --- --- --- --- --- ---
+33.0s,41min	 Now, another place that you could do this instead of having like a selection category here, that's very common, is you could have like a sum here, you could have a max here, etc. Basically, once you have the group data set, you can do this. Basically, once you have the group by, you have a variety of ways that you can accumulate things together, whether by just further slowing it down within that group or by aggregating in a more interesting way.
+--- --- --- --- --- --- --- --- ---
+56.0s,41min	 Yeah, so behind the scenes, we have all this additional data and a lot of things that does the work for me. And then I have this sort of interface where with all that done, all I need to do is just select from this as I want, and the rest is taken care of for me. One last thing to mention on this file, and then probably I'll just run it,
+--- --- --- --- --- --- --- --- ---
+17.0s,42min	 and then we can look at some examples of what ends up in the database and various other tables that are present. It's on the border of GAN to Weeds, but it's pretty useful to know about. So here we have this data set of most recent file things. This is the first thing we looked at.
+--- --- --- --- --- --- --- --- ---
+43.0s,42min	 And again, it's technically a view. Not a table. So it's something that is computed on the fly as opposed to sitting in a file. By design, SQLite doesn't let you write into views for good reason. Because like, okay, maybe you can imagine the code inferring where that should go by working in reverse, but come on, right?
+--- --- --- --- --- --- --- --- ---
+4.0s,43min	 Well, that makes sense, and that still makes views usable as something that you can read from. But what's the point? Well, boy, that leaves something to be desired. There is a way, however, that you can sanely make write operations on the view and interact with it exactly the same way as you would a table.
+--- --- --- --- --- --- --- --- ---
+31.0s,43min	 And the way you do that is, again, with a trigger. So what happens here is that you create a trigger. So create, you don't need to worry about temp, it's a technical detail, but create the trigger by that name. And instead of inserting on this view, you do these operations. So it's a matter of fact that in the Python code that this thing interacts with, all I do is insert values like this to this view.
+--- --- --- --- --- --- --- --- ---
+53.0s,43min	 And then behind the scenes in this database, it does all the rest of the operations for me. So this one says instead of insert, so instead of inserting. But I also made one that does instead of update. So once that's written, I can do that. Okay. So once that's written, the database takes care of all that for me. I never have to think about it again.
+--- --- --- --- --- --- --- --- ---
+17.0s,44min	 And if we go back to the interface, as a matter of fact, if we go to, let's say, the code to add stuff, so there's some Python here that's a little annoying that's just like listing out which columns I should insert in. But the actual command is just insert into that view the columns as you'd expect, not the rest of the thing of like record the provenance, record the session ID, et cetera.
+--- --- --- --- --- --- --- --- ---
+39.0s,44min	 That's all taken care of. And with all that described, let's actually run it a bit, and then we can explore what actual values show up. So first thing first, I will run this in debug just for the sake of it.
+--- --- --- --- --- --- --- --- ---
+60.0s,44min	 And hopefully I didn't break anything before now. But it's running. It's just going to spit out a number each time it runs. That's basically just counting the number of times it goes through that main loop. It's purely for visual purposes, not the issue.
+--- --- --- --- --- --- --- --- ---
+22.0s,45min	 So what it's doing right now is checking the inbox, the inbox being that file I specified in the configs. And I don't exactly remember where it is, as a matter of fact, so I might as well just check my configs. So I put it at there. Okay. Base. So that. And then temp data store inbox.
+--- --- --- --- --- --- --- --- ---
+43.0s,45min	 Cool. Right now it should probably be an empty file. It's not the keyboard, but I mean, it might work the same. Inbox. Cool. So it's empty.
+--- --- --- --- --- --- --- --- ---
+15.0s,46min	 Now, for record, I put things out in the past for like outbox. They're like that. Now, eventually you can imagine writing the other script to clean it up. Like if there's one that's doing routine maintenance, I'd imagine that like every like hour or so it might clean this out. You could just delete the file, but then it might confuse users. It's [...]  whatever. But there's also, if I check my configs again, there are files I've sent in the past or like communications I've sent in the past that I'll probably grab a couple of times.
+--- --- --- --- --- --- --- --- ---
+39.0s,46min	 So now just to speed up [...]  well, I'm getting ahead of myself. Anyway, this is still running and I want to see if I still have my example files because the idea with the JSON is I specify this data set and it checks whether these files exist or not.
+--- --- --- --- --- --- --- --- ---
+13.0s,47min	 And then that note, actually, why don't we show what happens if I tell it about a file that doesn't exist? So here we have a JSON and that was just testing an update command. But let's just say add and we have the rest of this stuff here. And [...]  the base path is that I want to just confirm that those files don't actually exist here. Yeah.
+--- --- --- --- --- --- --- --- ---
+35.0s,47min	 Second, nothing like that. So what happens if I send this to the database manager? First of all, how am I going to do that? I'm going to just copy it over to that location.
+--- --- --- --- --- --- --- --- ---
+56.0s,47min	 Inbox? Inbox. I think it was in temp something. Temp. Datastore. That's right. Yeah. It's named slightly better on the server, I think, than this. Yeah. So it's copied over. Then let's look at next time it loops, it should read it in. And it says there we are. That's an error. It wasn't saying the value for that key specifies a file that could not be found. [...] So it's telling us what we want. But it keeps going. Yeah. So a couple other things to check. First off, is my, did it just close that on me?
+--- --- --- --- --- --- --- --- ---
+17.0s,48min	 It just closed that on me, didn't it? No. No. No. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. It's not. No.
+--- --- --- --- --- --- --- --- ---
+37.1s,48min	 No. It's not. Okay. Whatever. So that's that. And just want to. Okay. So I want to see if my, the file I sent is still there. Okay. You probably know where this is going already. But look, it's gone. Where did it go? If I look at temp, I think it was. You can change all these names in config file.
+--- --- --- --- --- --- --- --- ---
+58.0s,48min	 I'm not a fan of calling that external. It's a historical accident. But if we do that, we see it by default. Okay. And if I actually paste the code here. Okay. I'll just do a bunch of these there. If I grab the most recent. So that's this one received 17 something. Something sounds reasonable. I say. Fits exactly. So that's that. So I can see it's not. No. No. No. No. No. No.
+--- --- --- --- --- --- --- --- ---
+20.0s,49min	 No. No. No. No. No. No. No. No. No. No. No. No. No. No. the file we sent. But I want to actually look at the response from that. That's at that other location.
+--- --- --- --- --- --- --- --- ---
+46.0s,49min	 Outbox. Apply for, what would we call it, temp-chasing? DER17, right? Or, what are the options? DER121. Oh, it's called temp-file.
+--- --- --- --- --- --- --- --- ---
+7.0s,50min	 That's not the fault of the code, that's the fault of me naming it something stupid. Okay, so that. And that's just a copy of the file, similar to what we saw as a RAND. But again, we see at the top we have the first couple keys. Reply to, name of that file.
+--- --- --- --- --- --- --- --- ---
+30.0s,50min	 Error, yes. Name, at the time we received the error. And then the error message we saw pumped out in the terminal is actually recorded here. Great, so that is some error catching, and you can imagine that there's additional levels of cleverness to capture and try and record other errors appropriately.
+--- --- --- --- --- --- --- --- ---
+57.0s,50min	 But before I actually start sending in proper data, I want to at least take this opportunity, before putting in more work, to show some of the other records that show up on the database while this happens. So how am I going to talk to my database? Well, sqlite3 is just the command itself. And you can change in the configuration file where the database actually gets stored, but for now I have it stored in this location.
+--- --- --- --- --- --- --- --- ---
+20.0s,51min	 So just type that in. It has a REPL. Now if I type in .tables, which is just specific to the REPL for sqlite3, here's a list of the various tables that were created. We talked about a couple of them. Other ones were in other files. We didn't go through them. We'll go over. Great. But let me take a look at some of them. So we have a run logs table. We'll take a look at that for a moment.
+--- --- --- --- --- --- --- --- ---
+41.0s,51min	 Select the star from. And if we scroll up, some of these, I can tell you what the schema. So this table has columns of session ID, ID of that row.
+--- --- --- --- --- --- --- --- ---
+3.0s,52min	 Unix epoch time, et cetera. Different things. And I take a moment to bring this up, not only to show that you can get this information, but also so we can make a little bit more sense of this. These are the same times, just ones in a human readable format. And here's the log. So gathering the processing context and gathering processing context, et cetera.
+--- --- --- --- --- --- --- --- ---
+27.0s,52min	 And it's just reporting as it goes through. And it mentions that an error happened. Yep. An error being distinct from just the message. Just the message being sent out. We can look at the message table in a second. But fine. So that's a log exists and it has stuff. Great. What are some of the other tables? Let's start from, well, let's see. We have session context.
+--- --- --- --- --- --- --- --- ---
+48.0s,52min	 Might as well. Now, this is pumping a lot of stuff, but it's because, hey, get status, et cetera. Get log. Post name. The environment values. The first value there before the pipe symbol is the session ID. So that's probably [...]  apparent or what have you. But I mention that because, well, we might as well look at the session table. Sessions. Only one. That's the ID number.
+--- --- --- --- --- --- --- --- ---
+9.0s,53min	 And that's when it started. Great. So that's all great. And that's all metadata stuff. But what about some more interesting stuff about GC? So, let's go back to the session table. And we can see that we have a lot of data. We have a lot of data. We have a lot of data. We have a lot of data. We have a lot of data. We have a lot of data. We have a lot of data. We have a lot of data. We have a lot of data. So, that's all great. And that's all metadata stuff. But what about some more interesting stuff about GC? Huh? What was that? GC?
+--- --- --- --- --- --- --- --- ---
+30.0s,53min	 Probably. Let's take a look at the schema and find out. Because I think the time I added is added automatically. Schema. Yeah. So, the integer. That's just automatically added. I'll just say add something. It adds it. Time started. Default value. Current time stamp. I think current time stamp by default is Linux.
+--- --- --- --- --- --- --- --- ---
+52.2s,53min	 Okay. So, that's all. Great. Cool. Okay. So, let's see. Contactors table. That's going to be for like when we need to start sending emails, etc. That does have a value there for the outbox right now. So, it tries to have an email listing and also like other file contact listing.
+--- --- --- --- --- --- --- --- ---
+13.0s,54min	 But that's for another discussion. Dataset stuff. Well, we haven't really added stuff to it yet. We'll show that when we have it. But probably the one to look at next is the message table. Because we did receive a message and we also sent out a message. Both of those land in the message table. Okay.
+--- --- --- --- --- --- --- --- ---
+33.9s,54min	 It would be good if I had some space because it's not clear how it's distinct from the dump and gump. Okay. So, we have various IDs and numbers of timestamps. But this one says received.
+--- --- --- --- --- --- --- --- ---
+58.2s,54min	 And if we look, this is the content we provided earlier. And then this one says sent. And this is a copy of the message we sent. So those are all stored. Great. So, if we went through that same process, this would just be concatenated to this.
+--- --- --- --- --- --- --- --- ---
+20.9s,55min	 An additional thing. Just dependent on the end. So, this would still be there. Yeah. It's not the most recent yet. Yeah. Yeah. Cool. So, probably the next bit is, obviously, I'm not going to show every combination of outcomes. But it would be good to look at what happens when we add data that actually exists just
+--- --- --- --- --- --- --- --- ---
+44.3s,55min	 so we can see where it lands on the table and do some of the other commands like outlets and git just to show that they exist. So, the first thing is that, well, because the coach... I'm sorry. Because the code checks that files exist and will not add them to the database if they don't, we need to quickly make these files, which is not terribly hard. At the moment, the code just checks that they exist, not that they have content.
+--- --- --- --- --- --- --- --- ---
+7.9s,56min	 You can imagine adding additional functionality, what have you, but that's for another time. So, if I do 4x equals 0. Okay. So, I'm going to do git to tell me if I have...
+--- --- --- --- --- --- --- --- ---
+28.9s,56min	 So, I have a bunch of that stuff. And now, if I try sending this thing again, we will see if it gets me an answer. Okay. I don't think it should.
+--- --- --- --- --- --- --- --- ---
+52.9s,56min	 I don't think it should. So, it's saying that 2 doesn't exist. Oh, I forgot the nd2 extension. So, I made the files, but it didn't give them the right name.
+--- --- --- --- --- --- --- --- ---
+13.9s,57min	 I could... I'm just going to... I'm just going to... I'm just going to... What's up? Nothing. That's why we have the... That's why we make the system, so that if there's a mistake and something's not named right, it tells you. [...] Okay. So, I made those files, but I haven't told it to upload those yet. So, if I copy that over again, ifir specifies a file that could not be found. H5. H5. H5. H5. H5. H5. H5. H5.
+--- --- --- --- --- --- --- --- ---
+34.9s,57min	 H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. H5. Okay What was that? OK.
+--- --- --- --- --- --- --- --- ---
+55.5s,57min	 What was that? Now it infers that from the freely moving because.. Maybe it will change that at some point, maybe with another interface, but right now the normal in the code in FOCAL is that the NIR is named the same as the freely moving, just with a different file extension. So, copy that.
+--- --- --- --- --- --- --- --- ---
+40.2s,58min	 cool then let's get again no complaint so what can we do well if I'm just a normal user I would look at the outbox which is what I'm going to do now you okay reply for well that thing and then 52 looks about right
+--- --- --- --- --- --- --- --- ---
+10.3s,59min	 okay detect the error false and it says data added successful database under you so that's the name of our data they happen to infer this from the data file because that's our norm in house but this could be an arbitrary other name if you wanted to in principle and then it spits out what data landed in the
+--- --- --- --- --- --- --- --- ---
+32.0s,59min	 database and JSON format this is primarily just meant to inform the user not to be machine readable there are other commands that make a machine readable as a matter of fact why don't we do that so here's another request in a different JSON file so see you copy over that says like get and that's a different name might just show an error on that to
+--- --- --- --- --- --- --- --- ---
+7.4s,0min,1hr	 begin with should pump out an error when the processes that yep can't find it because it doesn't exist but if we change that to was the second one I think it's gonna be the second one I'm gonna have to do is I'm gonna have to do the same thing so trying to figure out a permanent type of paper combination and see to what I'm going for
+--- --- --- --- --- --- --- --- ---
+35.7s,0min,1hr	 you you when if there sort of and file names on my part sent. Great.
+--- --- --- --- --- --- --- --- ---
+56.0s,0min,1hr	 So reply to new file, error none, time received, and then here's the content that we've bumped in. And you'll see that when we specified the original JSON here, we had the base path as a separate thing. Well, obviously, it's not hard to append it to the full thing, but it does that work for us. Yeah. It has the name, has the path, everything. It's all in there.
+--- --- --- --- --- --- --- --- ---
+16.7s,1min,1hr	 Cool. Yeah. Now, I will tell you that if you try adding the same data set twice or try adding something that has files that are already on record with a different data set, it will give an error, which I think makes sense. There might conceivably be times when someone wants to run a weird experiment where they want to tweak that one way or another, but I think it can cross that bridge
+--- --- --- --- --- --- --- --- ---
+39.8s,1min,1hr	 when we get there. Anyway, so is it possible to do that? Do you have an update request? Do you request to update a particular field of a particular data set? Yeah. I implemented an update function here. Now, I'm not sure if I covered every conceivable update
+--- --- --- --- --- --- --- --- ---
+0.2s,2min,1hr	 that someone would want to do, but certainly, if someone mistakenly specifies the file in the wrong place or they want to move the file and then tell the system that, they can do that. Mm-hmm. And that's with the interface we're talking about right now, like through files. In the database, you can do that around the ship.
+--- --- --- --- --- --- --- --- ---
+21.0s,2min,1hr	 So there are additional things, as I'm alluding to, like Git and LS that would just show all the data files, but I won't take your time to go through all of those. I will take a moment, though, to show what that looks like on the database itself for people who actually maintain it or want to develop on top of it. So so far, these are the sort of things that a user could look at.
+--- --- --- --- --- --- --- --- ---
+42.0s,2min,1hr	 Or at the very least, software outside of the system could use. For example, Anson, you can imagine interacting in this way with the system, since this is clearly machine readable. But if we ask SQLite again about this,
+--- --- --- --- --- --- --- --- ---
+16.0s,3min,1hr	 and I ask it where are my tables, OK, we talked about the structure of the data set, et cetera, stuff before, but now we get to see what they look like when they have stuff in it. So we're going to use the data set. And I'll show you what we want to do. Do you want dem or from? No, no, you're right. It's from. OK, so there's only one data set, because we only added one. And that's the name of it.
+--- --- --- --- --- --- --- --- ---
+41.3s,3min,1hr	 That's when it's added. What's the sex of the worm? And then string. Nice. Nice. Nice. Nice. OK. Okay, and then dataset content. So this is just the idea of what the row is basically, what the file is, data added, dataset it's a part of, they all belong to one, and then this is the type. And we can confirm the type which is dataset content.
+--- --- --- --- --- --- --- --- ---
+4.0s,4min,1hr	 Dataset, what was it? Data record type. I think it's content type. Data content, yeah. There's the edit, and then one there. Oh yeah. This right here. Yeah, so, and there was a free text describing what each one of these are, but those are the ID numbers,
+--- --- --- --- --- --- --- --- ---
+28.0s,4min,1hr	 and we can see that they match over here, great. Those are the individual tables. I mentioned that we have this view that does the work for us, so we don't have to break it down in this way. How do I interact with the view? Same way I would a table. Select star. From dataset and most recent files. And this is just one big row basically.
+--- --- --- --- --- --- --- --- ---
+48.6s,4min,1hr	 That's the idea of the dataset, name of the dataset, sex, strain, and all the different files in the order of one, et cetera, et cetera, et cetera. So that's obviously there are bits and pieces that we didn't go over, but that's the [...] 
+--- --- --- --- --- --- --- --- ---
+8.8s,5min,1hr	 the big bulk of the idea and the big bulk of the material there. I like to think that this sort of thing is, can provide a foundation for what we do in-house. If nothing else [...]  whatever I do aside, just the fact that we have some of the proper technology
+--- --- --- --- --- --- --- --- ---
+32.4s,5min,1hr	 that multiple things can talk to might be a good place to go. You alluded to before like Google Sheets, et cetera, having APIs, et cetera. That's not. That's not unreasonable. You can imagine using this to talk to them or vice versa. But whatever the case is, there are many things that support escrow statements, reading them,
+--- --- --- --- --- --- --- --- ---
+53.5s,5min,1hr	 receiving them, et cetera. So, yeah. This is great. This is really awesome. I appreciate that. Yeah. So I'm happy to talk about any other part of it right now, but I'm going to go ahead and wrap up. Okay. Thank you. Thank you. Thank you. Thank you. All right. So if there's any other questions,
+--- --- --- --- --- --- --- --- ---
+15.5s,6min,1hr	 I think we'll go ahead and wrap up. If there's not like immediate things that we'd like to chat further on it about, then maybe I can show you what's needed to set it up on the server. Yeah. I think my brain is as full as I can. Yeah, I'd imagine. So I can kind of.
+--- --- --- --- --- --- --- --- ---
+42.0s,6min,1hr	 Do it another time? Yeah, perhaps. That sounds good. I appreciate you sitting through this whole thing, but yeah, brain's full. It's a good time to stop. I definitely want to read through the code a little bit more in depth. Just in my own time. It would definitely help. This is really cool. Do you know if there's an existing utility that could reference this?
+--- --- --- --- --- --- --- --- ---
+8.0s,7min,1hr	 I'm just thinking for the sake of users that don't really use command line stuff. Is there a way of creating some form of database visualization in a GUI? I think so. Part of the good thing about this style of relational databases is that they're fairly old and well supported.
+--- --- --- --- --- --- --- --- ---
+31.5s,7min,1hr	 So it's not atypical for spreadsheet interfaces that behind the scenes pump out or exist as databases. Right. Yeah. Because when you think about it, I've talked a lot about tables, but another way to draw the table is spreadsheet. So I'm optimistic that that probably exists.
+--- --- --- --- --- --- --- --- ---
+55.9s,7min,1hr	 Yeah. Yeah. Yeah. I can imagine ways of building it, but probably don't need to reinvent that. Yeah. That probably exists. And I mean [...] with the... Yeah. Worm-wide web thing, that's sort of a way of [...] going through, oh, what data sets do we have? What are the types of data sets?
+--- --- --- --- --- --- --- --- ---
+20.3s,8min,1hr	 Yeah. What do they have in them? But I don't know if [...] changed this, but when I worked with it, worked with their original version of it, all of their data sets were just a ginormous JSON file. It included every single trace value. It was just a giant... List. And so each thing.
+--- --- --- --- --- --- --- --- ---
+43.9s,8min,1hr	 And so [...] because of that, then [...] any form of... And [...] the way that you talked about this, where if you want to query the database in a way that the data has not been formed for, was extremely inefficient.
+--- --- --- --- --- --- --- --- ---
+11.4s,9min,1hr	 Like, for example, I wanted to create... A list of all the data sets that had a particular group of neurons. But the way that they had set it up is I then needed to read through each data set and say, does this have this neuron, this neuron, this neuron, and this neuron? And if it did, okay, add it to the list. And so I had to do that every single time you changed the neurons that you were displaying.
+--- --- --- --- --- --- --- --- ---
+40.6s,9min,1hr	 And then it would update the list, which would take a while. Yeah. So it's just... [...]. So, yeah. Doing something that's a little bit more supported and scalable, I think, is huge. Like, this would definitely make a big difference. Yeah. I think the... Like, this is [...] the... The important foundation.
+--- --- --- --- --- --- --- --- ---
+3.4s,10min,1hr	 And then getting it to be widely adopted, which would make it as easy as possible to use. Yeah. I totally agree with you because I [...]  I appreciate you having interest in this and sitting through the description. But certainly, it's not like most of our users are as comfortable looking at this sort of thing as you're not.
+--- --- --- --- --- --- --- --- ---
+30.0s,10min,1hr	 Right. So, one of the good things about adoption is that if Anson becomes reliant on this, which is part of the goal, that's to a certain degree. Right. And that's why we're doing this. Right. So, for example, certainly, it would be nice for the functionality of the World Wide Web to refer to this.
+--- --- --- --- --- --- --- --- ---
+54.3s,10min,1hr	 But you could imagine, at least in principle, that that continues to live separately from whatever else we do in-house for Anson. Yeah. Before the recent change. I don't think we would change World Wide Web, but, yeah. I mean, hopefully we... Not in the near term, but... Yeah. Again, just in part because this sort of thing is so ubiquitous. I would be surprised if there's not some easy web way to include this. Right. And that's part of the point, right?
+--- --- --- --- --- --- --- --- ---
+16.2s,11min,1hr	 So, I think it's fair to say that there's sort of the classic, I have a specific use case and I know how to do this one thing. I don't need to bring too much [...]  additional machinery with me. Mm-hmm. Versus the, okay, I'm developing this further. I'm doing more serious things and needs to do stuff curve. And World Wide Web...
+--- --- --- --- --- --- --- --- ---
+47.1s,11min,1hr	 Some other things developed in the first regime, understandably. I think there was a right trade-off. But then, unfortunately, they matured enough to be starting to go into the other regime. Yeah. A little bit of a side thing, but just maybe fodder for curiosity another time. When the brain isn't as full. So, I know that... Well, I get the sense that you like how Jax has compilation steps, etc.
+--- --- --- --- --- --- --- --- ---
+9.9s,12min,1hr	 And I think that's cool, too. It's worth noting that one of the pros of SQL databases is that you can write a bunch of commands together. And that the way you write it down isn't necessarily the way to execute it. Because it uses an outrun internally to reorder those things or compress those things and make it more efficient.
+--- --- --- --- --- --- --- --- ---
+42.0s,12min,1hr	 That's one. And there's actually a command called explain. Which I might as well... Just... Do here. That will show you what it does internally. I'm curious. Okay. Oh, wow. Yeah. So, that's one thing. The other thing you mentioned in terms of [...] efficient retrieval. There's a whole notion of an index on a column. Where not only are you able to just retrieve things without having to worry about how they're stored.
+--- --- --- --- --- --- --- --- ---
+6.8s,13min,1hr	 Which is one of the big pros of this. But if you tell it to make an index on a column... And that's all you need to say. Make index on column. It will start recording some extra bookkeeping information to make accesses, etc. on that fast. So, it's like if you built [...] a binary tree over this column behind the scenes. So, part of many of the gadgets available.
+--- --- --- --- --- --- --- --- ---
+21.2s,13min,1hr	 But, again, I appreciate your enthusiasm for this. And I do appreciate you letting me talk this much this late in the day. [...]. Okay. Bye. Bye. Bye.
+--- --- --- --- --- --- --- --- ---

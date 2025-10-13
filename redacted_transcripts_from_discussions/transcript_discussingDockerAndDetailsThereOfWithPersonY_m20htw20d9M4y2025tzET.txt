@@ -1,0 +1,392 @@
+26.1s	 So picking up from where we were yesterday, first let me close this out, and to confirm I have your permission to record the discussion, correct? Yes. Thank you. And you are? [...]. Who? Myself. Last name? [...]. There you go. It's April 9th, 2025, it's currently 5.20pm Eastern USA time.
+--- --- --- --- --- --- --- --- ---
+56.0s	 So where we left off yesterday, according to my notes, so we were in the process of decompressing the home directory, then we wanted to make a container. A couple other things I want to talk about during this are going over some of the SSH keys, I know that you know about that, but it's worth just describing. And also I want to mention looking at history files, because I installed Anson on this thing, and the process that I took, or at least most of it, should be reflected in things like the backslash.
+--- --- --- --- --- --- --- --- ---
+25.5s,1min	 So it's worth at least looking at and noting that that's around if at some point in the future something happens. So even if the Docker for some reason breaks in the future, we still have a record of the packages it was using, and also how that was set up inside of it. Alright, with that all said, let's actually get into it. I'm just going to go ahead and record my terminal activity. I have a version of the script that I use on my machine here that I discussed yesterday in the Docker.
+--- --- --- --- --- --- --- --- ---
+54.3s,1min	 And again, we're setting this up for [a particular person]. This is on [the particular person]'s account on C3 right now. So, just going to log in there. Thank you very much. Please try and verbalize that next time, just because they can't see your hand and etc. There we are.
+--- --- --- --- --- --- --- --- ---
+20.6s,2min	 There we are. Alright, so if we look at this, in this session right there, so the phone directory, this is the one that we had yesterday to decompress the, well not decompress, I'm sorry, untar the large file that we had decompressed. Let's see the progress on that. It should be finished by now, but I'll hold it just a second.
+--- --- --- --- --- --- --- --- ---
+47.8s,2min	 Anyway, so we see that it took about 47 minutes for this thing to untar, whereas it took maybe about two minutes to decompress. So, that kind of just, my reading from prior antidotes is just file systems.
+--- --- --- --- --- --- --- --- ---
+12.1s,3min	 So, that's the first thing that I want to talk about. So, I'm going to go ahead and start the process. So, I'm going to go ahead and start the process. So, I'm going to go ahead and start the process. You know, just dumping out a bunch of files and stuff can take time. Anyway, so if we take a quick gander inside of this thing, well, we have the home directory that was untarred and we have the original tar file. I'm going to go ahead and remove the tar file since we don't need it anymore, at least not here.
+--- --- --- --- --- --- --- --- ---
+35.1s,3min	 If we wanted to make multiple home directories for multiple containers on C3, or we wanted to make it again on C2 or C4, we'd follow a similar process, but that's hypothetical at this point. So, moving that tar file, and this is just the process. tar file? Yes, there we are. And if we look inside this home directory, we should see something in terms of structure very similar to what we saw yesterday with mine. So we
+--- --- --- --- --- --- --- --- ---
+56.9s,3min	 can do ls, and in fact if we do lsa, so a little bit of a breakdown of these commands for anyone who's less familiar with these specific flags in ls. So l is long listing, most people use those. A is to list everything, including the hidden files, so these things at the dots in front. T is to sort them in order of time, so more recent things are near
+--- --- --- --- --- --- --- --- ---
+21.7s,4min	 the top, and things that I think was modified last, or at least recently are at the bottom. And I [...]  you actually rarely need that, but it lists out the inodes, and that's kind of the detailed file system, but I just kind of throw it in there because it adds more information, and I mean I'm glad I developed the habit because goodness knows sometimes it's useful, but discussing what inodes are and why they come up is a whole other kid
+--- --- --- --- --- --- --- --- ---
+47.2s,4min	 and caboodle. Anyway, so looking inside this directory, we see that we have the various things that you would expect in a home directory. We have a, where is it, there should be a bash history, etc. Yeah, it's executable in green. So there's bash history, there's a .julia, there's a source file, there's an ssh file, etc., etc., etc. There's the things we'd expect. Source?
+--- --- --- --- --- --- --- --- ---
+13.2s,5min	 Anyway. Okay. Great. So, with that set up, let's move on to actually making the container. So, from what I had set up yesterday, or what we had set up yesterday, we had this bash file for command to make a docker container. And if we step inside that again, we were looking at this a bit yesterday, and just to recap, let me read the first bit of text, because start with
+--- --- --- --- --- --- --- --- ---
+38.6s,5min	 text saying these are some things you have to do. It says, one, you need to change the home directory to point to a new copy. For most machines, we just, we're dealing with the home directory, basically there's a path down around in the command that we'll look at that we have to modify that value for. Then it says, and specify the image as it corresponds to what is shown on your machine
+--- --- --- --- --- --- --- --- ---
+3.0s,6min	 once it is copied over. That's the docker image stuff. We'll look at that again in a moment to get the information. Then it says, after you do the above, or at least check things in the regard that are, check things are okay in that regard. Remove the occurrence of the word exit below, which was put in to help reduce the chance of errors, and then uncomment this line. So, I'm going to do this in a slightly different
+--- --- --- --- --- --- --- --- ---
+32.4s,6min	 order just because I know what I'm doing. Okay. Anyway, so, I'm going to do this in a slightly different order. Anyway, so, this is read on, or it has some protections on it, so I just did a forced
+--- --- --- --- --- --- --- --- ---
+53.2s,6min	 write. It's not a big deal. This is just a copy of the, of the command that we have saved on str1, so if I wanted to I could even delete this and we shouldn't be in big trouble. Anyway, so, we need two pieces of information. One is where the home directory on the command, and the other is where the command is stored. So, we're going to do this in a slightly different order just because I know what I'm doing. Anyway, so, I'm going to do this in a slightly different order just because I know where the command is stored. So, we need two pieces of information. One is where the command is stored on the host, or what will be the home
+--- --- --- --- --- --- --- --- ---
+19.8s,7min	 directory in the docker is stored on the host. That's the thing we were looking at a moment ago, but just to get the full path and remind myself there's a docker home, there we are, be free, and then that's [...]  the whole kit and the poodle. There's that piece of information. And if we look at the command that we uncommented out here, we should actually take a moment to break this down. Yeah. So, we have docker run, which is the command that
+--- --- --- --- --- --- --- --- ---
+41.6s,7min	 is stored on the host. So, we have a command that is stored on the host, and then we have the docker run command, which docker run command, I suggest that if you're curious, you read the documentation on that proper, but the gist is that it takes an image which we specify, it's one of the values we have to deal with, takes an image we specify, puts a container out of it, and then it starts it and runs a command you specify. So, in
+--- --- --- --- --- --- --- --- ---
+7.8s,8min	 this case, I will, I'll go talk about these different commands here. It, I'm going to do the command, hold on just one second, will you? Alright, I had to pause for a moment just to address a minor issue. So, starting to talk about this command break it down. So, docker run, I just mentioned, and the command that tries to execute is listed at
+--- --- --- --- --- --- --- --- ---
+29.8s,8min	 the end. Here it's bash. So, bash is just the name of one of your command line shows. So, for example, if I step out of vi there, within there, the terminal I'm using here is bash. And another terminal that exists is sh. So, typically when you see just a dollar sign like that, it means you're running sh. And when you see something like this,
+--- --- --- --- --- --- --- --- ---
+55.0s,8min	 you're in bash. And just to illustrate [...]  there you go. Anyway, so basically, the gist of what this thing is doing is it's spinning up a container based on an image, and then it gives you a terminal that you can interact with. There's a bit more going on here beyond that. So, um, So, I said there were two parts of information we needed to specify. And while it's true
+--- --- --- --- --- --- --- --- ---
+16.2s,9min	 there's more I need to talk about on this line, um, let me first specify the home directory which I, um, set a need to put in. So, each one of these mount, uh, options specifies something on the host that is then presented to the docker and how or where it's presented,
+--- --- --- --- --- --- --- --- ---
+42.9s,9min	 um, to the docker. So here, by doing so, by pasting in this path to the home directory, that I set up for, um, [this particular person's] Docker here, this is the path on the host, but from the machine it will appear as just home. And as a matter of fact, since I'm just mounting at this home, I probably should, um, it's
+--- --- --- --- --- --- --- --- ---
+3.8s,10min	 not the best setup. So typically in the home directory, if I exit out of DI for a moment, I'm going to have a new directory. So, I'm going to have a new directory. And, um, I'm going to have a new directory, and for a moment. So in a home directory you typically have not just one user's, I mean not home directory, under home a literal directory called home like I am presenting here,
+--- --- --- --- --- --- --- --- ---
+24.6s,10min	 you typically have not just one person's home directory but multiple people's home directory. And indeed if we look on the server here we see that we have [person name 1, person name 2, person name 3], etc. And we'd like to continue to follow this pattern on our Docker because we want our Docker to present like a typical Ubuntu Linux system more specifically and the sort of pattern that I'm describing it
+--- --- --- --- --- --- --- --- ---
+44.9s,10min	 in regards to what goes on in the home directory is pretty standard across them. So what do I want to change then? Well in specifying the home directory here if I specify just this path then when a person goes under home what will they see? They will see what should be called
+--- --- --- --- --- --- --- --- ---
+8.1s,11min	 the Docker home directory. So if I specify this path then when a person goes under home what will they see they will see what should be called the Docker home directory. And that by itself is fine but the issue there is that if I want to make multiple Docker containers that end up having separate home directories on C3 and I want to not make the naming just awful, it will be probably prudent to make another sub directory that's actually
+--- --- --- --- --- --- --- --- ---
+28.4s,11min	 mounted as the quote unquote home in that Docker. These are things that aren't the end-of-world per se but just perhaps avoid some minor hiccups or minor issues. So what I'm going to do is I'm going to go to this actual directory like that. I'm going to make another directory called
+--- --- --- --- --- --- --- --- ---
+59.1s,11min	 mounting point for C3 like that. And I'm actually going to move that say home directory into the home directory. And I'm going to put a one in it just in case we want to make multiple at some point. And of course you need a source and a destination. There we are. And then I'm going to move the home directory that we set up into that mount point.
+--- --- --- --- --- --- --- --- ---
+21.1s,12min	 So that what I actually present to the Docker as the home directory or one unfortunate naming, the literal directory called in quotation marks home as opposed to the home directory in the general, the usual sense for the Docker user. It's easier to look at the screen and see the text as opposed to the
+--- --- --- --- --- --- --- --- ---
+41.8s,12min	 verbal description. But in any case, I'll put this as the home thing so that when someone looks inside of it, they'll see that there's only one home directory for the one non-root user that should be present. Little details that are more along the lines of just generic sort of Linux-like knowledge than deeply involved in setting up the
+--- --- --- --- --- --- --- --- ---
+4.0s,13min	 Docker. Okay, let's go and double check if the home directoryGroup meansog. Okay, and the resonance duty thingy with this indoctrination заяв salud so that's the home directory. And as mentioned, the text up here. So one part was the home directory.
+--- --- --- --- --- --- --- --- ---
+25.9s,13min	 This naming here is a little bit annoying I can tell you the syntax for this command into the Docker run command is generally the command here is a little bit annoying. I get take a syntax for this command change. I think it should wait until this feels further in j Panther to send it to me. should wait untill we need to write a new command name. And I essentially already finished it just because it's notял382Ь That's why I don't modify it because I don't want to prisons to it because I don't want to run this command to run any source in a futherý. you want to run goes last, the name of the image that you want to build your container from goes second to last. Notice I said image, and that was intentional, despite the fact that the string says container. The reason it has
+--- --- --- --- --- --- --- --- ---
+50.0s,13min	 container there refers back to some way I described yesterday in terms of having an image, making a container, making changes in that container, then converting that container to an image. So just refer back to the notes from that conversation whenever, and basically when I made this thing, I was dealing with an image that I had made from a container with this
+--- --- --- --- --- --- --- --- ---
+11.6s,14min	 name. Poor naming historically, but don't be thrown off by that going forward. So we still need to find the ID for the container I want to use as it has been loaded into this machine. So similar to what we were doing yesterday, I'm going to say docker image ls slash a where we are, and
+--- --- --- --- --- --- --- --- ---
+34.2s,14min	 I remember this number from yesterday, but we want to make sure there are other ways you can check, if nothing else, then the created time and prior knowledge that we have one lineage of images as opposed to there being a tree or separate branches, what have you. One informs my decision on the side of the moment.
+--- --- --- --- --- --- --- --- ---
+9.0s,15min	 That's the ID we want, because it's the most recent one, if nothing else. And then I'm just going to replace it with that bit at the end. There we are. As such. Right. So what else do we need to modify? Well, you probably shouldn't have to modify anything else, but it's worth describing what's here for future record. So I went a little bit
+--- --- --- --- --- --- --- --- ---
+33.9s,15min	 out of order in describing what's there so far, just because there were some major components, right? I described the first two strings, the docker run, and I described basically the last two strings, which were the command and the image you want to make your container from. And I described a little bit this mounting stuff when we had to specify the home directory. But there are a couple other commands listed out here. First, to make sure there are no
+--- --- --- --- --- --- --- --- ---
+57.8s,15min	 lingering points to go over for the mounting. As you can see, there's a flag you need to specify, and then you provide a type, source, and a target. The source is how, is what the location is on the host. The target is how it will show up on the docker. And, as a little
+--- --- --- --- --- --- --- --- ---
+24.1s,16min	 bit of a pitfall, if I recall correctly, if I recall correctly, by default, if the source path does not exist on the host, then docker will create it. Okay. Yeah. So. Okay. Okay. So for example, if I had misspecified this path, or if I am misspecifying it, we'll find out, and maybe had like a 2 here instead of a 1, 2 in this point, then Docker by default,
+--- --- --- --- --- --- --- --- ---
+46.9s,16min	 if I recall correctly, will make a folder with that name and it will be empty. And then when you go to look for your stuff, it will be like, hey, this folder exists, but it doesn't, you know. So just be aware of that. It's a common point. And there's also this command called type, and this is something that just has to do with generic mounting.
+--- --- --- --- --- --- --- --- ---
+8.9s,17min	 If you're really interested in this, I suggest consulting the Docker documentation first and foremost, and then maybe things like umount, like man umount, for just more of a general discussion of how mounting is handled by a Linux machine. But again, that's sort of generic knowledge, not something that really needs a point of
+--- --- --- --- --- --- --- --- ---
+36.9s,17min	 view. At least in terms of umount, not something that needs to be discussed in regard to the Docker specifically. Okay, so that's more or less the mount. Before I move on to some of the other flags here, do you have any questions or clarifications or things you want summarized about what we've discussed so far in regards to this? I think I have a few very small questions.
+--- --- --- --- --- --- --- --- ---
+58.1s,17min	 Sure. What is runtime? And IT specify? Well, these are flags I was going to get to. I wanted to be clear about the things I've discussed so far. No, I think they're all good. They're all very clear to me. Okay. So, indeed, there were other flags like runtime and IT I wanted to talk about, and also we need to go over the ports, etc.
+--- --- --- --- --- --- --- --- ---
+22.4s,18min	 So going over those from left to right. Double flag user, Docker user. Yes, that's right. That does indeed specify that the user we want to attach to when this spins up is the Docker user, and it's also the user we want to run the bash command under.
+--- --- --- --- --- --- --- --- ---
+49.9s,18min	 If you don't specify that, well, I think you can set it in the Docker image, what the default user you would make that is. Just be aware that absence specific instruction otherwise, it's not going to be able to do that. Okay. So, let's go over the' root' thing to see if that works. So with the root, the docker image, as you would recognize either on this command line or in the Docker file, Docker typically runs things as the root for the Docker image.
+--- --- --- --- --- --- --- --- ---
+13.8s,19min	 Now, we'll have to come back to show things about the UIDs. In fact, let me make a note about that, some ID's. Because I was very intentional with my wording there saying the root for the Docker image. for the Docker image, bear in mind we're running as Docker rootless, so the root for the Docker
+--- --- --- --- --- --- --- --- ---
+35.4s,19min	 image corresponds to you as a user on the host, so it has no greater permissions than what you as a user on the host machine have. That is not how Docker typically runs. Docker, if you do not set that up as rootless, root in the Docker means root on the host, and that's a security issue,
+--- --- --- --- --- --- --- --- ---
+56.5s,19min	 which is one of the reasons that we're going with Docker rootless, but that's something we can elaborate further on in a moment. Whatever the case is, this thing about specifying the user is, if nothing else, good practice, and depending on some other things, perhaps essential. I don't have the Docker file that I use to make this right in front of me, otherwise we can look at some of
+--- --- --- --- --- --- --- --- ---
+21.8s,20min	 that setup, but I have it somewhere in my notes. Anyway, so that's a thing, just be wary of it. Runtime NVIDIA, this is something that's important in order to run the NVIDIA container with access to the GPU under it. So if we go back for a moment and look at our various images, I know that as shown on the screen, it's not
+--- --- --- --- --- --- --- --- ---
+41.9s,20min	 terribly informative about what's what, but I can tell you that this one on the bottom, that's from 17 months ago, corresponds to a NVIDIA container, and basically that's a foundation. We build off of so that the Docker containers we're using can talk to the GPU and use it
+--- --- --- --- --- --- --- --- ---
+4.4s,21min	 efficiently. All right, so there are a couple different parts that went into using NVIDIA. If we revisit this on the commands that we ran yesterday, one of the first commands we ran in order to set up the Docker for us was this one for the curl and then rootless, and the next thing we did was, or one of the next things we did, was run this thing for the new NVIDIA container. So if we
+--- --- --- --- --- --- --- --- ---
+31.5s,21min	 go back to the NVIDIA configuration and runtime, et cetera, and you notice some of the similar verbiage, right? Runtime, configure, yada, yada, yada, but as part of the process of getting that set up, we need to specify it here. If you're interested, NVIDIA has some additional documentation about all of this, but I think we've said enough now. This next part is kind of important, and for
+--- --- --- --- --- --- --- --- ---
+1.0s,22min	 people who are used to dealing with ports, it might not be to use it for the NVIDIA container, but it's going to be used for the NVIDIA container. So if we go back to the NVIDIA container, and we look at the NVIDIA container, we can see that this is a NVIDIA container, and we can see that this is a NVIDIA container, and we can see that this is a NVIDIA container, which is amazing. That No aqua container I'm using in this lighting setup. And no cloud container, if you fished this up, have seen thebecca container, which is镠 more than 15m 3 sqa So you can just forward that. If you chose in this plane channel, that hits the primer point, and there is a�� who's the top of the world temperatures J aqui está oka
+--- --- --- --- --- --- --- --- ---
+26.7s,22min	 Thank you awful lot Dokkailiar, duty of the red. Actually during the event, we little Video Chen Process. And I understand.altenlos not d gek sista sectorSunlight00 versionN nuggetsInNoftheColor biblenic.com to the host network or it doesn't have a network attachment. But whatever the case is, we want to have some access but not total access. And one of the ways to do all that is to specify some limited number of ports that are exposed. So basically, all that rationale aside, what each one of these is doing is saying, I want to expose a port.
+--- --- --- --- --- --- --- --- ---
+52.5s,22min	 On the right is the port on the Docker. On the left is the port on the host. If you don't specify a port on the host, Docker will find the next available open port and use that. So this is what basically starts setting up the mapping where on the host, a port like 36.1.2.3
+--- --- --- --- --- --- --- --- ---
+15.0s,23min	 would then correspond inside the Docker to 8888. So that's how we do this. And I chose these numbers because they're fairly generic in terms of places where processes talk to things. But really, you could start using other ports like 9000 or something like that.
+--- --- --- --- --- --- --- --- ---
+41.6s,23min	 You know, a module of the typical considerations that go into setting ports up for processes to talk to each other. Okay. So the next thing we have are the mounts, which we already went over for the most part. The only other thing that I have to talk about is that we have... Things like the source and target for other things, like the data drives. Just a second. All right, resuming after pausing for a moment.
+--- --- --- --- --- --- --- --- ---
+9.1s,24min	 Right, so we're just covering the bases with the mount. As a person can probably tell from looking at the other mount commands, these are binding the storage directories that are mounted on the host to corresponding names in the Docker. This might not look like it's a corresponding name, but we have it presented on host via links or other mounting options
+--- --- --- --- --- --- --- --- ---
+33.6s,24min	 so that indeed root data one on the host corresponds to also this path. So for consistency and to not have to change our code too much to work in the Docker, we're just keeping that convention. So we have data one, data three, data four, and of course store one. There's no... There's no data two because data two, as we have it set up on our servers,
+--- --- --- --- --- --- --- --- ---
+59.8s,24min	 is just a pointer to data one. All right, continuing after pausing for another moment. All right, so we, I think at that point, covered what these mounts are. The next two commands to talk about, and I think the last four, I'm saying a container, are IT and name. IT, the I stands for interactive, and the T is...
+--- --- --- --- --- --- --- --- ---
+23.8s,25min	 It's another specific flag. I'll look at the man function in a moment to see that, but basically one usually specifies those to tell Docker, hey, the thing I'm about to run, I want you to open it up in an interface where I can see it and talk to it. So even though I have the bash command specified as the last command to run, and typically that's just the terminal or just runs a script,
+--- --- --- --- --- --- --- --- ---
+53.9s,25min	 depends on how you invoke bash. If I just ran like this, it would run behind the scenes, without me being able to actually get IO to it. And just to really drive that home, and also show you some generic helpers there. I think it's Docker run. Okay, there's no bash there. Docker that. Okay. Docker run help. There we are. TTY, okay, yeah.
+--- --- --- --- --- --- --- --- ---
+17.1s,26min	 So that's one of the ways that it allocates a pseudo terminal. That's just sort of details of how terminals, et cetera, work. And if we look at some of the other options, I just want to see I. Yeah, there we go. So I is indeed for interactive. Keep STD in, open, even if it is not attached, et cetera.
+--- --- --- --- --- --- --- --- ---
+41.4s,26min	 So just things you need to set up and not typically have to know too many of the details of. Anyway, so there's that. Okay. Okay. Okay. Okay. So the last bit is name. In this case, we'd like to make containers that have something we can refer to beyond just the mechanical numbers we have for the images.
+--- --- --- --- --- --- --- --- ---
+8.8s,27min	 So if I do Docker image, ls, a. If we typed in container instead of image here, we'll get a similar list once we make something. And we'd really like to have something with like a human readable name column instead of just these numbers. Okay. Okay. And one of the ways you do that is by specifying a name when you create the container. So with that all said, let's actually try running the command to make a container.
+--- --- --- --- --- --- --- --- ---
+40.2s,27min	 First, I need to modify it so that it is runnable as an executable. Like that. And then I actually need to run it, hopefully without syntax errors or anything else. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Okay. Mm. Um. . Um. . Mm. Mm. Mm. . Mm. mm. Mm. Mm. Mm. Mm. Mm. 32768.
+--- --- --- --- --- --- --- --- ---
+17.9s,28min	 Oh, I think I've had this issue before but resolving it was a little bit of a hiccup. Well, first off, let me get out Tmux. I've run into that before and it was just some. minor thing like the folder running it, but I'm trying to recall what was the way around it. Might as well try it again. I don't think Docker created any containers, but I just want to use that.
+--- --- --- --- --- --- --- --- ---
+41.9s,28min	 Oh, it didn't. No. Docker star 3e. Error response. Right. Oh, I think it might have been Docker container star. Okay. So that's a little bit of voodoo dealing with Docker containers.
+--- --- --- --- --- --- --- --- ---
+5.9s,29min	 Docker start versus Docker container start. Why? Well, that's a whole other discussion. I don't want you to have to go down the rabbit hole I went down to. Just bear in mind if you see an error like this, sometimes the magic is to do something that looks basically the same. It just has the word container in front. So with that started, let's see if we can attach to it without issue.
+--- --- --- --- --- --- --- --- ---
+27.9s,29min	 Docker attach. And there we go. We're attached. Now, if we look, we're at the root directory of the Docker. Let's see if we have the ability to go visit our home directory. And it says the home with no such file or directory. Oh, well, you want to bet that I did not rename the directory.
+--- --- --- --- --- --- --- --- ---
+50.9s,29min	 That's why. Because the name of the directory we made was on the host. It was called home Docker user. But on the machine, well, by default, it looks for something with the matching username under the home directory. So let's fix that. First, I'm going to stop the Docker.
+--- --- --- --- --- --- --- --- ---
+11.9s,30min	 Now, when you exit a Docker like this, typically it stops. All right. We'll come back in a moment to things like detaching. Well, actually, might as well do it now. So if I do control P, then control Q, it reads an escape sequence, and I'm detached from the Docker. That doesn't mean the Docker has stopped running.
+--- --- --- --- --- --- --- --- ---
+33.9s,30min	 In fact, and one of the ways we can check that is ask Docker container ls-a. And we see, if we look at this line carefully, the container ID, the image that was built off of the command that it's running, when it was created, its status, which says up.
+--- --- --- --- --- --- --- --- ---
+56.9s,30min	 And up typically means something's up and running. And then some details about the ports that we'll need in a couple minutes, but we'll come back to. The key thing here is to see that the status says up, which means that's running. So I can attach to it again. Great. And there you go. Now, if I type in exit, and then check again,
+--- --- --- --- --- --- --- --- ---
+26.9s,31min	 it will say exit it. And in fact, if I try to attach to it now, it should give an error. There you go. And thankfully, this is an informative and concise error. It cannot attach to a stopped container. First started. We'll go over starting and stopping in a minute, but first I want to correct this thing about the home directory. So let's go back to that thing with the Docker.
+--- --- --- --- --- --- --- --- ---
+47.9s,31min	 As such. Now just a second. Anyway, so we're here in the location, and we'd like to do two things. One, just because of the way we set things up, we might want to change this thing to be Docker user.
+--- --- --- --- --- --- --- --- ---
+10.9s,32min	 And again, because we put this under its own directory, it's not like it will conflict with another one that we make, or for another container we run on this machine. So we might as well just do that, and change it to from home Docker user to Docker user. Bear in mind that we did not, when we set up the container, we didn't specify the mount point to be that specifically,
+--- --- --- --- --- --- --- --- ---
+36.9s,32min	 so we don't need to worry. Whereas if we change the name of the parent directory, in this case, say mounting point for 1C3, we change that, then we would have to worry about what's going to happen with the Docker, because we specified that as exit. So we don't need to worry about that as a point on the host to use as something to mount on the Docker. Anyway, so the next thing we want to do is change the permissions inside the Docker user
+--- --- --- --- --- --- --- --- ---
+59.9s,32min	 to be something that the Docker itself can run and use. And this gets to a little bit of the matter I noted down to talk about of UIDs, GUIDs, and sub-IDs, etc. Which is a little bit of a messy detail that most people who use Docker won't have to worry about, but people who set up the Docker will.
+--- --- --- --- --- --- --- --- ---
+20.9s,33min	 So, where to start? Let me actually start the Docker again, because I want to show something. Docker start... what's it? 3...
+--- --- --- --- --- --- --- --- ---
+42.9s,33min	 Error. Oh. Docker container start. Error. Error. Oh, now it's complaining again. Let's see. It's the same thing with the ports. Let me just restart the Docker. System...
+--- --- --- --- --- --- --- --- ---
+7.9s,34min	 Controller... User... There's a better way to fix that, but I'd have to dig through my notes to see what. Let's start Docker. And you'll notice that the error message it's giving is... You know, it's allocating a new port. So it's basically a thing where it starts spinning it up, it allocates a port that isn't being used,
+--- --- --- --- --- --- --- --- ---
+30.9s,34min	 and then I think it tries to bind it twice, which is not what we want to have happen. I wonder if I actually specified the command incorrectly and accidentally had the same port there twice. Let's take a look. I'll store one. Just hold on. Let's see.
+--- --- --- --- --- --- --- --- ---
+57.9s,34min	 888, 8080, 8080... Something along those lines. I never actually had an issue with this command, but there's something else about maybe running it or so forth. Might have had to do .FAT first and then command. I don't know. But not a big deal. Let's see if just restarting the Docker addressed that issue.
+--- --- --- --- --- --- --- --- ---
+19.9s,35min	 So docker container start freee. No. Docker container start freee. No. And again, we see that it is in fact allocating new ports to that. And if I say docker container ls-a.
+--- --- --- --- --- --- --- --- ---
+46.9s,35min	 Exited four minutes ago. No port specified. That's the image that's built off of container ID. Name. So at least we see the name setup. Let me see if I have that for when I made it on C4 for myself.
+--- --- --- --- --- --- --- --- ---
+8.9s,36min	 So I'm just... I'm just... Not long ago I had to switch some of what I was doing from C3 to C4 because the GPUs on C3 were fully being used. So I just want to check what commands I ran to see if there was something different.
+--- --- --- --- --- --- --- --- ---
+35.9s,36min	 I did. I don't think it was, but might as well check. I have GPUs all listed, but I don't think that's the cause of the issue.
+--- --- --- --- --- --- --- --- ---
+12.9s,37min	 Maybe if I log out and log back in. Warp. Actually, let's see if logging out and logging back in actually just fixed it itself. Okay. So I'm going to log out. Probably not. Okay. Sometimes that happens. Just nature of profiles and configs. I don't recall when we logged out last when we were doing these things.
+--- --- --- --- --- --- --- --- ---
+33.9s,37min	 Sometimes if you are using a computer that's already been logged out, it's just a matter of time before you can actually do anything. Sometimes if you are setting configurations, you can specify the configuration to take effect, but you actually need things to reload in memory for them to be effective in your current shell. And if you don't log out, then the thing you had in memory before you did the configuration still was running.
+--- --- --- --- --- --- --- --- ---
+54.9s,37min	 So that's often the cause. Whatever the case, at the very least now it's started up again. So I wanted to demonstrate this thing with UIDs and GUIDs, et cetera. So let me attach to 3E. And let's see. Great. So as I think I mentioned yesterday when we were talking about the Docker container
+--- --- --- --- --- --- --- --- ---
+15.9s,38min	 I made, there's a script that at the top whenever attached to it says you are now attached. And it will keep printing out a message like this every few seconds. Just press any character and then it brings up the next question, which is do you want to record your terminal activity? And as I described yesterday, that means it will just record the input and output of the text that you show on your terminal, et cetera.
+--- --- --- --- --- --- --- --- ---
+41.9s,38min	 And in this case, I might as well just say yes for the sake of demonstration. But it should actually fail because it writes those to a directory in the home directory of the Docker user, which will probably have a permission error because we haven't done something for the next step. What I'm rambling on about there, aside for a moment, let's just demonstrate that it is
+--- --- --- --- --- --- --- --- ---
+3.9s,39min	 a problem or isn't. And what does it say? It says permission denied. And that's more or less what I was expecting. Why? Well, let me try and demonstrate. So store one should be mounted. And it is. So we're inside the Docker right now. And yet when we do ls in store one, we see all these wonderful things.
+--- --- --- --- --- --- --- --- ---
+24.9s,39min	 And if we go into [a particular person], we see these various things. If we go into David, permission denied. So a little bit of a side. Why is that? Why can we go into [that particular person]'s but not mine? That's because the Docker container that we are running in is running in [that particular person]'s account
+--- --- --- --- --- --- --- --- ---
+49.9s,39min	 as rootless. So it is part of [that particular person]'s group in regard to access. But it's not part of my David's group in regard to access. That will be clearer in a moment when we actually look at the IDs of things that it touches. So here I'm just going to make a file.
+--- --- --- --- --- --- --- --- ---
+12.9s,40min	 I'm going to say hi there. April 9, 2025. Great. Now let me ask, let me see some of the information about it. So when I look at this file that I've just made on store one and I look at inside the Docker, we have two columns here to list out ownership information.
+--- --- --- --- --- --- --- --- ---
+37.9s,40min	 The first column, the one on the left, is the owner. And we see that for a number of the files under store one [that particular person], it lists out root. And then for the one we just made, it lists out Docker user. And bear in mind that the current user we're doing things as inside the Docker is, ta-da, ta-da, Docker user.
+--- --- --- --- --- --- --- --- ---
+2.9s,41min	 The next column, the one on the left, what names list root. And this is the group permission. This is because the sort of, you might call it traditional Linux permission structure goes owner, group, everyone else. You can set permissions that only the owner of the file has. Then you can set permissions that people who are part of the same group, which might be a subset of everyone, then has.
+--- --- --- --- --- --- --- --- ---
+24.9s,41min	 And then you can say everyone who isn't a group member or myself, what can you do? And that all corresponds to the group. And then you can also do the flags we see on the far left, where it's the first character has to do with the nature of the file, like directories, always start with D, or usually start with D.
+--- --- --- --- --- --- --- --- ---
+46.9s,41min	 Sometimes they can be soft links, whatever. But that has to do with the file, and the rest have to do with the permissions, except for the very last one. So this is the set of permissions for the owner, which again in this case is the Docker user. This is the set of permissions for the group. Which in this case is root. And this is the set of permissions for everyone else.
+--- --- --- --- --- --- --- --- ---
+8.9s,42min	 And again we're looking at all inside the Docker container. So I'm going to detach, not exit, but detach by pressing control P, control Q again. And now I want to look at the same file, in fact the same directory, store1[person name], outside the Docker.
+--- --- --- --- --- --- --- --- ---
+37.9s,42min	 And we should notice some things that are different. Alright, so if I do the same command, ls-a, we see that outside the Docker, all the things that were previously listed as owned by root and group root are now listed as [person name person name]. And if we look at our file that we made inside the Docker, we have its owner being some weird number, and then the group being [person name].
+--- --- --- --- --- --- --- --- ---
+3.9s,43min	 Now the first thing to notice is that all the things that were listed as root before are now listed as [person name]. The second thing to notice is that the Docker user before is now some weird number. This has to do with the nature of Docker rootless. So as I alluded to before, Docker rootless runs under you as a user, user person.
+--- --- --- --- --- --- --- --- ---
+35.9s,43min	 It's one of the reasons why if I do system controller, I have to specify the user flag, get a status on Docker. And that's the reason why I have to specify the user flag, get a status on Docker. Right? Whereas if I just do it without this, like that, it can't find it. The command, the process for Docker is running as you. And what that also means, in regard to how they have it set up, is that you then are the root, or the most privileged person for the Docker container.
+--- --- --- --- --- --- --- --- ---
+59.9s,43min	 Right? So inside the Docker container, you have full privileges as an administrator. In fact, I can show you an example of that. But if you try and run something inside the Docker container that would violate permissions you as a person have on the host,
+--- --- --- --- --- --- --- --- ---
+20.9s,44min	 it won't work. That's one of the reasons why, well there's more than one reason why it didn't work in the Docker container when we tried to look at my stuff. Right? But even if we run it as root, that should probably blank out. So, to drag the point home and then explain some of the other stuff we're looking at with the numbers, etc.
+--- --- --- --- --- --- --- --- ---
+43.9s,44min	 There's a command that is actually useful to know about, so I'm glad it comes up. It's docker exec, it, u, root, and the bash. This is very similar, some of these flags are very similar to what we looked at when we made the container. First is it, which again is basically just to make sure it's interactive and I can talk to it.
+--- --- --- --- --- --- --- --- ---
+5.9s,45min	 At the end is the command I want to run, bash again, so I want to have a show. The bash u is specifying which user I want to run it as, and in this case I want to run it as root, which is the root for the Docker container. Which again, for Docker rootless, root corresponds to u on the host, as opposed to the root on the host, in contrast to most Docker containers.
+--- --- --- --- --- --- --- --- ---
+31.9s,45min	 Anyway. Exec differs from run in that instead of trying to spin up a new container based on an image, it just runs it in a container you already have. As a matter of fact, I'm forgetting one important piece of information now that I think of it. I forgot to specify which container I want to run this in. So let's get that from here, and probably I can just get away with specifying three,
+--- --- --- --- --- --- --- --- ---
+53.9s,45min	 since I only have one container right now in this account. But I'll just paste the... I'll just get the little bit of the longer hash. Alright, so I've done it, and now we see again this sort of statement saying [...]  press any character to continue. I do that, ask me if I want to record. Let me say yes this time, see what it says in terms of permissions.
+--- --- --- --- --- --- --- --- ---
+18.9s,46min	 This time it went ahead. Great. And you can see that in contrast to our commands above in the Docker, where the first person listed was the Docker user, it now has root listed. As if it [...]  same thing would do if we logged in as root on the host machine. Great. So what are some of the other things we can do now? So let's go to the home directory for the root.
+--- --- --- --- --- --- --- --- ---
+44.9s,46min	 Look around. This is all stuff that's inside of the Docker. This is not stuff that is stored on store one. In contrast to the home directory, we had to decompress and untar. Alright, so this is stuff that... If I stored a 12 gigabyte file here, it would show up on the disk supporting the OS of FOC on C3.
+--- --- --- --- --- --- --- --- ---
+8.9s,47min	 It would show up on the disk of C3. In contrast to if I stored a 12 gigabyte file on home for Docker user, which would show up in that directory we set up on C3. We might actually do that as an example in a minute just to really hammer that home. But right now, we're going to do that. Right now, we're talking about this business of IDs and UIDs, etc.
+--- --- --- --- --- --- --- --- ---
+32.9s,47min	 So, great. Let me interrupt you here and ask a question about a reason to go for Docker, execute, whatever. What is the typical reason for someone to do this? Well, so [...]  each one of these commands have more than one potential use.
+--- --- --- --- --- --- --- --- ---
+54.9s,47min	 But in this case, the reason why I'm spitting it up is twofold. One, well, they're at least twofold. In this case, I want to run a terminal or a shell similar to what I was doing as a Docker user. But in this case, I didn't want to run the same shell. I wanted to run it as a separate user. Which user do I want to run it as? Root. So this was one of the easiest ways for me to spin up a new terminal
+--- --- --- --- --- --- --- --- ---
+17.9s,48min	 that's separate from the one I was dealing with a moment ago and run it as this different person. Now, another reason I might do this sort of thing is if I wanted to run a new terminal I could run multiple terminals as docker user, right? Then I could do the same command but set a specifying root to say docker user. Then I have the one terminal that we looked at a moment ago. It's the one that started up whenever we started a container.
+--- --- --- --- --- --- --- --- ---
+38.9s,48min	 Then I can have a separate shell. A similar idea to if you [...]  had more than one SSH session going on to C3. You know, you can log out of one SSH session and not affect your other one. Yet another thing is if I wanted to run a command other than bash. So, for example, if I had a Jupyter shell I wanted to run,
+--- --- --- --- --- --- --- --- ---
+1.9s,49min	 I could specify Jupyter here. It would spin that up. And I wouldn't necessarily have... I wouldn't necessarily even want it to be interactive below that so it could get rid of these flags. And yet it would still run the Jupyter instance on the back end with a URL I could attach to separately. This is... I mean, it's a good question and I realize I didn't explain it super well there.
+--- --- --- --- --- --- --- --- ---
+23.9s,49min	 But basically the point is you can substitute this for something else you want to run. And if you want to see more details and use cases of this I would suggest visiting the documentation for Docker Exec. A follow-up on [...]  a similar thought. What is a good reason to do system control? Whether you do start docker or status docker. Like, basically when would someone want system control?
+--- --- --- --- --- --- --- --- ---
+46.9s,49min	 So, system control is a thing that actually interacts with services and daemons, etc. on the Linux machine. So there's... Let me pause this for just a second. Alright, so getting back to the question of when would we run system controller. The circumstances you do that should either be fairly clear
+--- --- --- --- --- --- --- --- ---
+11.9s,50min	 like it's prompted by one of the commands used to install Docker. Like somewhere up here we got a message saying you should probably restart it in order for things to take effect. And short of that, it's just something you would deal with to try and debug or reload things in the memory. So, similar to how we had to log out and then log back in
+--- --- --- --- --- --- --- --- ---
+34.9s,50min	 somewhere along the lines to get Docker to behave for us. The logic being that we fixed something but that fix had yet to be loaded into what was running in the memory. There are times when something might go awry or you might need to update something that is needed by the source. So, in order for that to take effect,
+--- --- --- --- --- --- --- --- ---
+56.9s,50min	 you need to restart the service itself. In general, if you're making some big change to some deep system file that Docker uses, you might want to. But frankly, if you're doing that, it's a slightly more sophisticated use and I would trust that if you're going that route, you would probably already know what a system controller is
+--- --- --- --- --- --- --- --- ---
+18.9s,51min	 or what the system is running on. So, that's a little bit of a surprise. But, I think that's what the system controller is or at the very least be dealing with documentation that tells you more about it than what I am right now. The point is, it's definitely on the upper end of the sophistication you have to touch and something that you would only have to interact with very lightly.
+--- --- --- --- --- --- --- --- ---
+42.9s,51min	 Basically, either starting, stopping, or checking the status of it. And as a matter of fact, if you do... Basically, it's just a couple of different commands that you can actually, on a day-to-day basis, have to use under this. Right, so getting back to the thing on IDs, etc. So, we're running this route and perhaps another good demonstration
+--- --- --- --- --- --- --- --- ---
+6.9s,52min	 is for me to make a file inside the Docker under Loren's thing again. Similar to how we made that high thing right here. I'm going to make it high2. And again, I'm not a Docker user this time. I'm running this route like that. Go ls-a.
+--- --- --- --- --- --- --- --- ---
+27.9s,52min	 And here we see that when we look at the permissions inside the Docker, it lists the owner's route and the group's route. Let's detach again. Well, actually, I should be able to exit out of this one without closing the Docker or causing the Docker to stop because we had a separate shell running as Docker user.
+--- --- --- --- --- --- --- --- ---
+49.9s,52min	 That we detached from. So, I should be able to exit this one without having the whole Docker container stop. Notice that I pumped this out the screen because when we attached, I told it to record. And you, for reasons and details of how the script recording is done,
+--- --- --- --- --- --- --- --- ---
+10.9s,53min	 internally it spins up a second terminal instance from inside the main terminal. Yada, yada. Whatever the case is, just be aware you probably have to type exit twice if you want to do that. Anyway, but again, you can kind of see that, yes, it recorded that and put it,
+--- --- --- --- --- --- --- --- ---
+36.9s,53min	 added it to the collection terminal recordings it has at this location. Great. So, if we look on store1 under [person name] to see what the permissions of this file are, you see that it's listed as [person name], [person name]. And recall that inside the Docker, it was listed as root, root.
+--- --- --- --- --- --- --- --- ---
+1.9s,54min	 So, this again really just makes it concrete that on the host, the things set up for [person name] and the permissions that [person name] has are then the permissions that root has on the Docker that we're running. So, that's that part. But we need to circle back to what's this random number
+--- --- --- --- --- --- --- --- ---
+22.9s,54min	 and why is it that things created by Docker user are given this. So, those numbers are, well, this gets into a little bit of a detail of how Linux, Ubuntu specifically, identifies users
+--- --- --- --- --- --- --- --- ---
+43.9s,54min	 and checks them. Checks these permissions and ownerships, etc. So, if I run the command id, bearing in mind that on server right now I'm running as [person name], it's going to pump out this information. It's going to give me a line that has something called uid, gid, groups, etc.
+--- --- --- --- --- --- --- --- ---
+5.9s,55min	 Let's break down what these are. So, the uid stands for user id. This is the number that Linux uses internally. To indicate when something is owned by [person name]. The actual text, [person name], is basically just human readable text that's put on top of the number that Linux uses internally to identify things.
+--- --- --- --- --- --- --- --- ---
+27.9s,55min	 That number being 1029. This number we saw up here is also a user id. But it doesn't have text because we didn't specify on the host machine what that number corresponds to. So, when we made the Docker, we had to do a lot of work. So, when we made the Docker container, it made a new user on the host machine.
+--- --- --- --- --- --- --- --- ---
+49.9s,55min	 And it gave that new user this number. The reason we're seeing that as a number, again, is just because we didn't go to the further steps of saying this number corresponds to this nice readable name. Anyway, so getting back to other things here, when we type in the id command for [person name], we have gid, that stands for group id.
+--- --- --- --- --- --- --- --- ---
+10.9s,56min	 Recall again that for Linux files, we have a owner and we have a group. So, the group in this sense corresponds also to the group in this sense. That in part has to do with the specifics of how we set up the users on our servers.
+--- --- --- --- --- --- --- --- ---
+34.9s,56min	 For each user, we manually have created both a user id and a corresponding group. So, just be aware that, generally speaking, it might be possible for you to have a user without a group like this. It's details aside. The other thing to be aware of that's a little bit more generalizable
+--- --- --- --- --- --- --- --- ---
+55.9s,56min	 is the last part that says groups. And this lists out the various sort of groups that [person name] is a part of. So, [they're] part of [their] own group. So, there's a technical difference. So, there's a technical distinction just because we called a group the same name as a user doesn't mean they're actually the same thing as used by Linux.
+--- --- --- --- --- --- --- --- ---
+21.9s,57min	 [They're] part of the group JupyterHub along with a number of other people. And [they're] also the group of SSH users, hence why we're able to SSH in. And if we do a little bit of a further step and look at etc. groups, not just group, then we say look at the JupyterHub users.
+--- --- --- --- --- --- --- --- ---
+44.9s,57min	 Okay, so who else is in the JupyterHub group? Well, [person name 1, 2, 3, 4, etc], etc. So, basically, just like we have above owners and groups, there are places where we can have, instead of [particular person name] listed as a group,
+--- --- --- --- --- --- --- --- ---
+7.9s,58min	 have JupyterHub listed as a group. And then everyone that is in this list would have all the accesses listed in the set of permissions listed as group members, which is the second set of three letters. In the case that I'm having highlighted, read, write, and execute for the members of the group, which in this case are [particular person name].
+--- --- --- --- --- --- --- --- ---
+29.9s,58min	 But here, the group only has read permission. So [...]  just if you want to read more about that, because I realize my explanation is a little bit scattered, I would just Google around for typical Linux user group and other permission details. It's a fairly common setup.
+--- --- --- --- --- --- --- --- ---
+52.9s,58min	 It's a pretty foundational aspect of most Linux systems, as a matter of fact. I don't think it's specific to Linux, even. Anyway, with that all said, let me try and circle back and maybe reiterate one more time, hopefully more clearly,
+--- --- --- --- --- --- --- --- ---
+17.9s,59min	 this business of the differing owner and group information we see on the host and on the Docker. So, I think we established, or pretty thoroughly hammered home, that on the host, if I see something listed as [particular person name], either as the owner or as the group, that's going to be translated as root on the Docker.
+--- --- --- --- --- --- --- --- ---
+41.9s,59min	 If I see something listed as Docker user on the Docker, on the host, it's going to be listed as some weird number. Now, something I didn't specify, and this is getting a little in the weeds, but it's just good to know about in case it's ever an issue, is why this number. Under the hood, Linux has a mapping utility
+--- --- --- --- --- --- --- --- ---
+8.9s,0min,1hr	 that basically says for each user, I'm going to allow them a range of additional IDs that they can use. So there's a mechanism under the hood in Linux that basically says, hey, for [particular person name], I'm going to allocate, this could be, let's say, 1,600,000 to 1,700,000.
+--- --- --- --- --- --- --- --- ---
+32.9s,0min,1hr	 And then within that range, guess what, it just picked this one for the Docker user. But it knows, because of this additional mechanism that we're not getting into, that that range of IDs actually all belong to [particular person name] or are all under the umbrella of [particular person name]. And that allows it to do things like say, hey, if your user ID or group ID, whatever, is in that range,
+--- --- --- --- --- --- --- --- ---
+57.9s,0min,1hr	 you don't have any more permissions than [the particular person] does, at least by default. I don't want to start saying what it is. So there's some pretty good measures you can take. That's all known as sub-IDs or sub-UIDs. Let me see. I think you can just take a quick look at that. In fact, yeah, so sub-UID.
+--- --- --- --- --- --- --- --- ---
+33.9s,1min,1hr	 All right. Great. Okay. So this number should look kind of familiar because we had one that was not too far off up here for the ID that was assigned to the Docker user. So for [particular person], [they have] IDs starting at this number
+--- --- --- --- --- --- --- --- ---
+57.9s,1min,1hr	 and then this many after it. So the maximum ID they should have, or be allowed to allocate to, is this plus this, probably minus one. I'm assuming it's zero index because I'm a computer scientist. But you'll certainly notice that this number up here is within that range. Anyway, so these are all a bunch of details
+--- --- --- --- --- --- --- --- ---
+20.9s,2min,1hr	 that I'm not expecting a person, a random person listening just to this transcript to gather all the mechanics from it. But I'm mentioning this all as little pointers so that if someone runs into this issue, they have enough that they can look up later. One other little detail that is definitely in the weeds
+--- --- --- --- --- --- --- --- ---
+42.9s,2min,1hr	 but was relevant is that because the servers were set up without centralized identity management, the sub IDs that were listed in these files, the etc. sub IDs,
+--- --- --- --- --- --- --- --- ---
+3.9s,3min,1hr	 were different on each one of the server machines. And that's an issue because the files that we created up here on store one under [particular person name] were given this owner ID that was informed by this sub ID.
+--- --- --- --- --- --- --- --- ---
+25.9s,3min,1hr	 So if on C3 this ID corresponds to something [the particular person] owns, it's totally possible that on C2, because the information in this file on C2 is different, [the particular person] no longer has ownership to this.
+--- --- --- --- --- --- --- --- ---
+48.9s,3min,1hr	 It could be someone else. It could be nobody. It really depends on what's inside the etc. sub UID folder there. That's not something that a typical Docker user has to fix. That's not something that... Well, frankly, that's something that an administrator, the people who are setting up our servers, need to fix.
+--- --- --- --- --- --- --- --- ---
+10.9s,4min,1hr	 It was an issue. I'm not sure it was 100% resolved, but it's just good to know about. But the real story there is if you're managing multiple servers that you're expecting people to talk to seamlessly, you're going to have to use the right tools to set them up, or the right procedures. One of those correct procedures is some method of centralized identity management,
+--- --- --- --- --- --- --- --- ---
+31.9s,4min,1hr	 as opposed to what we were doing as administrators prior to that. And by we, I mean myself included, so I'm equally to blame. Which was quick, seemed right, but then runs into these corner cases where, oh, hey, we didn't know all the sophistication that Linux has to offer. Um...
+--- --- --- --- --- --- --- --- ---
+54.9s,4min,1hr	 Yadda, yadda, yadda. Anyway. So, why did I go into this? Yes, there are details that are good to know. Yes, these are things that were technical points that caused us headaches. But, I mean, a typical person, or a typical person setting up a Docker, these Dockers shouldn't have to worry about this sub-ID stuff,
+--- --- --- --- --- --- --- --- ---
+15.9s,5min,1hr	 especially if the administrator fixes it once. And the administrators, by the way, should only have to fix that once per server. So it's not like each time, someone needs to set up a Docker, or the Dockers we're using, they're going to have to worry about this. Or at least the sub-IDs being correct. Great. So, what's the actionable part for a person who's typically setting up a Docker?
+--- --- --- --- --- --- --- --- ---
+37.9s,5min,1hr	 Um... This ID part is still relevant, despite everything else I said, because I need to make sure that if I want the Docker user in the Docker container to have access to something, then, like on the home directory, inside the Docker, then on the host,
+--- --- --- --- --- --- --- --- ---
+59.9s,5min,1hr	 I need to make sure that this user has adequate permissions in the home directory. Because again, the home directory for the Docker user inside the Docker is actually represented in the host as a directory on store 1. So that's a lot of verbiage, let's actually see what that looks like when the rubber meets the road.
+--- --- --- --- --- --- --- --- ---
+24.9s,6min,1hr	 So, we're still on store 1 for [particular person name]. And just as a reminder, if you look around, this is the content thereof, and one of them is called Docker Home Deers, we made that before, that's very familiar. But let's step inside of that and actually look at the permissions. Because if you remember, when we tried to start up the Docker container before, not as root, but as just a normal Docker user,
+--- --- --- --- --- --- --- --- ---
+45.9s,6min,1hr	 it was giving us permission errors. Where is that line? Not about the ports, but the actual... Yeah, here we are. So when I tried to attach to the Docker container, it might seem a little confusing just because there's this terminal recording thing, which I'm not expecting most people to be familiar with, but the story there is that
+--- --- --- --- --- --- --- --- ---
+8.9s,7min,1hr	 the reason we were getting permission deny errors is this whole thing, this weird recording stuff, is stored under the home directory in the Docker, but that has permission limitations because it's stored in a different way on the host, than the rest of the Docker. That different way, again, being that it's stored somewhere on store 1. So anyway, if we go back to that lovely directory we set up,
+--- --- --- --- --- --- --- --- ---
+31.9s,7min,1hr	 and we do ls-a, we see that all the stuff under the directory that we untarred has [particular person name] listed as the owner and the group. But again, [particular person name] on the host machine corresponds to root on the Docker. We'd like Docker user,
+--- --- --- --- --- --- --- --- ---
+53.9s,7min,1hr	 who has fewer permissions on the Docker than root, to have permissions to root. What do we do? Well, we have this number that corresponds on the host to the user, Docker user. We want to give ownership of all these to this number that corresponds to the Docker user.
+--- --- --- --- --- --- --- --- ---
+14.9s,8min,1hr	 How do we do that? Uh... Hoping I have sufficient permissions to do that, I should, as the current owner of these, current owner being [particular person name], I do chown-r at Docker user.
+--- --- --- --- --- --- --- --- ---
+38.9s,8min,1hr	 And I'll time this. Hoping this isn't going to start saying I have to be the admin on the host in order to change it, but it shouldn't. Invalid spec. Okay. Um... I think by default that works. Change your ownership. Operation not permitted.
+--- --- --- --- --- --- --- --- ---
+7.9s,9min,1hr	 Bummer. Um... Let's see. This might be something that I actually need an admin on the host of change, because I'm not just, uh... I'm changing permission from me as a user to someone else. Now, that someone else is an ID that's allocated to me by the sub-IDs,
+--- --- --- --- --- --- --- --- ---
+28.9s,9min,1hr	 but that doesn't necessarily mean that I have permission to do it either way, which, uh, this is bear in mind saying operation not permitted. It's not saying permission is denied, but my recollection is that the way around that is really just getting the root on the host to do the thing. But before I jump to that gun, let me, uh... Let me see if just stop in the container,
+--- --- --- --- --- --- --- --- ---
+50.9s,9min,1hr	 et cetera, for a moment, will help. Because the container, bear in mind, is mounted at the location I'm trying to change your permissions of. And goodness knows, when you have one thing that's actively dealing with, or even just actively mounted to something that you've done change of permissions for, all sorts of weird conflicts can happen. So, uh... Now, there's two ways that I could get the container
+--- --- --- --- --- --- --- --- ---
+13.9s,10min,1hr	 to stop right now. One is that I could reattach to it, and then say exit, like we did before. And that's probably the smart thing to do, because it had that recording going. It would be nice to have it [...]  close up, and then, uh, um... And then compress together with the rest of the recordings. Another way I could do it is, say, docker container, uh, then stop,
+--- --- --- --- --- --- --- --- ---
+34.9s,10min,1hr	 name of the container. I'm not going to do that, because it's not a graceful exit. It's not going to [...]  close our terminal and do all the bookkeeping that we had there. But just bear in mind that's an option. So I'm just going to go ahead and attach to that container again. So docker attach to 3. That. Here we are. Yadda yadda. But I know this is all being recorded.
+--- --- --- --- --- --- --- --- ---
+57.9s,10min,1hr	 I'd like the recording to finish up and then be stored compressed with the rest of them. So I'm going to type in exit. Actually, it wasn't recording this time, because, uh, we had that permission error earlier. So we weren't able to start the recording. Okay, great. Whatever. Um, good practice, though, to do this. Instead of, um, direct stopping either way.
+--- --- --- --- --- --- --- --- ---
+18.9s,11min,1hr	 Right, so let me try again to change those permissions. Uh, I don't think the story will be different, but we'll see. Nope, still giving me a lot of errors. Uh, ba-ba-ba. Let me try and see if this makes it any better. I don't think it will, but we'll see. Okay.
+--- --- --- --- --- --- --- --- ---
+40.9s,11min,1hr	 So tell you what. Um, I will, uh, go do some admin-y things, get an admin, uh, to help out, to change these permissions. All I can tell you, or what I can tell you between now and then, is that the command I'm going to ask people with root access on the host to run
+--- --- --- --- --- --- --- --- ---
+5.9s,12min,1hr	 is this command. So this is the right command. It's just that I, running as [particular person] here, uh, apparently don't have sufficient permissions to have it execute. So how about we pause, or at least break the... Before we break, I have a question about the ownership change. So would it also work equally well in practice if you just add, um, the user ID and [particular person name] and Dr. Use
+--- --- --- --- --- --- --- --- ---
+28.9s,12min,1hr	 to the same group? I think they're already the same group. But if you give members of the same group equal, um, permissions, does that basically do the same thing as changing ownership? Uh, no. No, it doesn't. Gotcha. Um, so as you alluded to, it is in fact, the case that, um, this ID,
+--- --- --- --- --- --- --- --- ---
+50.9s,12min,1hr	 which is the Docker user, is part of [particular person]'s personal group already. So, um, it's kind of annoying, and I know you don't need a diagram, but it kind of annoys me how, um, how imprecise my language feels about this. But let's see. We have users, and we have groups,
+--- --- --- --- --- --- --- --- ---
+12.9s,13min,1hr	 um, and we also have others, technically, but I'm not going to get into that. Why am I not going to get into that? Because these first two, the users and the groups, are the ones that have ID numbers we care about, and, uh, maybe this is just my ignorance, I'm sure it at least partially is, but the, um, there are not ID numbers corresponding to others
+--- --- --- --- --- --- --- --- ---
+34.9s,13min,1hr	 that I've had to deal with. I'm pretty sure it's just a barrel of [...]  anything that doesn't fall into the category, the category of the user or group falls into that. Alright. Great. So, I know that we have two things here. I know this is straight in your mind, but again, I'm just kind of annoyed by how fluffy the language is, and yet we have to care about the detail
+--- --- --- --- --- --- --- --- ---
+56.9s,13min,1hr	 for the discussion we're having. We have a user named [particular person name], and we have a group named [particular person name]. And it happens to be the case that, um, the [particular person name] user is a part of the [particular person name] group. But formally speaking, these are two separate things. In fact, behind the, uh, behind the scenes, I can just ask and say ID,
+--- --- --- --- --- --- --- --- ---
+17.9s,14min,1hr	 I have, uh, 1029 and 1050. It's worth noting that these are not just separate ID numbers, but they are [...]  ontologically different things. Like, they're just things that the Linux system will do or can do for groups
+--- --- --- --- --- --- --- --- ---
+41.9s,14min,1hr	 that it just doesn't make sense to do with a user. So, they're presented as this sort of very nice compatible thing, um, and that's really a strength of the system. But behind the scenes, there's [...]  these details of how they're different. Um, pretty annoying, though. But on that note, let me see how I can actually show that, um, these two things are part of the [particular person name] group.
+--- --- --- --- --- --- --- --- ---
+4.9s,15min,1hr	 Well, let's see, if we look at etc and then group, and then if I search for [particular person name], well, should list the name of the group, we'll see that it's got two things. Uh, the groups that [particular person name] is part of, and then [particular person name] the user, and then who is part of the group that is named [particular person name]. I'll just grab for [particular person name] first and see how much it comes across.
+--- --- --- --- --- --- --- --- ---
+28.9s,15min,1hr	 Uh, so there's a couple. Uh, da-da-da-da. Okay. So, those are the groups that [particular person name] is part of, and there's the [particular person name] group. That's the ID number. Uh, ba-ba-ba-ba. What am I missing here? Hmm.
+--- --- --- --- --- --- --- --- ---
+1.9s,16min,1hr	 Hmm. I don't think it's this, but... No, we already looked at that. That's the group assignment we looked at. Or maybe look at the user ID, as opposed to the group IDs that can allocate. Okay, same thing. Not surprising. Um... Hmm.
+--- --- --- --- --- --- --- --- ---
+34.9s,16min,1hr	 [...]
+--- --- --- --- --- --- --- --- ---
+56.9s,16min,1hr	 Hmm. Hmm. That's gonna bug me, but I'll do that offline. Um, in any case, there are ways that you can see how these things relate, uh, either by... looking through, uh, files under Etc., and you can just ask online about that, and it will tell you identities are something that are fairly well established.
+--- --- --- --- --- --- --- --- ---
+18.9s,17min,1hr	 And there are also command line things like git-int. Um... Uh, what was it, uh... Tell us that you don't have the right number of arguments. That's correct. I mean, I think it's git-int, and then you provide a user ID or something, but you might as well say, um... Don't think it works for groups, but we'll see. I'm on database.
+--- --- --- --- --- --- --- --- ---
+45.9s,17min,1hr	 Um... Service. Some information to use. Version dates. Time. Um... I'll get... database. I think it was, um...
+--- --- --- --- --- --- --- --- ---
+6.9s,18min,1hr	 I don't know. I'm not going to delve too far into this, but there's a way that you can specify, um, looking for user or something like that, and again, Google is your friend for that. If you're interested, we can delve into that, but I don't get the sense that that's something that's on top of mind. Uh, is there anything else you want to talk about before we take a pause
+--- --- --- --- --- --- --- --- ---
+13.9s,18min,1hr	 so that I can address the point of time? We can pause it. Okay. I'm actually going to stop it, and then we'll start another recording later.
+--- --- --- --- --- --- --- --- ---
