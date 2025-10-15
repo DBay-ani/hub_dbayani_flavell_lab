@@ -1,10 +1,10 @@
 # hub_dbayani_flavell_lab
-Hub for Content Relating to David ( داود ) Bayani and the Flavell Lab at MIT; Provides Links to Other Material and Metadata Sufficient to Confirm Content Existent at Time of Commit. Also Snapshotted by the Internet Archive.
+Hub for Content Relating to David ( داود ) Bayani and the Flavell Lab at MIT; Provides Links to Other Material and Metadata Sufficient to Confirm Content Existent at Time of Commit. Also Snapshotted by the Internet Archive. A copy of collected material related to this repository can also be found on [Zenodo under record 17345922, "Collected Publicly Accessibly Content From D Bayani Relating to The Flavell Lab MIT"](https://zenodo.org/records/17345922).
 
-Private material can be found at https://github.com/DBay-ani/private_from_dbayani_for_flavell_lab/tree/main .
+Private material can be found at https://github.com/DBay-ani/private_from_dbayani_for_flavell_lab/tree/main ; a copy of this material (with appropriately restricted access to downloading the members files) can be found [on Zenodo under record 17346107, "Subset of Private/Limited Access Content From D Bayani In Relation to The Flavell Lab MIT"](https://zenodo.org/records/17346107).
 
-Note that if you find this work useful, and especially if you find information here useful either as guideance or for direct use,
-at a minimum you should consider citing appropriately.
+Note that if you find this work useful, and especially if you find information here useful either as guidance or for direct use,
+at a minimum you should consider citing appropriately. Be aware that, in addition to standard methods of citing works found under this repository or the repository as a whole, the Zenodo records listed above also provide readily available citations equipped with [DOIs](https://www.doi.org/the-identifier/what-is-a-doi/).
 
 # Note Regarding Processing Files to Conform to Github File Size Limits
 
